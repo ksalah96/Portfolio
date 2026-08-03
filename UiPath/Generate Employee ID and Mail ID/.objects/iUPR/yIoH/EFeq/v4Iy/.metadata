@@ -1,0 +1,14 @@
+﻿{
+  "Name": "Gender(1)",
+  "Type": "Element",
+  "TaxonomyType": "Dropdown",
+  "Id": "v4IyeW7sV0eX5s_6XDv_Ww",
+  "Reference": "2OOv0U_2xk6I_iLRberfiw/v4IyeW7sV0eX5s_6XDv_Ww",
+  "ParentRef": "2OOv0U_2xk6I_iLRberfiw/EFeqi5bqVkGZc6qRM0rRKQ",
+  "Created": "2026-08-02T09:28:17.2979879Z",
+  "Updated": "2026-08-02T09:28:17.2979879Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.1.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.7.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}
