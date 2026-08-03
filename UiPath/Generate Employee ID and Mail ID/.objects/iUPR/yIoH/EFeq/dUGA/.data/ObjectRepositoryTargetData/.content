@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<ObjectRepositoryTargetData ContentHash="V7tmTCTJdUqEASwJWBtgBA" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <ObjectRepositoryTargetData.Data>
-    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="" DesignTimeRectangle="794, 593, 109, 20" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='resID' tag='SPAN' /&gt;" Guid="981a086f-fb2b-45f1-8fa7-1b4bfcbce9e5" ScopeSelectorArgument="&lt;html app='chrome.exe' title='HR Onboarding Form' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
-      <imageRef attrName="InformativeScreenshot" originalValue="e8413a729332e2e6ab8ca7b05e9791a2.jpg" xmlns="">0fxhDo-g1EkGgnq-synoguA</imageRef>
-    </TargetAnchorable>
-    <x:String x:Key="ActivityType">GetText</x:String>
-  </ObjectRepositoryTargetData.Data>
-</ObjectRepositoryTargetData>

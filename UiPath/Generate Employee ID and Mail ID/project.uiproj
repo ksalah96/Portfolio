@@ -1,6 +1,0 @@
-{
-  "Name": "Generate Employee ID and Mail ID",
-  "ProjectType": "Process",
-  "Description": "Blank Process",
-  "MainFile": "Main.xaml"
-}
