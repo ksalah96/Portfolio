@@ -1,0 +1,417 @@
+{
+  "name": "Summarize Tally Form",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "#### Create a Tally Form and transfer data to google sheet and read it ",
+        "height": 340,
+        "width": 600
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        -200
+      ],
+      "id": "705c36db-2006-4408-979a-ff5fc5feb9c9",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "What went great?"
+            },
+            {
+              "fieldToAggregate": "How can we improve?"
+            },
+            {
+              "fieldToAggregate": "What is the chance of recommending our event?"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        420,
+        -20
+      ],
+      "id": "2c5bee62-026b-4389-8fee-e25f5404b945",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "content": "#### Combine all answers into an array",
+        "height": 340,
+        "width": 160
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        380,
+        -200
+      ],
+      "id": "47ac7cb1-aa30-4503-9cd6-ab92b9cf3abe",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=What went great: {{ $json['What went great?'] }}\nHow can we improve: {{ $json['How can we improve?'] }}\nWhat is the chance of  recommending our event: {{ $json['What is the chance of recommending our event?'] }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=# Overview  \nYou are an AI assistant specialized in form response analysis. Your primary task is to analyze event feedback and generate a concise, insightful summary. This summary should be presented in Markdown format and structured as an email, suitable for sharing with event stakeholders.\n\n## Context  \n- The input data includes responses to three key questions:  \n  1. \"What went great?\"  \n  2. \"Suggestions for improvement?\"  \n  3. \"What is the chance of recommending our event?\"  \n- Responses may come from multiple attendees and vary in tone or depth.  \n- Stakeholders expect a summary that is digestible, professional, and action-oriented.\n\n## Instructions  \n1. Parse the three feedback questions from user-provided data.  \n2. Extract and group recurring sentiments or themes from each category.  \n3. Analyze the recommendation likelihood to assess attendee satisfaction.  \n4. Structure the output as an email written in **Markdown**, with the following format:  \n   - **Subject**: Feedback Summary for [Event Name]  \n   - **Greeting**  \n   - **Body**:  \n     - **Positive Highlights**  \n     - **Areas for Improvement**  \n     - **Recommendation Insight**  \n     - **Summary of the Summary** (a concise 1–2 sentence wrap-up)  \n   - **Closing & Signature**\n\n## Tools  \n- **Form Response Parser**: Extracts structured data from input responses  \n- **Sentiment Analyzer**: Determines tone and emotional valence  \n- **Theme Detector**: Groups similar feedback into core themes  \n- **Google Gemini Chat Model**: Generates summaries in natural language and formats them as Markdown emails  \n\n## Example  \n**Input:**  \n- What went great? \"Venue and speakers were excellent.\"  \n- Suggestions for improvement? \"Better signage and time management.\"  \n- What is the chance of recommending our event? \"8/10\"  \n\n**Output (Markdown Email):**  \n\nHi Team,\n\nHere’s a consolidated summary of the feedback we received from attendees:\n\n**What Went Great:**  \n- High praise for the venue and speaker quality  \n- Engaging presentations and smooth registration process  \n\n**Suggestions for Improvement:**  \n- Attendees recommended clearer signage and tighter schedule adherence  \n- Some requested additional Q&A time  \n\n**Recommendation Insight:**  \n- Majority of attendees rated 8–10 for likelihood to recommend, indicating strong satisfaction overall  \n\n**Summary of the Summary:**  \nThe event was successful, with well-received content and logistics. Minor operational tweaks could further enhance future experiences.\n\nBest regards,  \n[Your AI Assistant Name]\n```\n\n## Final Notes  \n- Keep the tone professional, warm, and stakeholder-friendly.  \n- Focus on clarity, avoiding repetition or overly technical language.  \n- Always present the output in Markdown using an email format.\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        640,
+        -20
+      ],
+      "id": "f8a81e39-728d-4814-aa77-bb2e8e3994a4",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        640,
+        160
+      ],
+      "id": "5dc52efa-a160-4b47-aa9a-3e870bcc71e3",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Salah-concert",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        -20
+      ],
+      "id": "72eef154-bbd0-456e-81fe-06ba563937d6",
+      "name": "Post Tally Form",
+      "webhookId": "99ae8754-f705-4b4a-880e-af1ff90b0efc"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1G_el2vjy7Zj0vucR4R5S3JBvh2c9iy4igFfNdrMlG2U/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G_el2vjy7Zj0vucR4R5S3JBvh2c9iy4igFfNdrMlG2U/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Full Name": "={{ $json.body.data.fields[0].value }}",
+            "Email": "={{ $json.body.data.fields[1].value }}",
+            "Phone Number": "={{ $json.body.data.fields[2].value }}",
+            "What went great?": "={{ $json.body.data.fields[3].value }}",
+            "How can we improve?": "={{ $json.body.data.fields[4].value }}",
+            "What is the chance of recommending our event?": "={{ $json.body.data.fields[5].value }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What went great?",
+              "displayName": "What went great?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "How can we improve?",
+              "displayName": "How can we improve?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What is the chance of recommending our event?",
+              "displayName": "What is the chance of recommending our event?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -20,
+        -20
+      ],
+      "id": "d6aed82b-1b45-4d52-80e0-962723c6e4f2",
+      "name": "Send Form to Google Sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XfloQ1syUsqZfRuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1G_el2vjy7Zj0vucR4R5S3JBvh2c9iy4igFfNdrMlG2U/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1G_el2vjy7Zj0vucR4R5S3JBvh2c9iy4igFfNdrMlG2U/edit#gid=0"
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        200,
+        -20
+      ],
+      "id": "c0137bfd-f17e-4da5-a1f0-18b0ec99c058",
+      "name": "Get Raw from Google Sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XfloQ1syUsqZfRuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.text }}",
+        "options": {
+          "completeHTMLDocument": false
+        }
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        -20
+      ],
+      "id": "e9f2e75b-fca1-4c7f-bda5-63ef1116c46d",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {
+        "sendTo": "khaledmido82@gmail.com",
+        "subject": "Feedback Summary",
+        "message": "={{ $json.text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1220,
+        -20
+      ],
+      "id": "3942d664-4f61-412d-aa6b-455940c1be77",
+      "name": "Gmail",
+      "webhookId": "2c5874fa-298a-4951-8399-d5f87a750012",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Pn9nFdfMzmvDolm",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Google Gemini to Summarize The Feedback",
+        "height": 340,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -200
+      ],
+      "id": "8e82f961-dce6-4a7b-b455-b85280022ff0",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Transfer from Markdown to HTML and Send Mail ",
+        "height": 340,
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        940,
+        -200
+      ],
+      "id": "e65b1114-08d0-454b-b69c-f1433e5529de",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post Tally Form": {
+      "main": [
+        [
+          {
+            "node": "Send Form to Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Form to Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "Get Raw from Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Raw from Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "7ecb7013-3fce-4cc9-b2ca-d36701711575",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "o7x1qLptMNUyXe3e",
+  "tags": []
+}

@@ -1,0 +1,309 @@
+{
+  "name": "AI Content Distributor",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "feedUrl": "https://rss.app/feeds/toKFRMqgGJPHYEqx.xml"
+      },
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        20
+      ],
+      "id": "33bbb1a0-9e17-467b-86e5-53ee87bfe940",
+      "name": "RSS Feed Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Rewrite the following blog summary into a catchy social post.\nlimit:\n- Twitter/X Version: 280 Characters\n- LinkedIn Version: ~600 characters\n\nInclude a short CTA and the link at the end.\nTitle:  {{ $json.Title }}\nSummary: {{ $json.Content }}\nLink: {{ $json.Link }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=# Overview \nYou are a social media specialist AI agent powered by Google Gemini Flash 2.5. Your task is to convert blog summaries into two engaging, platform-specific social media posts optimized for Twitter/X and LinkedIn.  \n\n## Context  \n- The agent receives a blog title, summary, and link as input.  \n- It generates two social media posts: one for Twitter/X and another for LinkedIn.  \n- The Twitter post should be concise and catchy; the LinkedIn post should be professional and informative.  \n\n## Instructions  \n1. Accept input values: `Title`, `Content` (summary), and `Link`.  \n2. Create a Twitter/X post:  \n   - Max 280 characters.  \n   - Include a brief call-to-action (CTA).  \n   - Add the link at the end.  \n3. Create a LinkedIn post:  \n   - Around 600 characters.  \n   - Use a professional tone.  \n   - Provide a brief, informative description of the blog content.  \n   - Include a clear CTA and the link at the end. \n\n## Tools  \n- **Gemini Flash 2.5 Language Model**: Fast and efficient content generation with support for short-form and professional writing styles.  \n\n## Examples  \n- **Input:**  \n  - Title: \"The Future of AI in Healthcare\"  \n  - Content: \"This blog explores the evolving role of artificial intelligence in healthcare, including diagnostics, personalized medicine, and operational efficiency.\"  \n  - Link: \"https://example.com/blog/ai-healthcare\"  \n- **Output:**  \n  - **Twitter/X:** \"AI is reshaping healthcare—from faster diagnoses to personalized treatments. 🧠💉 Explore how the future is unfolding: https://example.com/blog/ai-healthcare\"  \n  - **LinkedIn:** \"From precision diagnostics to smarter workflows, AI is revolutionizing healthcare. Discover the latest trends and what they mean for providers and patients alike. Read the full blog: https://example.com/blog/ai-healthcare\"  \n\n## SOP (Standard Operating Procedure)  \n1. Extract and understand the blog’s key points from the summary.  \n2. Craft a concise, engaging Twitter/X post with a CTA and link.  \n3. Write a professional, informative LinkedIn post (~600 characters) with a CTA and link.  \n4. Return both posts clearly labeled.  \n\n## Final Notes  \n- Tailor tone and structure to each platform’s audience.  \n- Stay within character limits.  \n- Always include a relevant CTA and ensure the blog link is functional."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        440,
+        20
+      ],
+      "id": "6cb1f015-59eb-484c-b640-22c0df66d3e3",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e8faadc7-fa62-4458-a98e-eb29393f1329",
+              "name": "Title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "4ce45264-9d6e-417e-97b7-c8cf94625206",
+              "name": "Link",
+              "value": "={{$json[\"link\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "a503e4ae-1dc8-4d61-b1df-c7e4e4208663",
+              "name": "Content",
+              "value": "={{$json[\"contentSnippet\"] || $json[\"content\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        20
+      ],
+      "id": "afea298d-9f4b-45ea-9406-b9a272ad798c",
+      "name": "Clean Input for AI"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        528,
+        240
+      ],
+      "id": "37220d8e-d955-4fcf-8325-e017c7aa00f2",
+      "name": "Generate Social Text",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c98ace51-2ec1-4568-a70c-195284de0399",
+              "name": "Twitter/x",
+              "value": "={{ (() => {   const raw = $json.text;   const match = raw.match(/\\*\\*Twitter\\/X:\\*\\*\\n([\\s\\S]*?)\\n\\n\\*\\*LinkedIn:\\*\\*/);   return match ? match[1].trim() : null; })() }}",
+              "type": "string"
+            },
+            {
+              "id": "b7bc4b9e-162a-4236-812b-6074d8837e05",
+              "name": "LinkedIn",
+              "value": "={{ (() => {   const raw = $json.text;   const match = raw.match(/\\*\\*LinkedIn:\\*\\*\\n([\\s\\S]*)/);   return match ? match[1].trim() : null; })() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        816,
+        20
+      ],
+      "id": "6ea04740-0f98-473e-9aa2-eefbc4d9d012",
+      "name": "Extract Content"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json[\"Twitter/x\"] }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [
+        1036,
+        20
+      ],
+      "id": "0fa9ace9-7229-4ab5-b2a9-ac5ff4e1962a",
+      "name": "X",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "qywZkNsABxgYg9Ak",
+          "name": "X account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C093N9XSL1W",
+          "mode": "list",
+          "cachedResultName": "all-salah"
+        },
+        "text": "={{ $json[\"Twitter/x\"] }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1036,
+        -180
+      ],
+      "id": "a9c272e2-a3c2-4508-bb7b-ff2ca47143b0",
+      "name": "Slack",
+      "webhookId": "980fe1de-3f66-4b6a-9633-087897a7bf1b",
+      "credentials": {
+        "slackApi": {
+          "id": "CTsxoaQRL5biUduy",
+          "name": "Slack Salah"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "postAs": "organization",
+        "organization": "2",
+        "text": "={{ $json.LinkedIn }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        1036,
+        220
+      ],
+      "id": "d536996b-7183-4932-99ba-47bf66a8e226",
+      "name": "LinkedIn"
+    },
+    {
+      "parameters": {
+        "content": "## Get The Content and Clean\n",
+        "height": 360,
+        "width": 420
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -70,
+        -180
+      ],
+      "typeVersion": 1,
+      "id": "c31abe44-fa17-48af-a496-75c3b32308a6",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## AI Generate The Post and Share to LinkedIN, X, Slack\n",
+        "height": 620,
+        "width": 840
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        398,
+        -240
+      ],
+      "typeVersion": 1,
+      "id": "fbaf7b5f-81b9-4173-9983-0b4dab908c86",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "RSS Feed Trigger": {
+      "main": [
+        [
+          {
+            "node": "Clean Input for AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Extract Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Input for AI": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Social Text": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Content": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "X",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "X": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5f9ef867-ecd2-4314-a806-4ddb499e0560",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "zb9TctC5LjgRINUg",
+  "tags": []
+}

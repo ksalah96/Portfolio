@@ -1,0 +1,631 @@
+{
+  "name": "REM Domestic Skip Request",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "df5f5ca7-db15-4505-aef7-b85918253a75",
+              "leftValue": "={{ $json.Score }}",
+              "rightValue": "={{ Number('10') }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        -40
+      ],
+      "id": "66870a12-c06e-4375-9879-d18bb443c8e7",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "days"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1100,
+        -140
+      ],
+      "id": "c86db962-af32-4ee1-8a45-b3dd8ccac34d",
+      "name": "Wait",
+      "webhookId": "6e854468-28da-42d1-b17d-b6c6acae217c"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C093Y9KTZ37",
+          "mode": "list",
+          "cachedResultName": "leads"
+        },
+        "text": "=🔔 Follow-up Reminder: High-Value Lead  A high-value lead was captured 24 hours ago and may require follow-up. \n Name: {{ $('High Value').item.json.Name }}\n Email: {{ $('High Value').item.json.Email }}\n phone: {{ $('High Value').item.json.Phone }}\n Address: {{ $('High Value').item.json.Address }}\n Skip Size: {{ $('High Value').item.json['Skip Size'] }}\n Lead Score: {{ $('If').item.json.Score }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1320,
+        -140
+      ],
+      "id": "ea8d2481-5ff9-483d-b4ee-9f002e8882e1",
+      "name": "Follow Up",
+      "webhookId": "c986802b-5f40-4f8f-8d60-67c49dfbbfc5",
+      "credentials": {
+        "slackApi": {
+          "id": "CTsxoaQRL5biUduy",
+          "name": "Slack Salah"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "036a4991-2db6-43cb-abed-dd9dafa6fd94",
+              "name": "name",
+              "value": "={{ $json.body.data.fields[0].value }}",
+              "type": "string"
+            },
+            {
+              "id": "d0bdfdbc-7fcf-402a-8a71-b1c1f7de1ddd",
+              "name": "Phone ",
+              "value": "={{ $json.body.data.fields[1].value }}",
+              "type": "number"
+            },
+            {
+              "id": "c67fc09e-2cf3-4a88-8ae7-e9c6ae677370",
+              "name": "email",
+              "value": "={{ $json.body.data.fields[2].value }}",
+              "type": "string"
+            },
+            {
+              "id": "5dbd8f09-3cef-4ff2-8550-7b2af79a85fe",
+              "name": "Address",
+              "value": "={{ $json.body.data.fields[3].value }}",
+              "type": "string"
+            },
+            {
+              "id": "03490ed8-f2fb-4f21-ad50-851e6523177d",
+              "name": "skip size",
+              "value": "={{ $jmespath($json.body.data.fields[4].options, \"[?id == `\" + $json.body.data.fields[4].value[0] + \"`].text\")[0] }}\n",
+              "type": "string"
+            },
+            {
+              "id": "37777673-0510-42b5-82a5-11159d484d04",
+              "name": "placement",
+              "value": "={{ $jmespath($json.body.data.fields[5].options, \"[?id == `\" + $json.body.data.fields[5].value[0] + \"`].text\")[0] }}\n",
+              "type": "string"
+            },
+            {
+              "id": "611cb7e4-0fb9-41d7-b4d9-32221596aa7d",
+              "name": "=waste type",
+              "value": "={{ $jmespath($json.body.data.fields[6].options, \"[?id == `\" + $json.body.data.fields[6].value[0] + \"`].text\")[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "62dd6338-8662-4340-8caa-8e98939e4886",
+              "name": "date",
+              "value": "={{ $json.body.data.fields[7].value }}",
+              "type": "string"
+            },
+            {
+              "id": "85a3bd70-58fe-4d9a-a946-eb5835ce86c3",
+              "name": "Score",
+              "value": "={{      (       ($jmespath($json.body.data.fields[4].options, `[?id == '${$json.body.data.fields[4].value[0]}'].text`)[0] || '')         .toLowerCase()         .includes('40 yard') ? 10 : 0     ) + (       ($jmespath($json.body.data.fields[5].options, `[?id == '${$json.body.data.fields[5].value[0]}'].text`)[0] || '')         .toLowerCase()         .includes('road') ||        ($jmespath($json.body.data.fields[5].options, `[?id == '${$json.body.data.fields[5].value[0]}'].text`)[0] || '')         .toLowerCase()         .includes('public') ? 5 : 0     ) + (       ($jmespath($json.body.data.fields[6].options, `[?id == '${$json.body.data.fields[6].value[0]}'].text`)[0] || '')         .toLowerCase()         .includes('mixed waste') ? 5 : 0     )   }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        -40
+      ],
+      "id": "51de7477-8862-427a-8d5c-6897e46aa3b4",
+      "name": "Calculating Score",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA",
+          "mode": "list",
+          "cachedResultName": "REM Domestic Skip Request",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.name }}",
+            "Phone": "={{ $json['Phone '] }}",
+            "Email": "={{ $json.email }}",
+            "Address": "={{ $json.Address }}",
+            "Skip Size": "={{ $json['skip size'] }}",
+            "Placement": "={{ $json.placement }}",
+            "Waste type": "={{ $json['waste type'] }}",
+            "Date": "={{ $json.date }}",
+            "Score": "={{ $json.Score }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skip Size",
+              "displayName": "Skip Size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Placement",
+              "displayName": "Placement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Waste type",
+              "displayName": "Waste type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lead Type",
+              "displayName": "Lead Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        660,
+        -140
+      ],
+      "id": "b0f9eaed-64d3-4081-b80c-f803fe66dab0",
+      "name": "High Value",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XfloQ1syUsqZfRuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "REM-Waste",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -40
+      ],
+      "id": "b337d548-67fd-4ecf-9268-4cac664fedc4",
+      "name": "Receive Form",
+      "webhookId": "f1f0baf5-52dc-47fb-9415-60fb4ced3c24"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C093Y9KTZ37",
+          "mode": "list",
+          "cachedResultName": "leads"
+        },
+        "text": "=🔥 High-Value Lead Received 🔥\n Name:  {{ $json.Name }}\n Email: {{ $json.Email }}\n phone: {{ $json.Phone }}\n Address: {{ $json.Address }}\n Skip Size: {{ $json['Skip Size'] }}\n Lead Score: {{ $json.Score }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        880,
+        -140
+      ],
+      "id": "a39a2305-afe2-46c3-aaa6-8a0abd94785a",
+      "name": "Send to Slack",
+      "webhookId": "98e3f2a8-7ada-461b-9e7d-dad1fb1c9af2",
+      "credentials": {
+        "slackApi": {
+          "id": "CTsxoaQRL5biUduy",
+          "name": "Slack Salah"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Receive form, clean data and calculating score.",
+        "height": 460,
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -40,
+        -340
+      ],
+      "typeVersion": 1,
+      "id": "d7943e3e-273f-4ce9-8a65-ddbe5534be52",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Lead Qualification Logic\n\n**If the lead is High Value** (score ≥ 10):\n- Save the lead data to Google Sheet\n- Send a Slack message to notify the team about a high-level opportunity\n- After 24 hours, send a follow-up reminder to the team for this lead\n\n**If the lead is Normal** (score < 10):\n- Only save the lead data to Google Sheet\n\nThis helps prioritize follow-up with high-value customers while still storing all leads.\n",
+        "height": 760,
+        "width": 1100
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        380,
+        -540
+      ],
+      "typeVersion": 1,
+      "id": "8cce2434-8a00-40a1-b13c-5d12142b9433",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## REM Domestic Skip Request – Workflow Overview\n\nThis automation handles online skip hire requests submitted via a Tally Form.\n\n### What It Does:\n\n1. **Receives a new form submission** through a Webhook.\n2. **Cleans the data and calculates a score** based on:\n   - Skip size\n   - Placement (road/public)\n   - Waste type\n3. **Classifies the lead**:\n   - If **score ≥ 10** → \"High Value\"\n   - Else → \"Normal\"\n\n### For High Value Leads:\n- Data is saved to the **Google Sheet**\n- A **Slack alert** is sent to the team\n- After **24 hours**, a follow-up **reminder** is sent to Slack\n\n### For Normal Leads:\n- Data is only saved to the **Google Sheet**\n\n### Links:\n- Tally Form: [Submit Request](https://tally.so/r/w8YEYO)\n- Google Sheet: [View Sheet](https://docs.google.com/spreadsheets/d/1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA/edit?usp=sharing)\n\nThis helps log all leads while giving priority to high-value opportunities.\n",
+        "height": 680,
+        "width": 680
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -940,
+        -540
+      ],
+      "typeVersion": 1,
+      "id": "ed86843d-8537-42e6-bbf2-00d59001c96e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA",
+          "mode": "list",
+          "cachedResultName": "REM Domestic Skip Request",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SFqcrZF5h0bnLTqaIyPDp56gopMsBdR5uhBEMaD6voA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.name }}",
+            "Phone": "={{ $json['Phone '] }}",
+            "Email": "={{ $json.email }}",
+            "Address": "={{ $json.Address }}",
+            "Skip Size": "={{ $json['skip size'] }}",
+            "Placement": "={{ $json.placement }}",
+            "Waste type": "={{ $json['waste type'] }}",
+            "Date": "={{ $json.date }}",
+            "Score": "={{ $json.Score }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Skip Size",
+              "displayName": "Skip Size",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Placement",
+              "displayName": "Placement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Waste type",
+              "displayName": "Waste type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Score",
+              "displayName": "Score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lead Type",
+              "displayName": "Lead Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        660,
+        60
+      ],
+      "id": "a2ac4182-b6a9-4713-8fb3-bf870a75d155",
+      "name": "Normal",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XfloQ1syUsqZfRuo",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "High Value",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Normal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Follow Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculating Score": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High Value": {
+      "main": [
+        [
+          {
+            "node": "Send to Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receive Form": {
+      "main": [
+        [
+          {
+            "node": "Calculating Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to Slack": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c5d559a2-3b85-4a64-8fab-146170bbcfc1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "ffUYD9eaqybKDhY9",
+  "tags": []
+}

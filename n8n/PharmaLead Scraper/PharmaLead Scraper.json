@@ -1,0 +1,214 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "dec19ccc-564b-4c4c-9df9-c2da9ddbf6fe",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "amount": 25
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "16444a5f-2385-443f-be39-4458fe95ac0c",
+      "name": "Wait",
+      "webhookId": "5fbbe1f3-d075-4916-bb79-5533dd0cc992"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/compass~crawler-google-places/runs?token=***",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"categoryFilterWords\": [\n        \"pharmaceutical company\"\n    ],\n    \"includeWebResults\": false,\n    \"language\": \"en\",\n    \"locationQuery\": \"Riyadh, Saudi Arabia\",\n    \"maxCrawledPlacesPerSearch\": 5,\n    \"maxImages\": 0,\n    \"maximumLeadsEnrichmentRecords\": 0,\n    \"placeMinimumStars\": \"four\",\n    \"scrapeContacts\": true,\n    \"scrapeDirectories\": false,\n    \"scrapeImageAuthors\": false,\n    \"scrapePlaceDetailPage\": false,\n    \"scrapeReviewsPersonalData\": true,\n    \"scrapeTableReservationProvider\": false,\n    \"searchMatching\": \"all\",\n    \"searchStringsArray\": [\n        \"Pharmaceutical companies\"\n    ],\n    \"skipClosedPlaces\": false,\n    \"website\": \"allPlaces\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "75a958cd-c215-4d42-b96c-a0ec788bd8b0",
+      "name": "Run Apify"
+    },
+    {
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/compass~crawler-google-places/runs/last/dataset/items?token=***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "id": "e99662f4-c1b6-4f83-9064-186fd6a3ad2d",
+      "name": "Get Apify"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "153vs2gpg-41bPK6icpPev1rizcFTYqQPDBqbv7-iFjU",
+          "mode": "list",
+          "cachedResultName": "Company info",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/153vs2gpg-41bPK6icpPev1rizcFTYqQPDBqbv7-iFjU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/153vs2gpg-41bPK6icpPev1rizcFTYqQPDBqbv7-iFjU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name ": "={{ $json.title }}",
+            "Address": "={{ $json.address }}",
+            "Phone ": "={{ $json.phone }}",
+            "Website": "={{ $json.website }}",
+            "Rate": "={{ $json.totalScore }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name ",
+              "displayName": "Name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone ",
+              "displayName": "Phone ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Website",
+              "displayName": "Website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rate",
+              "displayName": "Rate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        860,
+        0
+      ],
+      "id": "9bd6440a-3a31-4465-a3df-d5adc3abdf30",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XfloQ1syUsqZfRuo",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Run Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Apify": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Apify": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8d477afe-694f-425b-82fd-ce6cdd71221b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "VpXyNMADT7fzUPPB",
+  "tags": []
+}

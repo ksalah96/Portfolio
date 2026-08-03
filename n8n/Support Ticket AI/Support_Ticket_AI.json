@@ -1,0 +1,344 @@
+{
+  "name": "Support Ticket AI",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "customEmailConfig": "[\"UNSEEN\"]"
+        }
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b3ae1cae-4037-4f20-9ae5-342eed35102e",
+      "name": "Email Trigger (IMAP)",
+      "credentials": {
+        "imap": {
+          "id": "xLSONVunyWs4PwWN",
+          "name": "IMAP Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "010a2daf-0e24-4174-8ea2-fef0eda8d905",
+              "name": "textHtml",
+              "value": "={{ $json[\"textHtml\"] || $json[\"html\"] || \"No content\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        0
+      ],
+      "id": "19e20323-e4a1-4ab6-81a0-7e54cf677760",
+      "name": "Clean Body"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a support assistant. Read the following email and extract key ticket info in JSON format:\n{\n  \"summary\": \"\",\n  \"urgency\": \"low | medium | high\",\n  \"category\": \"billing | technical | general\",\n  \"client_email\": \"\",\n  \"client_name\": \"\"\n}\nEmail:\n{{ $json.textHtml }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "# Overview  \nYou are a support assistant powered by Google Gemini. Your role is to process incoming customer support tickets received via email and extract key information for downstream handling.  \n\n## Context  \n- Triggered by a new customer email/ticket.  \n- Each email contains an issue reported by a customer.  \n- Gemini is used to understand and extract structured information from the email content.  \n\n## Instructions  \n1. Read the email content thoroughly.  \n2. Extract and return the following details in a structured format:  \n   - **Summary**: A brief 1–2 sentence description of the customer's issue.  \n   - **Urgency**: One of `low`, `medium`, or `high`, based on the content.  \n   - **Category**: One of `billing`, `technical`, or `general`.  \n   - **Client Email**: The customer's email address.  \n   - **Client Name**: The customer's full name.  \n3. Ensure the output is clean, concise, and well-formatted for follow-up.  \n\n## Tools  \n- **Email Ingestion System**: Delivers incoming emails to Gemini.  \n- **Google Gemini Model**: Performs natural language understanding and extraction.  \n\n## Examples  \n- **Input Email:**  \n  > \"Hello, I was charged twice on my credit card for last month. Please resolve this as soon as possible. Thanks, Raj Patel (raj.patel@email.com)\"  \n- **Output:**  \n  ```json\n  {\n    \"Summary\": \"Customer reports being double-charged on their credit card.\",\n    \"Urgency\": \"medium\",\n    \"Category\": \"billing\",\n    \"Client Email\": \"raj.patel@email.com\",\n    \"Client Name\": \"Raj Patel\"\n  }\n  ```  \n\n## SOP (Standard Operating Procedure)  \n1. Detect new support ticket via email.  \n2. Use Gemini to parse and understand the content.  \n3. Extract required fields and categorize appropriately.  \n4. Output structured JSON data for support team use.  \n\n## Final Notes  \n- Prioritize precision and clarity in summaries.  \n- Use contextual clues to infer urgency and category.  \n- Maintain privacy and data integrity when handling client information.\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        440,
+        0
+      ],
+      "id": "49b39cb1-fee4-45ee-9039-dd8c3e9aa93c",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        528,
+        220
+      ],
+      "id": "60899eac-6e92-4880-8f40-bf7e98d01b0e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "21e0abad-2bde-80dd-b7de-d3bec48b9e34",
+          "mode": "list",
+          "cachedResultName": "Support Tickets",
+          "cachedResultUrl": "https://www.notion.so/21e0abad2bde80ddb7ded3bec48b9e34"
+        },
+        "title": "Support Tickets",
+        "simple": false,
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Summary |title",
+              "title": "={{ $json.Summary }}"
+            },
+            {
+              "key": "Urgency|select",
+              "selectValue": "={{ $json.Urgency }}"
+            },
+            {
+              "key": "Category|select",
+              "selectValue": "={{ $json.Category }}"
+            },
+            {
+              "key": "Client Email|email",
+              "emailValue": "={{ $json[\"Client Email\"] }}"
+            },
+            {
+              "key": "Client Name|rich_text",
+              "textContent": "={{ $json[\"Client Name\"] }}"
+            },
+            {
+              "key": "Assigned To|rich_text",
+              "textContent": "={{ $json[\"Assigned To\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1036,
+        0
+      ],
+      "id": "b78b074d-618a-4316-baae-9ed0491fdd46",
+      "name": "Notion",
+      "credentials": {
+        "notionApi": {
+          "id": "mSOn0ZUdDrzCBI8L",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "55d8c8ba-9edf-47b8-b42a-dc8b940f6374",
+              "name": "Summary",
+              "value": "={{(() => {\n  const raw = $json.text;\n  const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];\n  if (!jsonStr) return null;\n  const data = JSON.parse(jsonStr);\n  return data.summary;\n})()}}\n  ",
+              "type": "string"
+            },
+            {
+              "id": "6669095a-2505-44cb-8a39-a04238fb2aa5",
+              "name": "Urgency",
+              "value": "={{(() => {\n  const raw = $json.text;\n  const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];\n  if (!jsonStr) return null;\n  const data = JSON.parse(jsonStr);\n  return data.urgency;\n})()}}\n",
+              "type": "string"
+            },
+            {
+              "id": "0240c2ff-3f37-446e-b366-b1fb78a4bffa",
+              "name": "Category",
+              "value": "={{(() => {\n  const raw = $json.text;\n  const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];\n  if (!jsonStr) return null;\n  const data = JSON.parse(jsonStr);\n  return data.category;\n})()}}\n",
+              "type": "string"
+            },
+            {
+              "id": "7ef33181-9f71-4fa3-8612-02b000b9ff4c",
+              "name": "Client Email",
+              "value": "={{(() => {\n  const raw = $json.text;\n  const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];\n  if (!jsonStr) return null;\n  const data = JSON.parse(jsonStr);\n  return data.client_email;\n})()}}",
+              "type": "string"
+            },
+            {
+              "id": "7c5995b0-801b-40f6-a292-d6bb91a16e4b",
+              "name": "Client Name",
+              "value": "={{(() => {\n  const raw = $json.text;\n  const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];\n  if (!jsonStr) return null;\n  const data = JSON.parse(jsonStr);\n  return data.client_name;\n})()}}\n",
+              "type": "string"
+            },
+            {
+              "id": "a730f32d-db5b-49a0-949c-8e51a3575d51",
+              "name": "Assigned To",
+              "value": "={{(() => {\n  const category = $json[\"property_category\"]?.toLowerCase() || \"general\";\n  const urgency = $json[\"property_urgency\"]?.toLowerCase() || \"low\";\n\n  // Auto-routing logic\n  if (category === \"technical\") return \"Engineer\";\n  if (category === \"billing\") return \"Finance\";\n\n  // High-urgency general issues go to escalation manager\n  if (category === \"general\" && urgency === \"high\") return \"Manager\";\n\n  // If unknown or generic, assign to default support\n  return \"Support\";\n})()}}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        816,
+        0
+      ],
+      "id": "02a9985c-d1f8-4a68-90af-fd7c3d24907f",
+      "name": "Extract"
+    },
+    {
+      "parameters": {
+        "content": "## Receive  email and clean body",
+        "height": 280,
+        "width": 420
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -50,
+        -120
+      ],
+      "typeVersion": 1,
+      "id": "68f2f0fe-1534-4232-8194-4260012ad69c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Analyze email, extract the text and transfer it to notion",
+        "height": 500,
+        "width": 760
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        408,
+        -140
+      ],
+      "typeVersion": 1,
+      "id": "1949746b-b9a3-4be6-89b7-967f5e8652f0",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {
+    "Email Trigger (IMAP)": [
+      {
+        "json": {
+          "textHtml": "<html><head></head><body><div class=\"yahoo-style-wrap\" style=\"font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;\"><div dir=\"ltr\" data-setdir=\"false\"><div><p data-start=\"286\" data-end=\"295\">Hi there,</p>\r\n<p data-start=\"297\" data-end=\"541\">Iâve been trying to access my account since this morning, but I keep getting an error message that says âinvalid credentialsâ even though Iâm sure my details are correct. I also tried resetting my password, but I didnât receive any reset email.</p>\r\n<p data-start=\"543\" data-end=\"729\">This is causing some delays for me because I need to check a few important reports by tomorrow. Itâs not super urgent right now, but Iâd appreciate it if someone could look into it soon.</p>\r\n<p data-start=\"731\" data-end=\"752\">Thanks for your help!</p>\r\n<p data-start=\"754\" data-end=\"799\">Best,<br data-start=\"759\" data-end=\"762\">\r\nOmar Khalil<br data-start=\"773\" data-end=\"776\">\r\nomar.khalil88@email.com</p></div><br></div></div></body></html>",
+          "textPlain": "\r\nHi there,\r\n\r\nIâve been trying to access my account since this morning, but I keep getting an error message that says âinvalid credentialsâ even though Iâm sure my details are correct. I also tried resetting my password, but I didnât receive any reset email.\r\n\r\nThis is causing some delays for me because I need to check a few important reports by tomorrow. Itâs not super urgent right now, but Iâd appreciate it if someone could look into it soon.\r\n\r\nThanks for your help!\r\n\r\nBest,\r\nOmar Khalil\r\nomar.khalil88@email.com\r\n\r\n",
+          "metadata": {
+            "delivered-to": "k.salah0610@gmail.com",
+            "received": "by 2002:a05:6a11:d847:b0:616:6d1c:81e2 with SMTP id oc7csp205106pxc; Thu, 26 Jun 2025 04:10:24 -0700 (PDT)",
+            "x-google-smtp-source": "AGHT+IEJAgPQfX95uMC/A2Avv9km02HI38K2oAS70wSvVzO4XmObXHtci9nLj2FZtuWtG4z8ysMQ",
+            "x-received": "by 2002:a17:903:b8c:b0:237:e3a0:9d63 with SMTP id d9443c01a7336-23824060224mr118236725ad.43.1750936224396; Thu, 26 Jun 2025 04:10:24 -0700 (PDT)",
+            "arc-seal": "i=1; a=rsa-sha256; t=1750936224; cv=none; d=google.com; s=arc-20240605; b=ZjpdGkPcB2eO42sacbL9lJ1WtvShAXXpLxfxg1yok6zxKC9vRe1T3w1sRgdFBL0tjH XefX/knRVKHt+Lw8T4OxUe8eu22JCXVrNmcQ4B0GnEs7IhRAG/R7V077cHjobg4mHqnr CHuRAui3Ss1MlDrmx3O6LdOROUGOsBNyZAx1EZ8pamnGiFtTJWbx9AKSfFMWTBQ6qRZq YEJvbpVl6aijHBXvKHo4f3et7RSYB1FATZOonzoVRIANVmwyliZhGD7Ufin7XCJ72fgo nrApBC+Vc8YgEyIr7yg0dmtnm9k/OkkafLMs78bxrKrPJPq21xcq7rJI+Tc1NdEse0P3 1BNA==",
+            "arc-message-signature": "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605; h=references:mime-version:subject:message-id:to:from:date :dkim-signature; bh=kRXesbgMGGb4zTvlLO1OSrkfjroPF4vVuIg0Ap93FUo=; fh=G/cpK60k5t82o49lHISfz7trTl7cbP5QELi03cQCOa4=; b=cppc/KO7WHU1rZ3CBSnrnM51/RgDc5BHs1aJwvPDAarD/thDtEoQDI181OfP4JLhPq nFrQvBJk3KNL0aeoaLQeft1w572roqcuQdonDL19nmn6PqqYMbIdH/EM4oLkuQe+F+B8 NUD5h7Z2BbY8bf0PMc8ZtPvlfUD9LIr2W+rclEwM5gFXBy0braTGS2pi4kW3MSPg69or ckgBhTaZ/bz/IQbMSRKOND5nF3fJJLNlIX6OCo9nV4UB4Ge0WEnKyzcaTHu9LY//Ydoj VSQDfK9M+lAN634DUtmrReEkN0Ivq9CjYIGBjHAjjjUPDqOeEwBkDsv9wNuhX3lSBUYn evUA==; dara=google.com",
+            "arc-authentication-results": "i=1; mx.google.com; dkim=pass header.i=@yahoo.com header.s=s2048 header.b=i95vEYWg; spf=pass (google.com: domain of k.salah26@yahoo.com designates 106.10.242.83 as permitted sender) smtp.mailfrom=k.salah26@yahoo.com; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=yahoo.com",
+            "return-path": "<k.salah26@yahoo.com>",
+            "received-spf": "pass (google.com: domain of k.salah26@yahoo.com designates 106.10.242.83 as permitted sender) client-ip=106.10.242.83;",
+            "authentication-results": "mx.google.com; dkim=pass header.i=@yahoo.com header.s=s2048 header.b=i95vEYWg; spf=pass (google.com: domain of k.salah26@yahoo.com designates 106.10.242.83 as permitted sender) smtp.mailfrom=k.salah26@yahoo.com; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=yahoo.com",
+            "dkim-signature": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1750936223; bh=kRXesbgMGGb4zTvlLO1OSrkfjroPF4vVuIg0Ap93FUo=; h=Date:From:To:Subject:References:From:Subject:Reply-To; b=i95vEYWgV6K03hpuxLrlF7BVsOy1qnbYOtG9qIHUB5OvoHPwO+qG8W6/ytNjPlgmsKT+IuWA4ygZWFuqOjZ0iGWRRnWb0cUNjvHnvC5iaCoHyBeMRpC8+MrRRaUWyfLkzRANRTmiwjdWhsA13Lw3JMzve5BNcEPaxVhsRkLL98HPsTR79nahSeGBFFjJ5Llo7pMwwAfRd5+Yulj8feaUadTRqxrBGSd3skFUIllP94QzGHRh1PMkCqR/+nJAflutlYw+bWTCix1RgkGEzXsrPacfV/4x1oSYRoFtinV6tR/hahugH/R1+xDO19JbRc9F1W6PVdC1f3v9XAdEVUmvTA==",
+            "x-sonic-dkim-sign": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1750936223; bh=wa/jqVLpcB1rVOaK/ECTJKCF4JudhpYCrdzyt1IMnhD=; h=X-Sonic-MF:Date:From:To:Subject:From:Subject; b=QEz3e2++fqaveR0sGbuQP1QM+qFJ3Z8k53210GNB4kbGoYouWWDdhAq17/30RtJU0I+U0nbWb3lXzns0mE4pvWJYYMsfctqGTS5zqHzJ5xwWu4FAJiakH8Gwb7CAOoYQJk3TWFyp1R0x/oo4dkfOUSsZuO6IvH2MaIGtdasfFq5MWfoahYWcb3mDI6RlhTZyD4oCtl6SzZlAJcBeVVJIUJg/RchzTgTqkqrZDUa2fJnWvxZsRUnq3LcsRPuZPa4obSwkzrc/ftueYuDJsV/wS0S7TQj6t/gKIPMQT0+fdb/f3uGTRpjPL+Uk/sqlxGkn/vM1ZyeZr+pkZMHX5L4MWg==",
+            "x-ymail-osg": "vZLzy1UVM1n0yxlS8bTxJkML1Fx1wx_YQDUmzHl09hFVJMyn1_Cudoiox7ta1tw iCYQmnJJATKkrP4SsaVMypKdw.84tI23I3bO9yUexRSyj6mrLcNDvv8m0H4N3wtL8G_N87aDX1df wZPLNkRQZ2PBnNTHsvGK.HujRL.OOagv.VHStcD4hof0BDB4aDybwCSfxfzWqwxfy1I0EZ8.bgrj IoQIcECR68uNv72lJCT_3BdjNoJi82C4QZEsoaTz58cdkuVkzbqdZ2tTjIf69kWHyxh59SFht_VA 5HRzDWXVPTxp5NIMgAUCC6FE6ur8NXnojlt3Njoi4dkSqj9.n4DDwl9oL4Jnt6yuuJdFl4E78E2C 8MeMw85hXt4ZH1PqoPtizfS6OR3XmLXqOB9ueFAO5ItJqq4a5LiAtTKzcQLpwirCS4Ow3RTk4iPt 2t6lcZvryhL7HS6CKkEja62nYXBFwmev08YH5zSETqRPpTTzPpnVuYcp8pyhO.hHorddx0S77jX9 3wGWNq0fUzMXJka0W1saZ2bDBpZTLTAEiRKt1ZhxNBe9FhNjCTbYHi6hGdiHQbxAWGlNZMJLSNpr dgmu9JDvJ1bjM.D.9m2MXg_n2B6Oa0QzkQIhATiWvTN6ue3U7PqfXi3wz78b9oCXaSQr6hV.xD53 gKNCxrKzJqooqCmsAMr8cPk8ScThpxINA7PckHYBS2V7QHOiFqge7EJCurjDyJBNhL0BVWyirLgo hgerjNxXLafjcCNrLbmfQGB277_WRG73zT3EpfgqeoNP8wzbBXWbM6cOsr7cKict4LW86tmtln3o rwtGgntK0ehpXV0u8GWKSnUln13BPkJLAP66rU9mK7h.zQP.SnGmXeEAafD_ZgRDQOPZJtYrU2NW dMfRI1nN0TR_2ZpqxkXNlMJM2ccessj8cbKbHevVilAysVhsJqMbFlQtaq291eAEhQAh8Z0BiIbM pkL8sjKpmMZRfc9jaJ8e55C5mFPzzWo9j58pjKwOF0MnjSXTIxLdIH6LW8imlntU3I0X_AdB0i07 MZqlbHKiVMYBrVuDevqyto91rMukFD29LymMlDnv8kpO8VSg_Q5ePs4YeR8X3coajCMIMwWNUt5Q Bad1dol8HUWIymcsjGT7GlcJzQjYFWPJ1Fs3cgZFGKHZgvU50D.xB0uugBVhEIZdBSm2rBZlkONa XU40i91JhkxZB7n_Fn6byqgVyeDO2BOYCm6WgWzExtHRueXKHLcZ6tTl94ZRH.CByl8qEWDXR5EK 9s.lE9Zckstfb2PJbZDCaI1DyA.YE24hst41aRQmI45EDaJaN.76eYK.4w67Ot5N.7LzmbYMhaps LQByjSdt9TQ1x3005sHSAu2zr6NSV0bz8onn6OsYlHMXTGZrdH8AUB_Wo3oz.ZgRunSIkTNjbPuw 5qHCrB._kVvfbwUJteMpGHZ09YJhE98CTwaO30Wn3gsbOAvKMSRb0mEpY9zh9X8NDGvx9v_vR9mT oO74EuitbwIJCd7udf_qB.viVLtgsAwbOndReKoAmPLHrwzcmJefeHGAuGWvTRi4D4mh7g3mRwc7 qSHN5EUP5UCRZyCratc7l.goGN4Ok_TfmqTILT31Xq0PW8rx6t_V7rZemb6a1gJM1ksFJB4Glkpc bh7Mpj_f1TefUmqj9.ZY5ypcYqxP0lsX1Zx8m5BVpLMO4hggBWPn_trgTnAw4Lz_8rc_NKzR2OM7 KHzHw7Bzbdp_AYo4QmhS65Qs3DTfm54cYtcQIDvA_fkOvvQV1X2WHE8kgcyk0yf3rgeD8jvKie_7 g1XeQEn3kShj4lAifM5K9QGQSfboeSyqEVJqVak6toloBqKVSPpAQk17rTty9SeoXv_6jYWIFnjC vkRm10U_bAFANpOCteuZSQ28EvHUPxQESoiXuTRvu7eVtEjd18m31cy5e9kONan9m0VHn..ru9NU HVLDo3kbflPSyqPLrjp0lBEEqZtjVO6f3qswzYVGsjW9l1OCnugALG4OShOw.Xd8._zQOvcW4_z7 vdLot6HSiNsawoHQkxvdSlnt2MJsm6CIZcmSGcGynd1QYDFbT1qn6qnFTdWqmAOzyrNAaDPYO7UL diDtoQeQC9Hgoa0kUtMYq..6hv9RLxhOd8_l5GwV5jmZ8CDVH0AdBEgR5.udUqfNF4m9jydPb8lI d6q7GX29xXa_U9LuY_n9l4yah1.gh9KAokFg-",
+            "x-sonic-mf": "<k.salah26@yahoo.com>",
+            "x-sonic-id": "6d99812e-a5b4-4a2b-9d55-8d4e1a9b8edf",
+            "message-id": "<2056374812.1897472.1750936219237@mail.yahoo.com>",
+            "mime-version": "1.0",
+            "content-type": "multipart/alternative; boundary=\"----=_Part_1897471_1172895572.1750936219236\"",
+            "references": "<2056374812.1897472.1750936219237.ref@mail.yahoo.com>",
+            "x-mailer": "WebService/1.1.24027 YMailNorrin",
+            "content-length": "1987"
+          },
+          "attributes": {
+            "uid": 1097
+          },
+          "date": "Thu, 26 Jun 2025 11:10:19 +0000 (UTC)",
+          "from": "khaled salah <k.salah26@yahoo.com>",
+          "to": "\"k.salah0610@gmail.com\" <k.salah0610@gmail.com>",
+          "subject": "Problem Logging Into My Account"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Clean Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Body": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Extract",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion": {
+      "main": [
+        []
+      ]
+    },
+    "Extract": {
+      "main": [
+        [
+          {
+            "node": "Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "628f08cc-1a3f-4a37-80e2-1d5136c2f759",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "AEp1gPpdCKKBLlFu",
+  "tags": []
+}

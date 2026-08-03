@@ -1,0 +1,416 @@
+{
+  "name": "Real Estate Lead Qualification Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a lead qualification assistant, analyze the email below and respond with JSON.\n\nEmail:\n {{ $json.email_text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=# Overview  \nYou are an AI lead qualification assistant for a real estate company in Saudi Arabia. You evaluate incoming emails to determine whether the sender qualifies as a potential client based on predefined criteria related to apartment rentals in Riyadh and Jeddah.\n\n## Context  \n- The company offers apartment rentals in **Riyadh and Jeddah**, all priced under **800 SAR per day**.  \n- The AI receives incoming email text as input.  \n- Your goal is to extract relevant sender details and assess qualification status.  \n- The output must be structured in a strict JSON format for further automation in n8n workflows.\n\n## Instructions  \n1. Receive the body of an email as input.  \n2. Analyze the content to determine:  \n   - If the sender is interested in **apartment rentals**.  \n   - If the interest pertains to **Riyadh or Jeddah**.  \n   - If the **budget aligns with <800 SAR/day**.  \n3. Extract the sender’s **name**, **email address**, **company**, and **phone number** (if mentioned; otherwise return `null`).  \n4. Based on the evaluation, set `\"is_qualified\"` to `true` or `false`.  \n5. Provide a one-sentence `\"reason\"` explaining the qualification status.  \n6. Ensure that any missing fields (name, email, company, or phone) are returned as `null`.  \n7. Return the result in the exact JSON structure below.\n\n## Tools  \n- **Google Gemini Chat Model-2.0-flash-001**: Performs email parsing, entity extraction, and logical qualification.  \n- **n8n memory/variables**: May store or use email text passed via automation nodes.  \n\n## Output Format  \n```json\n{\n  \"is_qualified\": true or false,\n  \"name\": \"Full Name of the sender\",\n  \"email\": \"Sender's email address\",\n  \"phone\": \"Phone number if mentioned, else null\",\n  \"company\": \"Company name if mentioned, else null\",\n  \"reason\": \"One-sentence explanation for the qualification status based on interest, region, and price relevance\"\n}\n```\n\n## SOP (Standard Operating Procedure)  \n1. Parse the email text to identify interest, location, and budget.  \n2. Validate against the criteria (rental interest, region: Riyadh/Jeddah, budget <800 SAR/day).  \n3. Extract relevant entities (name, email, phone, company).  \n4. Populate the JSON structure with findings.  \n5. Return the JSON output to the calling workflow node.\n\n## Final Notes  \n- Be strict with JSON formatting.  \n- Always ensure the `reason` clearly reflects qualification logic.  \n- Use `null` for any unidentified fields.\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        440,
+        8.816466552315603
+      ],
+      "id": "4f077c9e-4b82-4e76-8ab0-34a227bdc942",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        528,
+        228.8164665523156
+      ],
+      "id": "04cfb649-eafa-49ab-9f72-0bc5b36fac7c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "appToken",
+        "email": "={{ $json.email }}",
+        "additionalFields": {
+          "firstName": "={{ $json.name }}",
+          "phoneNumber": "={{ $json.phone }}"
+        },
+        "options": {
+          "resolveData": false
+        }
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.1,
+      "position": [
+        1256,
+        -91.1835334476844
+      ],
+      "id": "b0926b17-2989-49cd-9f60-1fea18c5a369",
+      "name": "HubSpot",
+      "credentials": {
+        "hubspotAppToken": {
+          "id": "chI93xgeaF2OUXaA",
+          "name": "HubSpot Salah Real State"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C093N9XSL1W",
+          "mode": "list",
+          "cachedResultName": "all-salah"
+        },
+        "text": "=Lead Skipped\nReason: {{ $json.reason }}\nEmail:{{ $json.email }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1256,
+        108.8164665523156
+      ],
+      "id": "b0eefea6-c910-412f-a8e8-62890c89fc16",
+      "name": "Slack",
+      "webhookId": "47fbe4df-5932-4cf2-baed-a55e5607c00d",
+      "credentials": {
+        "slackApi": {
+          "id": "CTsxoaQRL5biUduy",
+          "name": "Slack Salah"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "customEmailConfig": "[\"UNSEEN\"]"
+        }
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        0,
+        8.816466552315603
+      ],
+      "id": "fc64da46-2c23-4dab-833a-28335924e148",
+      "name": "Receive Email",
+      "credentials": {
+        "imap": {
+          "id": "xLSONVunyWs4PwWN",
+          "name": "IMAP Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8d0f582e-e22c-49ad-ada4-3715fa72d821",
+              "leftValue": "={{ $json.text }}",
+              "rightValue": "= \"is_qualified\": true",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        816,
+        8.816466552315603
+      ],
+      "id": "a38460da-eb31-4fae-a598-c408d2f488a3",
+      "name": "Qualified?"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b8a12dd8-01cf-4f43-9e07-c4593ad8c285",
+              "name": "name",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.name; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "b9cbc9e9-f2ee-460a-ab11-b3f8bcd68595",
+              "name": "email",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.email; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "dc5f2787-2e55-42d6-a000-22111818c756",
+              "name": "phone",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.phone; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "1d75da1a-f618-47fc-b165-7940862585e6",
+              "name": "is qialified",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.is_qualified; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "491d48e2-cd44-4035-ab93-9565de58d937",
+              "name": "reason",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.reason; })()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1036,
+        -91.1835334476844
+      ],
+      "id": "d4dc2dcd-ec45-408e-ba05-f165e6b943fc",
+      "name": "Extract"
+    },
+    {
+      "parameters": {
+        "content": "## Receive a mail and clean email body",
+        "height": 380,
+        "width": 460
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -70,
+        -211.1835334476844
+      ],
+      "typeVersion": 1,
+      "id": "2d5c6aa0-f7e3-4cce-abfb-bb403acc083d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "081c9ffc-b6c2-4df6-b399-c34c6c7836ee",
+              "name": "email_text",
+              "value": "={{$json.textPlain || $json.textHtml || \"No content\"}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        8.816466552315603
+      ],
+      "id": "3392aabe-ab5f-478c-a2f9-f984fd728d6b",
+      "name": "Clean Email Body"
+    },
+    {
+      "parameters": {
+        "content": "## AI make analyze and check if client qualify or not",
+        "height": 500,
+        "width": 520
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        418,
+        -131.1835334476844
+      ],
+      "typeVersion": 1,
+      "id": "dcaf29a6-94c5-4bed-a3e0-9868b4f1a1a5",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## If qualified put info into CRM, if not send a message to slack for team channel",
+        "height": 520,
+        "width": 460
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        966,
+        -251.1835334476844
+      ],
+      "typeVersion": 1,
+      "id": "9fb7bdf1-141a-4b85-bff3-eac962846e30",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b8a12dd8-01cf-4f43-9e07-c4593ad8c285",
+              "name": "name",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.name; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "b9cbc9e9-f2ee-460a-ab11-b3f8bcd68595",
+              "name": "email",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.email; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "dc5f2787-2e55-42d6-a000-22111818c756",
+              "name": "phone",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.phone; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "1d75da1a-f618-47fc-b165-7940862585e6",
+              "name": "is qialified",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.is_qualified; })()}}",
+              "type": "string"
+            },
+            {
+              "id": "11c0ac85-4c91-490d-95ca-74689c097462",
+              "name": "reason",
+              "value": "={{(() => {   const raw = $json.text;   const jsonStr = raw.match(/```json\\n([\\s\\S]*?)```/)?.[1];   if (!jsonStr) return null;   const data = JSON.parse(jsonStr);   return data.reason; })()}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1036,
+        108.8164665523156
+      ],
+      "id": "db852b8b-505d-4887-a194-c9bf16d21a17",
+      "name": "Extract1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Qualified?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receive Email": {
+      "main": [
+        [
+          {
+            "node": "Clean Email Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qualified?": {
+      "main": [
+        [
+          {
+            "node": "Extract",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract": {
+      "main": [
+        [
+          {
+            "node": "HubSpot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Email Body": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract1": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "963e49e5-2d27-4270-860d-7f9cc713e0bf",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "SBcBmPdecRebLd0F",
+  "tags": []
+}

@@ -1,0 +1,355 @@
+{
+  "name": "AI Habit Tracker",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9,
+              "triggerAtMinute": 53
+            },
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -360,
+        0
+      ],
+      "id": "19b22aa7-c9af-4c4a-8caf-025ca0697b40",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -112,
+        580
+      ],
+      "id": "1dd3cc8c-c814-4bb1-9a92-362a55c5cce9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Reply on this message{{ $json.message.text }}",
+        "options": {
+          "systemMessage": "# Overview  \nYou are an AI assistant designed to respond to task lists with brief, uplifting messages. Your goal is to motivate, reinforce the user's sense of purpose, and inspire confident action.\n\n## Context  \n- The agent receives a list of tasks from the user.  \n- It does not evaluate or modify the tasks.  \n- It generates a positive, purpose-driven 1–2 sentence response.  \n\n## Instructions  \n1. Receive the user's list of tasks.  \n2. Generate a motivational reply in 1–2 sentences.  \n3. Reinforce the user's purpose, determination, or progress.  \n4. Inspire action with an encouraging and optimistic tone.  \n\n## Examples  \n- **Input:**  \n  - \"1. Finish report  \n    2. Call supplier  \n    3. Plan team meeting\"  \n- **Output:**  \n  - \"You’ve got a solid plan ahead—every task you complete brings you closer to your goals. Keep that momentum going!\"\n\n## Final Notes  \n- Keep your tone energizing, supportive, and focused.  \n- Avoid being generic—tailor the motivation to the structure or tone of the task list when possible.  \n- Do not comment on task difficulty or feasibility.  \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        360
+      ],
+      "id": "6b84ae29-e5bf-48a7-af13-44ae457ee314",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        8,
+        580
+      ],
+      "id": "a7ac4923-b58d-4e46-b0b2-d0f8824cb027",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "YI8E0hGeNg5edyX0",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "21f0abad-2bde-805b-8819-ee7d8f4f6178",
+          "mode": "list",
+          "cachedResultName": "Habit Tracker",
+          "cachedResultUrl": "https://www.notion.so/21f0abad2bde805b8819ee7d8f4f6178"
+        },
+        "title": "={{ $json.Habit }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Habit|title",
+              "title": "={{ $json.Habit }}"
+            },
+            {
+              "key": "Date|date",
+              "includeTime": false,
+              "date": "={{ $json.Date }}"
+            },
+            {
+              "key": "Motivation|rich_text",
+              "textContent": "={{ $json.Motivation }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        456,
+        360
+      ],
+      "id": "aef16f78-5918-4551-ae97-78baa8346835",
+      "name": "Notion",
+      "credentials": {
+        "notionApi": {
+          "id": "mSOn0ZUdDrzCBI8L",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Sent Reminder to Telegram",
+        "height": 320,
+        "width": 540
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -470,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "13bcce8a-cec5-4325-be51-6b123d437e5f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "chatId": "2004322048",
+        "text": "👋 Time for your daily habit check-in!   Reply with what habit you completed today 💪  ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -140,
+        0
+      ],
+      "id": "1789d0a2-82d4-40ee-ae6e-8d96c5300e72",
+      "name": "Sent to User",
+      "webhookId": "5dc84ec1-6224-48af-b8ed-1b9f00e10a0d",
+      "credentials": {
+        "telegramApi": {
+          "id": "GG7epZeMgZ7GCtTp",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -360,
+        360
+      ],
+      "id": "685ed6ba-21c0-4c41-98de-708acb21294e",
+      "name": "Receive Habit",
+      "webhookId": "fb41570f-66f8-42bb-95c5-6812e0b27604",
+      "credentials": {
+        "telegramApi": {
+          "id": "GG7epZeMgZ7GCtTp",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "63e7e10c-75c8-4eef-b333-22dd99c72f25",
+              "name": "Habit",
+              "value": "={{ $('Receive Habit').item.json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "42b5d936-ba97-4565-95b1-6421f55bf623",
+              "name": "Date",
+              "value": "={{ \n  (() => {\n    const date = new Date();\n    const pad = n => String(n).padStart(2, '0');\n    const yyyy = date.getFullYear();\n    const MM = pad(date.getMonth() + 1);\n    const dd = pad(date.getDate());\n    return `${yyyy}-${MM}-${dd}`;\n  })()\n}}\n",
+              "type": "string"
+            },
+            {
+              "id": "6776135f-55be-42bc-8d86-bccba28db741",
+              "name": "Motivation",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        236,
+        360
+      ],
+      "id": "b74232a7-65b2-4761-aa79-42f086c35dc2",
+      "name": "Extract Field to Notion"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Receive Habit').item.json.message.chat.id }}",
+        "text": "={{ $json.property_motivation }}\n\"✅ Habit logged successfully!\" ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        676,
+        360
+      ],
+      "id": "2b54e814-7152-4192-98c1-5d339756a30e",
+      "name": "Reply to User",
+      "webhookId": "01046b5c-9a90-4d12-b748-e796f6115c07",
+      "credentials": {
+        "telegramApi": {
+          "id": "GG7epZeMgZ7GCtTp",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## The user reply what is him/her habit and AI Agent Generate a Motivation Text and sent it to notion and reply to user.\n",
+        "height": 460,
+        "width": 1300
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -442,
+        260
+      ],
+      "typeVersion": 1,
+      "id": "f7ff25c5-2351-4aee-aafa-78ab3b9cc445",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sent to User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Extract Field to Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notion": {
+      "main": [
+        [
+          {
+            "node": "Reply to User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receive Habit": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Field to Notion": {
+      "main": [
+        [
+          {
+            "node": "Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d8fd58bd-fcf3-4506-a483-e6d668d4f549",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "U740FVY2BXKNZZ6X",
+  "tags": []
+}

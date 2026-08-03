@@ -1,0 +1,218 @@
+{
+  "name": "Email Labeling AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "36ad2614-aac1-4dc9-8bbe-e3e17a1f2d69",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Pn9nFdfMzmvDolm",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "ALX VA ",
+              "description": "If someone Asks about virtual assistant course"
+            },
+            {
+              "category": "Personal",
+              "description": "If someone want to connect with the manager"
+            },
+            {
+              "category": "Note",
+              "description": "Any mail have note word"
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Please classify the text provided by the user into one of the following categories: {categories}, and use the provided formatting instructions below. Don't explain, and only output the json."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        220,
+        -20
+      ],
+      "id": "00695f99-f44d-4b6b-aa8b-5cf052bd68e8",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        240,
+        140
+      ],
+      "id": "d8879259-f1a9-4a34-98d7-1957666c6bb9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_3"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        700,
+        -100
+      ],
+      "id": "8603c416-abb0-4b38-9c4f-b5ebe0f93785",
+      "name": "Personal",
+      "webhookId": "c32263e0-99a4-41d2-9dcd-774d00693916",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Pn9nFdfMzmvDolm",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_3504084860964995072"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        580,
+        -280
+      ],
+      "id": "86b5dfe4-a911-4def-a487-85fde1c6e230",
+      "name": "ALX VA",
+      "webhookId": "c32263e0-99a4-41d2-9dcd-774d00693916",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Pn9nFdfMzmvDolm",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_5"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        680,
+        100
+      ],
+      "id": "a784aa81-c70a-4fde-a53f-eeaebe91a66c",
+      "name": "Notes",
+      "webhookId": "c32263e0-99a4-41d2-9dcd-774d00693916",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Pn9nFdfMzmvDolm",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "ALX VA",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Personal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "335e7753-9907-4070-b73c-725a0f2add85",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "ofYruuOlvNCxUfbN",
+  "tags": []
+}

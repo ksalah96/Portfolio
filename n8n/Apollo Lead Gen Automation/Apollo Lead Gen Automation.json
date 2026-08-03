@@ -1,0 +1,549 @@
+{
+  "name": "My workflow 13",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        288
+      ],
+      "id": "82dc0247-f839-4e83-a936-d6f2f8ae0878",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=I want you to come with apollo url just natural language query/prompt given by the user.\n\nExample of search url: https://app.apollo.io/#/people?sortAscending=false&sortByField=%5Bnone%5D&page=1&qKeywords=design%20agency&personLocations[]=new%20york&personTitles[]=ceo&personTitles[]=ceo%20founder&personTitles[]=owner&personTitles[]=partner&personTitles[]=founder&personTitles[]=co-founder\n\nThis URL describes a search for people that are\n\nLocated in the new york.\nHold the titles: Owner, CEO, Founder, or Partner.\nHave a keyword association with “design agency”.\nThe query of the user was: Design agency in new york\n\nThese are the fields you can change:\n\npersonLocations[], Keywords, personTitles[]\n\nDo not add or change any other fields. Use the above template\n\nReturn your response in JSON using this format:\n\n{\"searchUrl\": \"search url goes here\"}"
+            },
+            {
+              "content": "You're a helpful, smart sales assistant.",
+              "role": "model"
+            },
+            {
+              "content": "Automation Developer in Egypt"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "codeExecution": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        224,
+        288
+      ],
+      "id": "b5de3481-fbb2-4e46-97d8-a4dc8f67881a",
+      "name": "Apollo URL Maker",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YzNL02rIf3gFc48A",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ccbb1b53-ca6c-4df2-a838-9b0b5d6b2c5f",
+              "name": "searchURL",
+              "value": "={{ JSON.parse($json.content.parts[0].text)[\"searchUrl\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        576,
+        288
+      ],
+      "id": "ffd1416a-5c5e-47a6-b546-54c33e36ca04",
+      "name": "Clean URL"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/jljBwyyQakqrL1wae/run-sync-get-dataset-items",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer ***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"getPersonalEmails\": true,\n    \"getWorkEmails\": true,\n    \"totalRecord\": 500,\n    \"url\": \"{{ $json.searchURL }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        288
+      ],
+      "id": "74bd5a79-a793-4f20-bdeb-160eb67763db",
+      "name": "Apify"
+    },
+    {
+      "parameters": {
+        "maxItems": 3
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        288
+      ],
+      "id": "a1519ff3-94f0-485f-9038-b366cecaaa42",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1472,
+        168
+      ],
+      "id": "9bdc09b8-9f30-431b-b906-26b2eca90f16",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "url": "=https://emailverifier.reoon.com/api/v1/verify?email={{ $json.email }}&key=Oo9YLLvRNxRbs2TNMv5efDmnNUslF4y5&mode=quick",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1696,
+        192
+      ],
+      "id": "937b0281-be4a-40da-930d-7ab9829c23cc",
+      "name": "Check Email"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        216
+      ],
+      "id": "13710a41-0130-4839-80db-13e0c23cad6b",
+      "name": "Wait",
+      "webhookId": "f61b76d1-72cb-4c7e-b9ef-15030ca60749"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1472,
+        360
+      ],
+      "id": "03861c94-b60f-434d-94be-d3e741a79444",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        0
+      ],
+      "id": "56ff2644-72f4-4e0f-8f4b-a255e34cf734",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "fe2dddd4-f709-407c-9824-3b0bedcd97dd",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        288
+      ],
+      "id": "88899c1c-946b-4e74-84e6-0819aec773c5",
+      "name": "Email Exist"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1cndJ9Irb83ekQOeNh4gkR6XwpUlHATDdirtft96kWv0",
+          "mode": "list",
+          "cachedResultName": "Apollo Leads ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cndJ9Irb83ekQOeNh4gkR6XwpUlHATDdirtft96kWv0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1cndJ9Irb83ekQOeNh4gkR6XwpUlHATDdirtft96kWv0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $('Apify').item.json.id }}",
+            "First Name": "={{ $('Apify').item.json.first_name }}",
+            "Last Name": "={{ $('Apify').item.json.last_name }}",
+            "LinkedinURL": "={{ $('Apify').item.json.linkedin_url }}",
+            "Title": "={{ $('Apify').item.json.title }}",
+            "Email": "={{ $('Apify').item.json.email }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedinURL",
+              "displayName": "LinkedinURL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1920,
+        -192
+      ],
+      "id": "62b483d8-30e5-4a4f-848f-f9cbe11a9b78",
+      "name": "Add to Sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ym4Lo2KHJ35yC0qR",
+          "name": "Khaled 54"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7c8bff01-346d-471d-9b08-6118cd85b745",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "valid",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1696,
+        -168
+      ],
+      "id": "ecdb3916-b3ef-4274-9974-394153ff65e2",
+      "name": "Check Vail Email"
+    },
+    {
+      "parameters": {
+        "url": "https://server.smartlead.ai/api/v1/campaigns/1769229/leads",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "api_key",
+              "value": "***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"lead_list\": [\n    {\n      \"first_name\": \"{{ $json['First Name'] }}\",\n      \"email\": \"{{ $('Check Vail Email').item.json.email }}\",\n      \"custom_fields\": {\"Title\": \"{{ $json.Email }}\" }\n    }\n  ]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2144,
+        -192
+      ],
+      "id": "31b79c93-2f9d-4899-b1e7-b63968ce938c",
+      "name": "Cold Email Campaign"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Apollo URL Maker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apollo URL Maker": {
+      "main": [
+        [
+          {
+            "node": "Clean URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean URL": {
+      "main": [
+        [
+          {
+            "node": "Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Email Exist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Check Vail Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Check Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Email": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Exist": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Sheet": {
+      "main": [
+        [
+          {
+            "node": "Cold Email Campaign",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Vail Email": {
+      "main": [
+        [
+          {
+            "node": "Add to Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0eb920e8-8cb0-4e38-9f71-27d77fd57a66",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1891129567fec51a84b71c89da633af32f4e17179fe279ec5bdbd364f7dfc6a5"
+  },
+  "id": "ZwrNQB9R74AnTFgk",
+  "tags": []
+}

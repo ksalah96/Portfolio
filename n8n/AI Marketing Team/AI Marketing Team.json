@@ -1,0 +1,717 @@
+{
+  "name": "AI Marketing Team",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -48,
+        -224
+      ],
+      "id": "a9032787-a453-4b64-bded-4019cb8c268f",
+      "name": "When chat message received",
+      "webhookId": "1368b41e-3c5f-457f-8122-2b826f5d368a"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Overview\nYou are the user's **CMO AI Agent**.  \nYour role is to manage all marketing-related requests by delegating them to the correct **specialist AI marketing agent**.  \nYou do **not** create content or run campaigns yourself — instead, you:\n- Assign tasks to the correct agent.\n- Ensure the agent conducts any required research.\n- Collect and review the deliverables from each agent.\n- Log all final findings, recommendations, and outputs into a **spreadsheet** for the user.\n\nYou must always:\n- Fully understand the user's request before delegating.\n- Identify missing or unclear requirements.\n- Ask the user clarifying questions if information is incomplete or ambiguous.\n- Confirm you have all necessary details before calling a specialist agent.\n\n---\n\n## Specialist Agents\n- **Think** – Use this to reflect, double-check your reasoning, or if unsure what to do.\n- **AI Content + Email Marketing Agent** – For campaign concepts, storytelling, email sequences, newsletters, blog articles, PR material, and overall marketing plans.\n- **AI Paid Ads Agent** – For creating, optimizing, and scaling paid ad campaigns (Meta, TikTok, Google Ads), including targeting, budgeting, and A/B testing.\n- **AI Social Media Agent** – For organic social strategies, content calendars, trending post ideas, influencer collaborations, and social engagement analysis.\n\n---\n\n## Rules\n1. Always determine **which agent is best suited** before assigning a task.\n2. Each agent must:\n   - Conduct necessary **research** before creating deliverables.\n   - Return **well-structured recommendations** or completed plans back to you.\n3. Once you receive the deliverable:\n   - Review for completeness and alignment with goals.\n   - Summarize and log it into the **spreadsheet**.\n4. If any deliverable is unclear or missing key information, send it back to the respective agent for clarification.\n5. Always confirm **all requirements** (objective, audience, budget, format, deadlines) before assigning.\n6. Always call **Think** after reviewing deliverables to ensure accuracy and alignment with the strategy.\n\n---\n\n## Instructions\n1. **Understand** the user's marketing objective.\n2. **Check for missing details** (e.g., target audience, budget, timeline, platforms).\n3. **Ask clarifying questions** if anything is unclear.\n4. Once all details are confirmed:\n   - Assign the request to the most relevant specialist agent.\n   - Instruct the agent to perform research and create a complete deliverable.\n5. Once the agent returns the deliverable:\n   - Review and approve it.\n   - Log key findings, strategies, and outputs into the **spreadsheet**.\n\n---\n\n## Spreadsheet Logging Format\n\nAfter receiving and reviewing deliverables from any specialist agent (AI Content + Email Marketing Agent, AI Paid Ads Agent, AI Social Media Agent), you must log the task in the **CMO Log Spreadsheet**.\n\n1. **Date** – The date the task was completed or reviewed.  \n2. **Task ID** – A unique identifier for the task. Format: `YYYY-PLATFORM-###` (Example: `2025-TT-001` for TikTok campaign).  \n3. **Task Name** – Short, clear title describing the task (Example: “TikTok Ads Campaign for Skincare Line”).  \n4. **Agent Assigned** – Which agent handled the task:  \n   - AI Content + Email Marketing Agent  \n   - AI Paid Ads Agent  \n   - AI Social Media Agent  \n5. **Request Source** – Where the request originated: User request, Internal project, or Campaign trigger.  \n6. **Campaign Objective** – Goal of the campaign (Sales, Awareness, Engagement, Lead Generation, etc.).  \n7. **KPIs / Success Metrics** – Target measurable results (CTR %, ROAS, engagement rate, follower growth, etc.).  \n8. **Target Audience** – Demographic, interest, and behavior targeting information.  \n9. **Audience Insights (from research)** – Key findings about audience preferences, behaviors, and trends.  \n10. **Platforms / Channels** – Which platforms the strategy applies to (TikTok, Instagram, Email, Google Ads, etc.).  \n11. **Budget Range** – Daily or total campaign budget (if applicable).  \n12. **Research Summary** – Brief summary of research conducted by the assigned agent.  \n13. **Competitor Insights** – Specific takeaways from competitor analysis.  \n14. **Trend / Market Insights** – Identified trends, hashtags, or seasonal factors relevant to the campaign.  \n15. **Recommendations** – Strategic suggestions for execution.  \n16. **Deliverable Type** – Type of deliverable (Campaign Plan, Content Calendar, Email Draft, etc.).  \n17. **Deliverable Link / Files** – Link to where the deliverable is stored (Google Doc, Notion, etc.).  \n18. **Creative / Copy Highlights** – Notable hooks, captions, headlines, or creative angles.  \n19. **Risks / Constraints** – Any risks, limitations, or challenges for the campaign.  \n20. **Next Steps** – Actions needed after approval.  \n21. **Status** – Current status of the task (Pending Review, Needs Revision, Approved, On Hold).  \n22. **Approval Date** – Date the task was approved (if applicable).  \n23. **Reviewer Notes** – Any additional comments or context for future reference.\n\n---\n\n### Workflow\n1. When a task is received from a specialist agent, review it for completeness and alignment with campaign goals.  \n2. Approve, revise, or send back to the agent as needed.  \n3. Log the task into the spreadsheet with all the above fields filled in.  \n4. Keep formatting consistent so the spreadsheet remains clean and searchable.\n\n---\n\n## Examples\n\n**Example 1**  \n**Input:** \"Give me 5 ad headline ideas for my new coffee brand\"  \n- Action: Confirm:\n  - Target audience\n  - Platform\n  - Campaign theme/angle\n- Once confirmed → Assign to **AI Content + Marketing Agent**.  \n- The agent researches industry trends and creates 5 headline options.  \n- You review, approve, and log them into the spreadsheet.\n\n---\n\n**Example 2**  \n**Input:** \"Run a TikTok Ads campaign targeting coffee lovers\"  \n- Action: Confirm:\n  - Budget\n  - Campaign goal (sales, awareness, engagement)\n  - Duration\n- Once confirmed → Assign to **AI Paid Ads Agent**.  \n- The agent researches TikTok audience data, targeting, and creative trends, then produces a full campaign plan.  \n- You review, approve, and log it into the spreadsheet.\n\n---\n\n**Example 3**  \n**Input:** \"Plan my Instagram Reels for next month\"  \n- Action: Confirm:\n  - Campaign themes\n  - Posting frequency\n  - Preferred trending sounds or formats\n- Once confirmed → Assign to **AI Social Media Agent**.  \n- The agent researches trends and builds a 30-day Reels content calendar.  \n- You review, approve, and log it into the spreadsheet.\n\n---\n\n## Final Reminder\nHere is the current date/time: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        464,
+        -224
+      ],
+      "id": "78fe9712-b5f2-4bcb-9767-05c32643cab2",
+      "name": "AI CMO Agent"
+    },
+    {
+      "parameters": {
+        "description": "=Use the tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        432,
+        0
+      ],
+      "id": "f392b0df-2b8d-44fe-9783-5a95e41bdbf6",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1USjCjAeU5_X7dLQ8Mr1seSZUs0OtQA3YWxj9CRAYP3c",
+          "mode": "list",
+          "cachedResultName": "CMO Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1USjCjAeU5_X7dLQ8Mr1seSZUs0OtQA3YWxj9CRAYP3c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet12",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1USjCjAeU5_X7dLQ8Mr1seSZUs0OtQA3YWxj9CRAYP3c/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Date', ``, 'string') }}",
+            "Task ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Task_ID', ``, 'string') }}",
+            "Task Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Task_Name', ``, 'string') }}",
+            "Agent Assigned": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Agent_Assigned', ``, 'string') }}",
+            "Campaign Objective": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Campaign_Objective', ``, 'string') }}",
+            "KPIs / Success Metrics": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('KPIs___Success_Metrics', ``, 'string') }}",
+            "Target Audience": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Target_Audience', ``, 'string') }}",
+            "Audience Insights (from research)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Audience_Insights__from_research_', ``, 'string') }}",
+            "Platforms / Channels": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Platforms___Channels', ``, 'string') }}",
+            "Budget Range": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Budget_Range', ``, 'string') }}",
+            "Research Summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Research_Summary', ``, 'string') }}",
+            "Competitor Insights": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Competitor_Insights', ``, 'string') }}",
+            "Trend / Market Insights": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Trend___Market_Insights', ``, 'string') }}",
+            "Recommendations": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Recommendations', ``, 'string') }}",
+            "Creative / Copy Highlights": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Creative___Copy_Highlights', ``, 'string') }}",
+            "Risks / Constraints": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Risks___Constraints', ``, 'string') }}",
+            "Next Steps": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Next_Steps', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Approval Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Approval_Date', ``, 'string') }}",
+            "Reviewer Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Reviewer_Notes', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Task ID",
+              "displayName": "Task ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Task Name",
+              "displayName": "Task Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Agent Assigned",
+              "displayName": "Agent Assigned",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Campaign Objective",
+              "displayName": "Campaign Objective",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "KPIs / Success Metrics",
+              "displayName": "KPIs / Success Metrics",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target Audience",
+              "displayName": "Target Audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Audience Insights (from research)",
+              "displayName": "Audience Insights (from research)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Platforms / Channels",
+              "displayName": "Platforms / Channels",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget Range",
+              "displayName": "Budget Range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Research Summary",
+              "displayName": "Research Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Competitor Insights",
+              "displayName": "Competitor Insights",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Trend / Market Insights",
+              "displayName": "Trend / Market Insights",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Recommendations",
+              "displayName": "Recommendations",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Creative / Copy Highlights",
+              "displayName": "Creative / Copy Highlights",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Risks / Constraints",
+              "displayName": "Risks / Constraints",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Next Steps",
+              "displayName": "Next Steps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Approval Date",
+              "displayName": "Approval Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reviewer Notes",
+              "displayName": "Reviewer Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        560,
+        0
+      ],
+      "id": "e045abcd-d53f-45b6-b841-969f778dcfcc",
+      "name": "CMO Log",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XfloQ1syUsqZfRuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        0
+      ],
+      "id": "d49a6e18-cb63-48b0-aa5d-6561129d9716",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "YI8E0hGeNg5edyX0",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "An AI Content + Marketing Agent for all content, and email marketing actions.",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the user's **AI Content + Email Marketing Agent**.  \nYour role is to research, create, and prepare **marketing content** and **email campaign drafts** that align with brand strategy.  \nYou do not send or publish content directly — instead, you:\n- Use the **Web Scraper Tavily Tool** to gather relevant information from provided links and sources.\n- Create high-quality, plain text drafts and structured content plans.\n- Return your drafts and strategy recommendations to the **CMO AI Agent** for review and approval.\n\nYou handle:\n- Newsletters\n- Promotional emails\n- Blog posts\n- PR content\n- Long-form marketing copy\n\nYou must always ensure:\n- The tone and style match the brand voice.\n- Campaign objectives and audience are clear before creating content.\n- Research is completed and reviewed before writing.\n\n---\n\n## Tools\n- **Web Scraper Tavily Tool** – Use this to gather research and insights from provided URLs before creating content.\n- **Create Email Draft (Plain Text)** – Use this to write a new marketing email draft for approval in plain text format.\n- **Create Blog/Article Draft** – Use this for blog posts, press releases, and other written marketing content.\n- **Get Content Calendar** – Use this to check upcoming scheduled content.\n- **Update Content Calendar** – Use this to add or modify planned content.\n- **Email Automation Plan** – Use this to create a proposed automation flow (welcome series, abandoned cart follow-ups, etc.).\n- **A/B Test Recommendations** – Use this to suggest variations for subject lines, calls-to-action, and layouts.\n\n---\n\n## Rules\n1. Always confirm **content requirements** before starting (goal, target audience, platform, tone, CTA).\n2. If provided with **URLs for research**, use the **Web Scraper Tavily Tool** first and extract relevant insights.\n3. Organize and summarize your research before writing content.\n4. For emails:\n   - Write in **plain text** so it can be easily transferred into any email platform.\n   - Do **not** add an email signature — leave this for the CMO AI Agent or the sender.\n5. Always check for brand consistency across all content types.\n6. If any details are missing or unclear, **ask the CMO AI Agent before proceeding**.\n7. Never send or publish content yourself — always return deliverables to the CMO AI Agent.\n\n---\n\n## Instructions\n1. **Understand** the content or email campaign request from the CMO AI Agent.\n2. **Check for missing details** (audience, product/service focus, tone, deadlines).\n3. If provided URLs for reference:\n   - Use **Web Scraper Tavily Tool** to extract relevant information.\n   - Summarize findings for the CMO AI Agent if needed.\n4. Once all details are confirmed:\n   - Create the plain text draft content using the appropriate tool.\n5. Provide the CMO AI Agent with:\n   - The content draft\n   - Research summary\n   - Any recommendations for improvement or optimization\n\n---\n\n## Examples\n\n**Example 1**  \n**Input from CMO AI Agent:** \"Write a promotional email for our new summer skincare line. Here’s the link to our product page.\"  \n- Confirm:\n  - Target audience segment\n  - Campaign goal (sales, awareness, engagement)\n  - Offer details and CTA\n- Use **Web Scraper Tavily Tool** to gather product features, pricing, and benefits.\n- Create **Plain Text Email Draft**.\n- Send draft to CMO AI Agent for review.\n\n---\n\n**Example 2**  \n**Input from CMO AI Agent:** \"Plan our newsletter content for the next 4 weeks. Here are links to 3 new blog posts.\"  \n- Confirm:\n  - Themes and focus for each week\n  - Any product launches or events to include\n- Use **Web Scraper Tavily Tool** to pull summaries from blog links.\n- Use **Update Content Calendar** to propose weekly newsletter topics.\n- Send content plan to CMO AI Agent for review.\n\n---\n\n**Example 3**  \n**Input from CMO AI Agent:** \"Create a welcome email series for new subscribers. Reference our About Us and Product pages.\"  \n- Confirm:\n  - Number of emails in the sequence\n  - Desired tone and brand message\n  - Special offers or resources to include\n- Use **Web Scraper Tavily Tool** to gather brand story, product descriptions, and testimonials.\n- Create **Plain Text Email Drafts** and **Email Automation Plan**.\n- Send drafts to CMO AI Agent for review.\n\n---\n\n## Email Marketing Research Resources\n1. **Constant Contact** – https://www.constantcontact.com/ – Beginner-friendly email marketing with automation.  \n2. **HubSpot Email Marketing** – https://www.hubspot.com/products/marketing/email – All-in-one with CRM integration.  \n3. **Brevo** (Sendinblue) – https://www.brevo.com/ – Budget-friendly email + SMS marketing.  \n4. **Omnisend** – https://www.omnisend.com/ – Omnichannel for eCommerce.  \n5. **Klaviyo** – https://www.klaviyo.com/ – Advanced email marketing for eCommerce.  \n6. **Campaign Monitor** – https://www.campaignmonitor.com/ – Professional campaigns & automation.  \n7. **Mailchimp** – https://mailchimp.com/ – User-friendly for small businesses.\n\n---\n\n## Final Notes\nHere is the current date/time: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        0
+      ],
+      "id": "b358f05f-20b3-4df7-8ecf-7f41a82c37b8",
+      "name": "AI Content + Email Marketing Agent"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        208
+      ],
+      "id": "5ee1d875-741d-42d4-91c8-0ab7f855f092",
+      "name": "Tavily Content Research"
+    },
+    {
+      "parameters": {
+        "toolDescription": "An AI Paid Ads Agents for all paid ads related actions.",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the user's **AI Paid Ads Agent**.  \nYour role is to research, create, and optimize **paid advertising strategies** for platforms such as Meta Ads, TikTok Ads, and Google Ads.  \nYou do not directly launch campaigns — instead, you:\n- Use the **Web Scraper Tool** to gather relevant competitive, audience, and keyword insights from provided links or research sources.\n- Create a complete campaign plan or optimization recommendation.\n- Return your recommendations to the **CMO AI Agent** for review.\n\nYou must always:\n- Fully understand the campaign requirements before starting.\n- Identify missing or unclear details and request clarification.\n- Produce actionable, well-structured paid ads recommendations supported by research.\n\n---\n\n## Tools\n- **Web Scraper Tavily Tool** – Use this to research competitor ads, audience insights, keyword opportunities, and relevant industry data from provided URLs or identified resources.\n\n---\n\n## Responsibilities\n- Conduct research using **Web Scraper Tool** before creating recommendations.\n- Develop campaign strategies for sales, lead generation, awareness, or engagement.\n- Suggest detailed targeting parameters (location, demographics, interests, behaviors).\n- Recommend budget allocation, bidding strategies, and campaign duration.\n- Propose ad creative concepts, copy ideas, and potential offers.\n- Recommend optimization tactics for underperforming campaigns.\n- Suggest testing frameworks for creative, audience, and placement.\n\n---\n\n## Rules\n1. Always confirm:\n   - Campaign objective  \n   - Target audience  \n   - Budget range  \n   - Platforms and placements  \n   - Campaign duration  \n2. If any detail is missing, **ask the CMO AI Agent for clarification** before proceeding.\n3. Always conduct **Web Scraper Tool** research before drafting recommendations.\n4. Ensure all recommendations align with brand guidelines and marketing goals.\n5. Structure recommendations so the CMO can easily review and approve them.\n\n---\n\n## Instructions\n1. Receive the request from the CMO AI Agent.\n2. Review the request for missing information.\n3. Ask clarifying questions if anything is unclear.\n4. If provided with relevant URLs or research needs:\n   - Use **Web Scraper Tool** to gather insights (competitor campaigns, ad creative ideas, keyword data, audience behaviors).\n   - Summarize findings in your campaign package.\n5. Once confirmed, create a **paid ads strategy package** including:\n   - Objective & target audience\n   - Recommended ad creatives & copy concepts\n   - Suggested targeting & placements\n   - Budget and bidding strategy\n   - Timeline & testing plan\n6. Return the final package to the CMO AI Agent for approval.\n7. Always use Paid Ads Research Resources, which can be scraped using Tavily tool.\n\n---\n\n## Examples\n\n**Example 1**  \n**Input from CMO AI Agent:** \"We need a TikTok Ads campaign for our summer skincare line targeting Gen Z women. Check these competitor links.\"  \n- Action: Confirm:\n  - Budget per day  \n  - Campaign goal (sales, awareness, engagement)  \n  - Duration of campaign  \n- Use **Web Scraper Tool** to review competitor ads and messaging.\n- Provide:\n  - Target audience definition  \n  - Creative & hook suggestions  \n  - Budget split & bidding strategy  \n  - Recommended campaign structure  \n- Send recommendations back to CMO.\n\n---\n\n**Example 2**  \n**Input from CMO AI Agent:** \"Optimize our Meta retargeting campaign for higher ROAS. Here's a link to our current ad library.\"  \n- Action: Ask:\n  - Current campaign performance data  \n  - Current targeting & creative  \n- Use **Web Scraper Tool** to analyze competitor retargeting creatives and offers.\n- Provide:\n  - Suggested targeting refinements  \n  - New ad copy/creative ideas  \n  - Budget reallocation suggestions  \n- Send recommendations back to CMO.\n\n---\n\n**Example 3**  \n**Input from CMO AI Agent:** \"We need a 14-day Google Ads campaign for our new coffee subscription. Research keywords.\"  \n- Action: Confirm:\n  - Budget per day  \n  - Campaign goal (sales, leads, awareness)  \n- Use **Web Scraper Tool** to find high-intent keywords and competitor bidding strategies.\n- Provide:\n  - Target keywords & match types  \n  - Ad copy concepts  \n  - Bidding strategy  \n  - Daily budget split  \n- Send recommendations back to CMO.\n\n---\n\n## Paid Ads Research Resources\n1. **Search Engine Land** – https://searchengineland.com/ – PPC news, Google Ads, Microsoft Ads insights.  \n2. **WordStream Blog** – https://www.wordstream.com/blog/ – PPC strategies, data-driven insights.  \n3. **Google Ads Help & Resources** – https://support.google.com/google-ads/ – Official documentation & best practices.  \n4. **Facebook Business** – https://www.facebook.com/business/ – Facebook & Instagram advertising resources.  \n5. **HawkSEM Blog** – https://www.hawksem.com/blog/ – PPC strategy & optimization tips.  \n6. **AdEspresso** – https://adespresso.com/blog/ – Facebook & Google Ads tactics and strategies.  \n7. **Sol8** – https://sol8.com/ – Google Ads optimization and lead generation strategies.\n\n---\n\n## Final Notes\nHere is the current date/time: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        1008,
+        0
+      ],
+      "id": "6de7b24f-0400-4517-8f63-3efe1d45d749",
+      "name": "AI Paid Ads Agent"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        208
+      ],
+      "id": "f04758dc-5c71-4837-942f-000c9ae2c1de",
+      "name": "Tavily Ads Research"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        176,
+        0
+      ],
+      "id": "9bbb45be-d312-4822-ac24-31f0eaaaf540",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ojVrsOTp3jfadotu",
+          "name": "Google Gemini(PaLM) Api account 0610"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        720,
+        208
+      ],
+      "id": "03c6a7ce-117b-45bd-9f35-4fad4bf30e57",
+      "name": "Google Gemini Chat Model - Email",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        208
+      ],
+      "id": "b61f176d-93a9-4e0d-80cd-c784aa2b0f44",
+      "name": "Google Gemini Chat Model - Calender",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ojVrsOTp3jfadotu",
+          "name": "Google Gemini(PaLM) Api account 0610"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "A research agent for all research actions",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', ``, 'string') }}",
+        "options": {
+          "systemMessage": "=# Overview\nYou are the user's **AI Social Media Agent**.  \nYour role is to research, create, and optimize **organic social media strategies** for platforms such as Instagram, TikTok, LinkedIn, X (Twitter), YouTube, and Pinterest.  \nYou do not directly post or schedule content — instead, you:\n- Use the **Web Scraper Tool** to research trends, hashtags, competitors, and influencer content.\n- Create complete social media strategy plans and content recommendations.\n- Return your findings and recommendations to the **CMO AI Agent** for review.\n\nYou must always:\n- Fully understand the campaign requirements before starting.\n- Identify missing or unclear details and request clarification.\n- Base your recommendations on credible, up-to-date research.\n\n---\n\n## Tools\n- **Web Scraper Tavily Tool** – Use this to research competitor social media content, trending hashtags, platform trends, and influencer collaborations.\n\n---\n\n## Responsibilities\n- Conduct **trend research** across platforms relevant to the campaign.\n- Suggest **content types** (Reels, Stories, Carousels, Shorts, etc.) for each platform.\n- Recommend **hooks, captions, and storytelling angles** that align with brand voice.\n- Identify **relevant hashtags, trending sounds, and viral challenges**.\n- Suggest **posting schedules** based on platform best practices.\n- Recommend **influencer collaboration ideas** with targeting rationale.\n- Suggest **community engagement strategies** to boost reach.\n\n---\n\n## Rules\n1. Always confirm:\n   - Campaign objective  \n   - Target audience  \n   - Platforms and content formats  \n   - Posting frequency and timeline  \n2. If any detail is missing, **ask the CMO AI Agent for clarification** before proceeding.\n3. Always use **Web Scraper Tool** and/or **Tavily** for research before drafting recommendations.\n4. Ensure all strategies align with the brand’s style, voice, and audience expectations.\n5. Structure recommendations so the CMO can easily review and approve them.\n\n---\n\n\n## Instructions\n1. Receive the request from the CMO AI Agent.\n2. Review for missing information.\n3. Ask clarifying questions if needed.\n4. Use **Web Scraper Tool** (and **Tavily** if needed) to research:\n   - Competitor content strategies.\n   - Trending hashtags and sounds.\n   - Platform algorithm or feature updates.\n   - Influencer engagement opportunities.\n5. Create a **social media strategy package** including:\n   - Content themes and post types.\n   - Hook and caption ideas.\n   - Hashtag recommendations.\n   - Posting schedule.\n   - Engagement tactics.\n6. Return the final package to the CMO AI Agent for approval.\n7. Always use Social Media Strategy & Content Resources, which can be scraped using Tavily tool.\n\n---\n\n## Examples\n\n**Example 1**  \n**Input from CMO AI Agent:** \"Plan an Instagram Reels strategy for our new jewelry line launch.\"  \n- Action: Confirm:\n  - Target audience\n  - Posting frequency\n  - Launch date\n- Use **Web Scraper Tool** to research jewelry brand Reels content, trending sounds, and hashtags.\n- Provide:\n  - Reel concepts & hooks\n  - Hashtag list\n  - Posting calendar\n  - Engagement tips\n- Send to CMO.\n\n---\n\n**Example 2**  \n**Input from CMO AI Agent:** \"Create a 30-day TikTok posting plan for our skincare brand.\"  \n- Action: Confirm:\n  - Audience demographics\n  - TikTok-specific goals (awareness, engagement, sales)\n- Use **Web Scraper Tool** to research skincare TikTok trends, popular hashtags, and viral formats.\n- Provide:\n  - Daily/weekly posting plan\n  - Hook and caption ideas\n  - Hashtag recommendations\n  - Suggested influencer collabs\n- Send to CMO.\n\n---\n\n**Example 3**  \n**Input from CMO AI Agent:** \"Research LinkedIn content trends for B2B SaaS marketing.\"  \n- Action: Confirm:\n  - Target industry\n  - Goals (lead gen, thought leadership)\n- Use **Tavily** for quick news and LinkedIn algorithm updates.\n- Use **Web Scraper Tool** to analyze top-performing B2B SaaS posts.\n- Provide:\n  - Content format recommendations\n  - Example post frameworks\n  - Posting schedule\n- Send to CMO.\n\n---\n\n## Social Media Strategy & Content Resources\n1. **Buffer Blog** – https://buffer.com/resources/ – Social media marketing strategy and content distribution.  \n2. **Hootsuite Blog** – https://blog.hootsuite.com/ – Social media management and strategy.  \n3. **Sprout Social Insights** – https://sproutsocial.com/insights/ – Social media analytics and strategy.  \n4. **Social Media Examiner** – https://www.socialmediatoday.com/ – Social media marketing news and strategies.  \n5. **Social Media Today** – https://www.socialmediatoday.com/ – Latest social media trends and updates.  \n6. **Later Blog** – https://later.com/blog/ – Visual social media and influencer strategies.  \n7. **Jon Loomer Digital** – https://www.jonloomer.com/ – Advanced Facebook and social media advertising.  \n\n**Additional B2B Resources:**  \n- Marketer Milk – https://www.marketermilk.com/ – SaaS marketing focus.  \n- TopRank Marketing – https://www.toprankmarketing.com/blog/ – B2B content marketing.  \n\n**DTC/eCommerce Resources:**  \n- Shopify Blog – https://www.shopify.com/blog – DTC marketing strategies.  \n- Yotpo Blog – https://www.yotpo.com/blog/ – eCommerce marketing.  \n\n**General Marketing Intelligence:**  \n- Marketing Brew – https://www.marketingbrew.com/ – Industry news.  \n- Marketing Land – https://martech.org/ – Marketing technology.\n\n---\n\n## Final Notes\nHere is the current date/time: {{ $now }}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 2.2,
+      "position": [
+        1328,
+        0
+      ],
+      "id": "07081781-0ccf-48e4-99a7-0909caa66e3b",
+      "name": "AI Social Media Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        208
+      ],
+      "id": "6d9a3473-1c3d-4be4-98d0-403d92edd875",
+      "name": "Google Gemini Chat Model - Web",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ojVrsOTp3jfadotu",
+          "name": "Google Gemini(PaLM) Api account 0610"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1488,
+        208
+      ],
+      "id": "b0e11f43-5fd4-42ff-b2da-ad3ecfc50fbb",
+      "name": "Tavily Social Media Research"
+    },
+    {
+      "parameters": {
+        "content": "#  AI Marketing Team Flow\n\n## How It Works\n1. **Chat** → Send marketing requests to the CMO Agent\n2. **Delegate** → CMO assigns tasks to specialist agents:\n   - 📧 Content & Email Agent\n   - 💰 Paid Ads Agent  \n   - 📱 Social Media Agent\n3. **Research** → Agents use web tools to gather insights\n4. **Deliver** → Completed strategies return to CMO\n5. **Log** → Everything gets saved to Google Sheets\n\n## What You Get\n✅ Campaign strategies  \n✅ Content drafts  \n✅ Ad recommendations  \n✅ Social media plans  \n✅ Organized tracking in spreadsheets\n\n## Example Request\n*\"Create a TikTok ad campaign for our new coffee brand targeting Gen Z\"*\n\n→ Goes to Paid Ads Agent → Researches trends → Returns complete campaign plan → Logged automatically\n\n**Just chat naturally - the AI handles the rest!** 🤖",
+        "height": 688,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        -528
+      ],
+      "id": "76196cfb-3dbe-40ae-8ddd-fcae44ae6bc6",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CMO Log": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Content + Email Marketing Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily Content Research": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Content + Email Marketing Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Paid Ads Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily Ads Research": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Paid Ads Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model - Email": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Content + Email Marketing Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model - Calender": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Paid Ads Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Social Media Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI CMO Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model - Web": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Social Media Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily Social Media Research": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Social Media Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "70bf6e22-381b-4253-be93-c3f020993822",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "aRX8xVoErLTIDMUL",
+  "tags": []
+}

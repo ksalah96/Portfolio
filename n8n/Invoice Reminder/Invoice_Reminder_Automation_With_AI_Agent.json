@@ -1,0 +1,253 @@
+{
+  "name": "Invoice Reminder Automation With AI Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -100
+      ],
+      "id": "4a867d93-f2ba-49a3-8b4e-90321df225e3",
+      "name": "Daily Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appSkfZRWJQ4eUgRa",
+          "mode": "list",
+          "cachedResultName": "Invoice Reminder",
+          "cachedResultUrl": "https://airtable.com/appSkfZRWJQ4eUgRa"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblVFIDgPm4qgGRIX",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/appSkfZRWJQ4eUgRa/tblVFIDgPm4qgGRIX"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        220,
+        -100
+      ],
+      "id": "5e54c0fe-211c-4086-a3b2-50b23e9a9ca0",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "DcWAi2eBKjH1C27W",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb8f75d3-4642-4dbe-a0fa-bb6a24984f9a",
+              "leftValue": "={{ $json.Due_date }}",
+              "rightValue": "={{ $('Daily Trigger').item.json.timestamp }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        440,
+        -100
+      ],
+      "id": "923dee92-f118-41c0-ae03-2b8191edab4b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Write a professional email to remind a client about an outstanding payment.",
+        "options": {
+          "systemMessage": "=### ROLE\nYou are a virtual assistant responsible for drafting professional, friendly, and clearly formatted payment reminder emails.\n\n### OBJECTIVE\nGenerate a well-structured and polite email reminding the client to pay the overdue amount.\n\n### CONTEXT\nThe client has an outstanding payment that was due on {{ $json.Due_date }}.  \nToday's date is {{ $now.format(\"YYYY-MM-DD\") }}.  \nThe amount due is {{ $json.Amount_due }}.  \nThe client’s name is {{ $json.Client_name }}.\n\n### TASKS\n- Greet the client using their name.  \n- Add a **double line break `<br><br>`** immediately after the greeting.  \n- Write the body of the email as short, clear paragraphs without extra spacing.  \n- Mention the due date, today’s date, and how many days overdue the payment is.  \n- Clearly state the amount due.  \n- Add a polite reminder to complete the payment.  \n- Add a **double line break `<br><br>`** before the sign-off to separate it visually.  \n- Close with a professional and courteous sign-off.  \n\n### OPERATING GUIDELINES\n- Use a friendly, respectful, and professional tone.  \n- Write in short, simple phrases.  \n- Keep the structure easy to read, but use only **two** double `<br><br>` line breaks:  \n  – One after the greeting  \n  – One before the sign-off  \n- Do not use extra `<br>` line breaks between every sentence.  \n\n### INSTRUCTIONS\n- Use the provided dynamic fields from the JSON object.  \n- Calculate the overdue duration using:  \n  `{{ $now.diff($json.Due_date, \"days\") }}`  \n- Return only the **email body** — do not include subject line or metadata.  \n- Ensure line breaks are formatted using **double `<br><br>`** in the two specified positions only.  \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        660,
+        -200
+      ],
+      "id": "25a12327-7543-4f22-9a6b-f403e63e57cd",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash-001",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        640,
+        20
+      ],
+      "id": "34c3a989-ca7f-401e-b888-379ca37ac69e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "R8RK7DPsyJrVIc1L",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        780,
+        40
+      ],
+      "id": "be78f645-f303-49af-9682-cedead7a53d8",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "YI8E0hGeNg5edyX0",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('If').item.json.Email }}",
+        "subject": "Outstanding Payment",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1000,
+        -200
+      ],
+      "id": "0d3cf0a8-ef3a-439b-aa8a-4e041ad7139f",
+      "name": "Gmail",
+      "webhookId": "0e934f81-2dba-48ac-a2b0-746d3e2c1a68",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8Pn9nFdfMzmvDolm",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "004b97f8-8532-4f69-9d72-467eedf1c073",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b2785ef5c94c23b815e4c99ea5a81b695b60b63d5b4600f4d99e21321ce42b8d"
+  },
+  "id": "9kBRJLaUkgCKIwkS",
+  "tags": []
+}
