@@ -1,6 +1,6 @@
 # ⚙️ n8n Workflow Collection
 
-This folder contains a set of n8n workflows for automating various business processes.
+This directory contains a set of n8n workflows for automating various business processes.
 
 ## 📁 Workflows
 
