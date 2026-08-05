@@ -60,6 +60,6 @@ RPA-Challenge/
 - The workflow uses UI selectors targeting the form fields by their labels (e.g. `First Name`, `Company Name`). The RPA Challenge site shuffles field positions between rounds — if selectors stop matching after an update to the site, they may need to be re-recorded in UiPath Studio.
 - Timing/selector reliability can vary depending on connection speed; adjusting timeouts in the `TypeInto` activities can help if the bot runs into element-not-found errors.
 
-## 📄 License
+## Author
 
-Feel free to use or adapt this project for learning purposes.
+Built by Khaled as part of hands-on UiPath RPA practice.
