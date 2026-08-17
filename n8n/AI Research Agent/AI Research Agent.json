@@ -1,0 +1,231 @@
+{
+  "name": "AI Research Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "responseNodes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1e7617e3-fb5a-4152-aaf4-1f29468381b8",
+      "name": "Chat Trigger",
+      "webhookId": "c17ca5ed-d84c-465d-9a91-e0837611635b"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are an expert AI Research Agent. Research any topic thoroughly and produce a structured report.\n\n## LOOP (Observe → Think → Act)\nAt each step: look at what you know, decide the next tool, use it, read the result, repeat until done.\n\n## TOOL RULES\n- web_search FIRST — to find URLs and get snippets. Never scrape without searching first.\n- web_scrape AFTER — only on article URLs returned by search. Never on social media, PDFs, or login pages.\n- Never guess or infer URLs. Only scrape what search gave you.\n\n## WHEN TO STOP\nAfter 2 searches + 2 successful scrapes — write the report immediately. Do not loop again.\n\n## IF SOMETHING FAILS\n- Scrape returns empty → skip it, try the next URL\n- Search returns nothing → rephrase and try once more\n- Hit iteration limit → report what you found so far, note it's partial\n\n## NEVER\n- Make up facts not found in search/scrape results\n- Call web_scrape before web_search\n- Scrape the same URL twice\n- Guess tool inputs — only use data from previous tool results\n\n## OUTPUT FORMAT\n# Research Report: [Topic]\n## Executive Summary — 2-3 sentences\n## Key Findings — bullet points\n## Detailed Analysis — main themes with sub-headings\n## Sources — every URL scraped + one-line description\n## Next Steps — 3 actionable recommendations\n\nOnly report what you actually found. If info is missing, say so."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "32f3858b-0cd7-4914-affb-39a5a30b9c8b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ],
+      "id": "dfa2c8cc-a0fc-40c7-bec5-4619fa6292f5",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output }}",
+        "options": {
+          "memoryConnection": false,
+          "autoSaveHighlightedData": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        0
+      ],
+      "id": "9d484f49-ab17-4705-858c-7441cbbceec7",
+      "name": "Respond to Chat",
+      "webhookId": "3d0537a9-2da2-42e1-9f39-ebbb58645d10"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Search the web for information on any topic. Use this FIRST when you need to discover URLs and get summaries about a subject. Returns a list of results with title, URL, and snippet. Input must be: { \"query\": \"your search term here\" }",
+        "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', ``, 'string') }}",
+        "locationSettings": {},
+        "languageSettings": {},
+        "searchOptions": {},
+        "timeFilters": {},
+        "pagination": {
+          "num": "10",
+          "page": "1"
+        },
+        "advancedOptions": {
+          "kgmid": ""
+        },
+        "requestOptions": {}
+      },
+      "type": "@searchapi/n8n-nodes-searchapi.searchApiTool",
+      "typeVersion": 1,
+      "position": [
+        384,
+        208
+      ],
+      "id": "330600fc-cf15-4fbd-abaf-4867af23f7ad",
+      "name": "Web Search",
+      "credentials": {
+        "searchApi": {
+          "id": "BZZ4mBopvOo2tLr5",
+          "name": "SearchApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "=Scrape the full text content of a specific webpage URL. Use this AFTER web_search when you want to read the detailed content of a page you have already found. Only use on article or blog URLs. Input must be: { \"url\": \"https://full-url-here.com\" }",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.jinaAiTool",
+      "typeVersion": 1,
+      "position": [
+        512,
+        192
+      ],
+      "id": "61cd6985-f59e-40ff-9276-ee0491da30c0",
+      "name": "Web Scrape",
+      "credentials": {
+        "jinaAiApi": {
+          "id": "6Y0Gd0l9aPLEDb4c",
+          "name": "Jina AI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.5-flash",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        192
+      ],
+      "id": "f47a7b01-138c-4f2c-b7bc-666082595f19",
+      "name": "Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "0UwMs3g45dFWRWbJ",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Web Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Web Scrape": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Chat": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "f9d96f7a-cb5d-4777-92c9-6bb9e2ee50a1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "364c88b6d194d894cbeeee76a6c25a8b7dba0e028f55d26d6876f392205dd804"
+  },
+  "nodeGroups": [],
+  "id": "eMITfYu5Ae5OLPkf",
+  "tags": []
+}
