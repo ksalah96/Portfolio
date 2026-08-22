@@ -1,0 +1,284 @@
+{
+  "name": "Live Weather Alert",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "weather-alert",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9df36fda-906a-4eab-bcdc-95cff01c3d2b",
+      "name": "Webhook",
+      "webhookId": "343ba40b-8f85-444b-b94d-74d467f84146"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6913b678-2b1a-4b7c-8fcf-27af9b4b842b",
+              "leftValue": "={{ $json.body.city }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        0
+      ],
+      "id": "00dc4841-5749-4591-a5cc-09eba9dba02c",
+      "name": "City Not Empty?"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"StatusCode\": 400,\n  \"ErrorMessage\": \"City is Missing\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        400,
+        144
+      ],
+      "id": "d1d337e6-0ff8-4302-96ae-79bc388ca3f3",
+      "name": "Bad Request"
+    },
+    {
+      "parameters": {
+        "url": "http://api.weatherapi.com/v1/current.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $json.body.city }}"
+            },
+            {
+              "name": "key",
+              "value": "YOUR_API_KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        -96
+      ],
+      "id": "de8ede0a-28a2-4d3b-981d-91b52b18f52e",
+      "name": "Get Weather Information",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "t4ubuJeH58yEJqHG",
+          "name": "Weather API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\nconst city = data.location.name;\nconst temp = data.current.temp_c;\nconst feels = Math.round(data.current.feelslike_c);\nconst humidity = data.current.humidity;\nconst desc = data.current.condition.text;\nconst wind = Math.round(data.current.wind_kph);\n\nlet severity = \"Normal\";\nlet emoji = \"🌤️\";\n\nif(temp > 35) {\n  severity = \"Hot\";\n  emoji = \"🔥\";\n} else if(temp <= 0) {\n  severity = \"Cold\";\n  emoji = \"🥶\";\n} else if (desc === \"Thunderstorm\") {\n  severity = \"Stormy\";\n  emoji = \"⛈️\";\n}\n\nconst message = [\n  `${emoji} *Weather Alert — ${city}*`,\n  `Condition: ${desc}`,\n  `Temperature: ${temp}°C (feels like ${feels}°C)`,\n  `Humidity: ${humidity}% | Wind: ${wind} km/h`,\n  `Severity: *${severity}*`\n].join(\"\\n\");\n\nreturn [\n  {\n    json: {\n      message,\n      severity,\n      cityName: city\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "21b3aa6c-61ce-4f79-8a2b-4d6d55973913",
+      "name": "Format Alert"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0df6e4ca-e698-48ec-b426-3a5f282c1ebb",
+              "leftValue": "={{ $json.severity }}",
+              "rightValue": "Hot",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "b0b89e6e-b1c1-45b9-ad0a-a16e2b47d1cb",
+              "leftValue": "={{ $json.severity }}",
+              "rightValue": "Cold",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "1b91e717-6b07-471f-86a5-1bb17bee4690",
+              "leftValue": "={{ $json.severity }}",
+              "rightValue": "Stormy",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        816,
+        -96
+      ],
+      "id": "1aa2305d-bccc-4be8-8a33-f1d23ec80688",
+      "name": "If Severe?"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"StatusCode\": 200,\n  \"Severity\": \"{{ $json.severity }}\",\n  \"message\": \"{{ $json.message }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1040,
+        -192
+      ],
+      "id": "14db0de6-2f83-4a80-a345-21c2da81fc3d",
+      "name": "Send Severe Alert"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"StatusCode\": 200,\n  \"Severity\": \"{{ $json.severity }}\",\n  \"message\": \"{{ $json.message }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        1040,
+        32
+      ],
+      "id": "7269f585-7bf6-4fb2-9f2b-cd50e8e34a78",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "City Not Empty?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "City Not Empty?": {
+      "main": [
+        [
+          {
+            "node": "Get Weather Information",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bad Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Weather Information": {
+      "main": [
+        [
+          {
+            "node": "Format Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Alert": {
+      "main": [
+        [
+          {
+            "node": "If Severe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Severe?": {
+      "main": [
+        [
+          {
+            "node": "Send Severe Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "bb884869-fbae-44af-8b2a-5b0ffad061eb",
+  "meta": {
+    "instanceId": "364c88b6d194d894cbeeee76a6c25a8b7dba0e028f55d26d6876f392205dd804"
+  },
+  "nodeGroups": [],
+  "id": "IhALa8T4ZB7GBtLk",
+  "tags": []
+}
