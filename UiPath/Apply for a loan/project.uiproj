@@ -1,0 +1,6 @@
+{
+  "Name": "Apply for a loan",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

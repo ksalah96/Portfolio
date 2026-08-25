@@ -1,0 +1,14 @@
+﻿{
+  "Name": "DE325476",
+  "Type": "Element",
+  "TaxonomyType": "Label",
+  "Id": "q50RheqQsUWXPXueiarh4Q",
+  "Reference": "edbcu9YZ7U6XavdwdeB71g/q50RheqQsUWXPXueiarh4Q",
+  "ParentRef": "edbcu9YZ7U6XavdwdeB71g/JddjiH4r7Ee4otxhXYpQ5w",
+  "Created": "2026-08-25T08:47:40.7472687Z",
+  "Updated": "2026-08-25T08:47:40.7472687Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.3.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}
