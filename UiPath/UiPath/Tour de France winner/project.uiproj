@@ -1,0 +1,6 @@
+{
+  "Name": "Tour de France winner",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

@@ -1,0 +1,6 @@
+{
+  "Name": "Pick Branch",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

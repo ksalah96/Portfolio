@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="CGJ_xKg42U2WoE8NMywRSQ" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="740, 99, 13, 22" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;uia cls='MsoCommandBar' helpText='Ribbon toolbar' /&gt;&lt;uia cls='NetUIOrderedGroup' name='Home' /&gt;&lt;uia cls='NetUIChunk' name='Number' /&gt;&lt;uia automationid='NumberFormatGallery' cls='NetUIComboboxAnchor' name='Number Format' /&gt;&lt;uia cls='NetUIStickyButton' name='Open' /&gt;" Guid="a42ee705-8783-420e-bc67-16f5c047de25" ScopeSelectorArgument="&lt;wnd app='excel.exe' cls='XLMAIN' title='VegetablesProduction.xlsx - Excel' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="8bfecb7dd8de3d16902770e94aae4261.jpg" xmlns="">0SU9Yk_OUC0uQXdGM5IlhUw</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">Click</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

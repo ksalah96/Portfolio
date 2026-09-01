@@ -1,0 +1,12 @@
+﻿{
+  "Name": "MonthReport.xlsx - Excel",
+  "Type": "App",
+  "Id": "SpESa4lcp0qNMpdpDZVYWw",
+  "Reference": "qJrMO25gIkSn_GyiPLuwZg/SpESa4lcp0qNMpdpDZVYWw",
+  "Created": "2026-08-20T09:34:56.6525159Z",
+  "Updated": "2026-08-20T09:34:56.6525159Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.2.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

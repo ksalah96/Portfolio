@@ -1,0 +1,6 @@
+{
+  "Name": "using array variables",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

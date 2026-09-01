@@ -1,0 +1,6 @@
+{
+  "Name": "Practice 2 Using the Invoke Workflow File",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

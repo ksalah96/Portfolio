@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="e7V_PfrIEkKkodNNNt871Q" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="rpachallenge.com" CVScreenId="b5e8d47c-8052-4877-b427-e0fce51117c9" CvElementArea="440, 599, 120, 41" CvTextArea="469, 610, 59, 16" CvTextArgument="SUBMIT" CvType="Button" DesignTimeRectangle="442, 601, 116, 36" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl tag='INPUT' type='submit' /&gt;" Guid="6d0469b2-8013-44ba-84bf-54c990e0bc1b" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Rpa Challenge' /&gt;" SearchSteps="Selector, CV" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="c36ea9b0eed2cccc23c6bfaf22ab99e5.jpg" xmlns="">05zZAT4E2nE2lGdHcQpG4SA</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">Click</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

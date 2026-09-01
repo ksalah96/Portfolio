@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="u7f1RRqc8023yicudQOsbA" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="google.com/search" DesignTimeRectangle="1085, 234, 41, 31" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl aaname='فيديوهات' tag='SPAN' /&gt;" Guid="8378d416-d6de-467d-8e09-21ddfdc9e5f9" ScopeSelectorArgument="&lt;html app='chrome.exe' title='uipath academy - بحث Google‏' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="1306dc717ef09eb5e9df16e5bfb5aa93.jpg" xmlns="">0RC7Xdw8GVUidMcUudhhpaQ</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">Click</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

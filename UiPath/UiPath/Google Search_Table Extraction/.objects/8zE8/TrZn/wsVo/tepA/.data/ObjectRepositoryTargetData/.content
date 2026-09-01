@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="eqKzMHbwnE6mY8kCpcAyUQ" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="https://www.google.com/search?sca_esv=2a198a1a37cb003b&amp;sxsrf=APpeQnuRVzua-4uSoFaEsepSGYfRH0ZUyw:1787659347860&amp;udm=7&amp;fbs=ABfTbFXVfwYHNO-tgTmeZDEnqm7z1_w67jfvvSY7S28k4Fsdr2FFApBeenu6tDS5TeUm_FLrD5Pf7-gDHikLiCowCqM_N0UZBZW-6yNMMITj6szHlUGsX5Gw98vorEy-XAgkGZKqvpD18EkariZIw7-pFKndmqmdCZEnV6Sej87Wmb2yxjdzOR4AqPOlMZDmxUIPq3OVZOqNvnvhV6rMSZaIyQoyQxwS7ESUGsWeLylXIyF56_2Hq3jNrItiStNj82SGrQcfYZgPEsoMIwRBWyMcjwG6gxJySA&amp;q=uipath+academy&amp;sa=X&amp;ved=2ahUKEwif-aGD3ruWAxXT2AIHHX_9BBAQtKgLegQIEhAB&amp;biw=1366&amp;bih=607&amp;dpr=1#ip=1" DesignTimeRectangle="582, -187, 652, 1770" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl parentid='rso' tag='DIV' /&gt;" Guid="201a0bf8-9eb7-4aa6-bda4-29b4132518c6" ScopeSelectorArgument="&lt;html app='chrome.exe' title='uipath academy - بحث Google‏' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="9b489c617dea42a56eee3c914592e0eb.jpg" xmlns="">07SdMq2ecJE-hRQopDMOm9A</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">ExtractDataGeneric</x:String>
+    <p:InArgument x:TypeArguments="x:String" x:Key="ExtractDataSettings" xml:space="preserve">&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;
+	&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='Video Title'&gt;
+		&lt;IsValidName&gt;true&lt;/IsValidName&gt;
+		&lt;ValidationErrorMessage /&gt;
+		&lt;IsExtra&gt;false&lt;/IsExtra&gt;
+		&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;
+		&lt;Format xsi:type='TextColumnFormat' /&gt;
+	&lt;/Column&gt;
+	&lt;Column xsi:type='DataColumn' ReferenceName='Column1' Name='Video Title Url'&gt;
+		&lt;IsValidName&gt;true&lt;/IsValidName&gt;
+		&lt;ValidationErrorMessage /&gt;
+		&lt;IsExtra&gt;true&lt;/IsExtra&gt;
+		&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;
+		&lt;Format xsi:type='TextColumnFormat' /&gt;
+	&lt;/Column&gt;
+	&lt;Column xsi:type='DataColumn' ReferenceName='Column2' Name='Date Uploaded ' Sort='Desc'&gt;
+		&lt;IsValidName&gt;true&lt;/IsValidName&gt;
+		&lt;ValidationErrorMessage /&gt;
+		&lt;IsExtra&gt;false&lt;/IsExtra&gt;
+		&lt;CanExtractSimilar&gt;false&lt;/CanExtractSimilar&gt;
+		&lt;Format xsi:type='DateColumnFormat' Format='d‏/M‏/yyyy' /&gt;
+	&lt;/Column&gt;
+&lt;/Table&gt;</p:InArgument>
+    <x:Null x:Key="NextLinkTarget" />
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

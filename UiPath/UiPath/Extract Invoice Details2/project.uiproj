@@ -1,0 +1,6 @@
+{
+  "Name": "Extract Invoice Details2",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

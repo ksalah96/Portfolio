@@ -1,0 +1,13 @@
+﻿{
+  "Name": "MonthReport.xlsx - Excel",
+  "Type": "Screen",
+  "Id": "Ve_p_3e9q0yc7XgcdeZdAg",
+  "Reference": "qJrMO25gIkSn_GyiPLuwZg/Ve_p_3e9q0yc7XgcdeZdAg",
+  "ParentRef": "qJrMO25gIkSn_GyiPLuwZg/jFsapuixb0yhcvZhsrRvvQ",
+  "Created": "2026-08-20T09:34:57.180349Z",
+  "Updated": "2026-08-20T09:34:57.180349Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.2.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

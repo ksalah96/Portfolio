@@ -1,0 +1,14 @@
+﻿{
+  "Name": "فيديوهات",
+  "Type": "Element",
+  "TaxonomyType": "Label",
+  "Id": "XCSOKtROTUCx--VHL2o8Hg",
+  "Reference": "m-Q9QZ0lzUelTWFEgDbr2w/XCSOKtROTUCx--VHL2o8Hg",
+  "ParentRef": "m-Q9QZ0lzUelTWFEgDbr2w/InyVzhDaDEaX1A_lx-aXwg",
+  "Created": "2026-08-25T12:02:51.4392508Z",
+  "Updated": "2026-08-25T12:02:51.4392508Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.3.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

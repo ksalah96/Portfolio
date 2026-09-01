@@ -1,0 +1,6 @@
+{
+  "Name": "For Each Starting Project with Input Files",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

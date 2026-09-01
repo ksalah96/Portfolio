@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryScreenData ContentHash="jLr_raUtm0GnYgHAovy0MA" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryScreenData.Data>
+    <TargetApp x:Key="TargetApp" Area="0, 0, 0, 0" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Dashboard' /&gt;" Url="acme-test.uipath.com/home" />
+  </ObjectRepositoryScreenData.Data>
+</ObjectRepositoryScreenData>

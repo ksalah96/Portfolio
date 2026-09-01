@@ -1,0 +1,14 @@
+﻿{
+  "Name": "Get Text - Date",
+  "Type": "Element",
+  "TaxonomyType": "Label",
+  "Id": "iudvAnAj80-yh-cbpTeAPA",
+  "Reference": "MbLbv0OZTkeC6JLOF-3BUA/iudvAnAj80-yh-cbpTeAPA",
+  "ParentRef": "MbLbv0OZTkeC6JLOF-3BUA/jO_jq78w_0yXBwgFyni3rA",
+  "Created": "2026-08-24T15:23:48.6411925Z",
+  "Updated": "2026-08-24T15:23:48.6411925Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.2.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

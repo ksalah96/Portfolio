@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="tpmrjeegW0e9Eu_lCzfZqA" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" DesignTimeRectangle="608, 122, 211, 467" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;uia cls='MsoCommandBar' helpText='Ribbon toolbar' /&gt;&lt;uia cls='NetUIOrderedGroup' name='Home' /&gt;&lt;uia cls='NetUIChunk' name='Number' /&gt;&lt;uia automationid='NumberFormatGallery' cls='NetUIComboboxAnchor' name='Number Format' /&gt;&lt;uia cls='NetUIGalleryContainer' name='Number Format' /&gt;" Guid="10823c37-59d0-4904-98c7-d305439780f0" ScopeSelectorArgument="&lt;wnd app='excel.exe' cls='XLMAIN' title='VegetablesProduction.xlsx - Excel' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="bab8a32ebb125d128092f5a97e7547c9.jpg" xmlns="">0puvdN_QeA0CLi6X0KBDLGQ</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">KeyboardShortcut</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

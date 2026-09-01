@@ -1,0 +1,6 @@
+{
+  "Name": "Extract first name and last name",
+  "ProjectType": "Process",
+  "Description": "Blank Process",
+  "MainFile": "Main.xaml"
+}

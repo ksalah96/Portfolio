@@ -1,0 +1,18 @@
+﻿{
+  "Version": "1.0",
+  "Metadata": [
+    {
+      "ApplicationType": "WindowsApplication",
+      "ExecutablePath": {
+        "Value": "word.exe",
+        "IsExpression": false
+      },
+      "Url": null,
+      "Arguments": {
+        "Value": "\"Word_Files\\\"+CurrentRow(\"Name\").ToString+\".docx\"",
+        "IsExpression": true
+      },
+      "Version": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+﻿{
+  "Name": "VegetablesProduction.xlsx - Excel",
+  "Type": "Screen",
+  "Id": "_qGBGILIjES0_ZjxMnVKvw",
+  "Reference": "4CqukGL9h0edc8ut6pS8Yw/_qGBGILIjES0_ZjxMnVKvw",
+  "ParentRef": "4CqukGL9h0edc8ut6pS8Yw/P84VA9m4b0mfMJMQHRbjDA",
+  "Created": "2026-08-20T10:36:40.4140037Z",
+  "Updated": "2026-08-20T10:36:40.4140037Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.2.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

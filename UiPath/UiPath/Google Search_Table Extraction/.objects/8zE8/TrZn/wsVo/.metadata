@@ -1,0 +1,13 @@
+﻿{
+  "Name": "Chrome uipath academy - بحث Google‏",
+  "Type": "Screen",
+  "Id": "wsVoeGhEYkSSvDiDk5hJKA",
+  "Reference": "m-Q9QZ0lzUelTWFEgDbr2w/wsVoeGhEYkSSvDiDk5hJKA",
+  "ParentRef": "m-Q9QZ0lzUelTWFEgDbr2w/TrZnO9JzM0OEXOPO5dmshQ",
+  "Created": "2026-08-25T12:20:30.0486706Z",
+  "Updated": "2026-08-25T12:20:30.0486706Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.10.3.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=26.4.0.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}
