@@ -1,0 +1,299 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:sd="clr-namespace:System.Data;assembly=Studio.Generated.TypedDataRow1"
+ xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities"
+ xmlns:ugade="clr-namespace:UiPath.GSuite.Activities.Drive.Enums;assembly=UiPath.GSuite.Activities"
+ xmlns:ugage="clr-namespace:UiPath.GSuite.Activities.Gmail.Enums;assembly=UiPath.GSuite.Activities"
+ xmlns:ugam="clr-namespace:UiPath.GSuite.Activities.Models;assembly=UiPath.GSuite.Activities"
+ xmlns:ugdm="clr-namespace:UiPath.GSuite.Drive.Models;assembly=UiPath.GSuite"
+ xmlns:ugsm="clr-namespace:UiPath.GSuite.Sheets.Models;assembly=UiPath.GSuite"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:uix="http://schemas.uipath.com/workflow/activities/uix"
+ xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform"
+ xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.GSuite.Activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="44">
+      <x:String>UiPath.GSuite.Activities.Drive.Enums</x:String>
+      <x:String>System</x:String>
+      <x:String>UiPath.GSuite.Drive.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.GSuite.Activities.Models</x:String>
+      <x:String>UiPath.GSuite.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>UiPath.GSuite.Activities.Gmail.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.UIAutomationNext</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.GSuite.Activities.Sheets.Enums</x:String>
+      <x:String>UiPath.GSuite.Sheets.Enums</x:String>
+      <x:String>UiPath.GSuite.Sheets.Models</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="30">
+      <AssemblyReference>Studio.Generated.TypedDataRow1</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.ReaderWriter</AssemblyReference>
+      <AssemblyReference>System.Xml.XmlSerializer</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="356,732" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="GeneratedUnicornName" />
+      <Variable x:TypeArguments="ugdm:GDriveLocalItem" Name="file">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">DownloadFileConnections_2</x:String>
+            <x:String x:Key="SourcePropertyName">NewResult</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Find Unicorn Name" HealingAgentBehavior="Job" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" IsDisplayNameAuto="True" ScopeGuid="293eaee4-79f4-4c77-9d4a-750b1732e84e" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <uga:ForEachRowConnections x:TypeArguments="sd:DataRow1" ConnectionAccountName="{x:Null}" Length="{x:Null}" ManualEntrySpreadsheetId="{x:Null}" Spreadsheet="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" AuthScopesInvalid="False" BrowserItemFriendlyName="Unicorn_Name_Iterations" BrowserItemId="https://docs.google.com/spreadsheets/d/1JZ-76gnTXibG3UcT9FC5Y4pW0D5Fye9lrOnjM-illNY/edit?usp=drivesdk" ConnectionId="7dfba646-e2fb-4181-bcb1-1c091adbe3d2" CurrentItemVariableName="CurrentRow" DisplayName="For Each Row in Spreadsheet" EmptyRowAction="Skip" HasHeaders="True" sap2010:WorkflowViewState.IdRef="ForEachRowConnections`1_1" ItemSelectionMode="Browse" Range="Sheet1" ReadAs="Values" UseConnectionService="True" WorkingWithTemplateSpreadsheet="False">
+              <uga:ForEachRowConnections.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow1, x:Int32">
+                  <ActivityAction.Argument1>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow1" Name="CurrentRow" />
+                  </ActivityAction.Argument1>
+                  <ActivityAction.Argument2>
+                    <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentRowIndex" />
+                  </ActivityAction.Argument2>
+                  <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'What is your name?*'" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="SameAsCard" ScopeIdentifier="293eaee4-79f4-4c77-9d4a-750b1732e84e" Text="[string.Format(&quot;{0}&quot;, CurrentRow.Name)]" Version="V5">
+                      <uix:NTypeInto.Target>
+                        <uix:TargetAnchorable BrowserURL="rpasamples.com/unicornname" DesignTimeRectangle="514, 442, 236, 28" ElementType="InputBox" ElementVisibilityArgument="Interactive" FuzzySelectorArgument="&lt;webctrl id='txtName' tag='INPUT' type='text' class='col-med form-el' placeholder='Enter your name' aaname='' matching:id='fuzzy' fuzzylevel:id='0.0' matching:class='fuzzy' fuzzylevel:class='0.0' matching:aaname='fuzzy' fuzzylevel:aaname='0.0' /&gt;" Guid="b280845e-e284-4e0f-a4d7-ba0d1d49c049" InformativeScreenshot="c34f0a432f235e3757acd646cee41bf0.jpg" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Find Unicorn Name' /&gt;" SearchSteps="FuzzySelector" Version="V6" WaitForReadyArgument="Interactive">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="286, 442, 228, 20" ElementType="Text" FuzzySelectorArgument="&lt;webctrl aaname='What is your name?*' tag='DIV' type='' class='col-med form-el' fuzzylevel:aaname='0.0' matching:class='fuzzy' fuzzylevel:class='0.0' check:innerText='What is your name?*' /&gt;" Guid="da14f9cb-74d0-4372-a120-e35c22e4700a" SearchSteps="FuzzySelector" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NTypeInto.Target>
+                    </uix:NTypeInto>
+                    <uix:NSelectItem DisplayName="Select Item 'What month is your birt…'" HealingAgentBehavior="SameAsCard" sap2010:WorkflowViewState.IdRef="NSelectItem_1" Item="[CurrentRow.Birthday_Month]" ScopeIdentifier="293eaee4-79f4-4c77-9d4a-750b1732e84e" Version="V5">
+                      <uix:NSelectItem.Items>
+                        <scg:List x:TypeArguments="x:String" Capacity="13">
+                          <x:String></x:String>
+                          <x:String>January</x:String>
+                          <x:String>February</x:String>
+                          <x:String>March</x:String>
+                          <x:String>April</x:String>
+                          <x:String>May</x:String>
+                          <x:String>June</x:String>
+                          <x:String>July</x:String>
+                          <x:String>August</x:String>
+                          <x:String>September</x:String>
+                          <x:String>October</x:String>
+                          <x:String>November</x:String>
+                          <x:String>December</x:String>
+                        </scg:List>
+                      </uix:NSelectItem.Items>
+                      <uix:NSelectItem.Target>
+                        <uix:TargetAnchorable BrowserURL="rpasamples.com/unicornname" DesignTimeRectangle="514, 490, 228, 25" ElementType="DropDown" ElementVisibilityArgument="Interactive" FuzzySelectorArgument="&lt;webctrl id='selMonth' tag='SELECT' type='' class='col-med' aaname='' matching:id='fuzzy' fuzzylevel:id='0.0' matching:class='fuzzy' fuzzylevel:class='0.0' matching:aaname='fuzzy' fuzzylevel:aaname='0.0' /&gt;" Guid="75929b7c-e95f-4c19-965f-27e972cefafb" InformativeScreenshot="a89c5a773b1dbad15cb1feda2c9dba8a.jpg" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Find Unicorn Name' /&gt;" SearchSteps="FuzzySelector" Version="V6" WaitForReadyArgument="Interactive">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="286, 490, 228, 20" ElementType="Text" FuzzySelectorArgument="&lt;webctrl class='col-med' tag='DIV' type='' aaname='What month is your birthday?' matching:class='fuzzy' fuzzylevel:class='0.0' matching:aaname='fuzzy' fuzzylevel:aaname='0.0' check:innerText='What month is your birthday?' /&gt;" Guid="d64f5ef8-63e3-472a-8920-315a0140bc51" SearchSteps="FuzzySelector" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NSelectItem.Target>
+                    </uix:NSelectItem>
+                    <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Get Name'" HealingAgentBehavior="SameAsCard" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="293eaee4-79f4-4c77-9d4a-750b1732e84e" Version="V5">
+                      <uix:NClick.Target>
+                        <uix:TargetAnchorable BrowserURL="rpasamples.com/unicornname" DesignTimeRectangle="281, 605, 130, 36" ElementType="Button" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='getNameButton' tag='BUTTON' /&gt;" Guid="702c738a-5ffc-4095-bcff-1b1565435622" InformativeScreenshot="fa410a089417a0b3f107b25ae9ae5962.jpg" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Find Unicorn Name' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+                      </uix:NClick.Target>
+                    </uix:NClick>
+                    <uix:NGetText DisplayName="Get Text 'Your Unicorn Name'" HealingAgentBehavior="SameAsCard" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="293eaee4-79f4-4c77-9d4a-750b1732e84e" TextString="[GeneratedUnicornName]" Version="V5">
+                      <uix:NGetText.Target>
+                        <uix:TargetAnchorable BrowserURL="rpasamples.com/unicornname" CVScreenId="2c114a46-2798-4910-b410-56c9d50247f6" CvType="AnyWordGroup" DesignTimeRectangle="781, 440, 195, 19" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='lblUnicornName' tag='SPAN' /&gt;" Guid="7a268c2c-35d6-4a1e-95c5-8fce78566b84" InformativeScreenshot="385a3dd76920fc9a412f09c758d8cc31.jpg" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Find Unicorn Name' /&gt;" SearchSteps="Selector, CV" Version="V6" WaitForReadyArgument="Interactive">
+                          <uix:TargetAnchorable.Anchors>
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                              <uix:Target DesignTimeRectangle="776, 395, 315, 22" ElementType="Text" FuzzySelectorArgument="&lt;webctrl aaname='Your Unicorn Name' class='lbl-header' tag='DIV' type='' matching:aaname='fuzzy' fuzzylevel:aaname='0.0' matching:class='fuzzy' fuzzylevel:class='0.0' check:innerText='Your Unicorn Name' /&gt;" Guid="0356dfd4-3019-4de7-8a0d-b7ba0ad22d16" SearchSteps="FuzzySelector" />
+                            </scg:List>
+                          </uix:TargetAnchorable.Anchors>
+                        </uix:TargetAnchorable>
+                      </uix:NGetText.Target>
+                    </uix:NGetText>
+                    <uga:WriteCellConnections ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" ManualEntrySpreadsheetId="{x:Null}" Spreadsheet="{x:Null}" AuthScopesInvalid="False" BrowserItemFriendlyName="Unicorn_Name_Iterations" BrowserItemId="https://docs.google.com/spreadsheets/d/1JZ-76gnTXibG3UcT9FC5Y4pW0D5Fye9lrOnjM-illNY/edit?usp=drivesdk" Cell="String.Format(&quot;C{0}&quot;, CurrentRowIndex + 2)" ConnectionId="7dfba646-e2fb-4181-bcb1-1c091adbe3d2" DisplayName="Write Cell" HideCell="False" sap2010:WorkflowViewState.IdRef="WriteCellConnections_1" ItemSelectionMode="Browse" RangeLocation="Sheet1" UseConnectionService="True" WhatToWrite="[string.Format(&quot;{0}&quot;, GeneratedUnicornName)]">
+                      <uga:WriteCellConnections.FileIdBackup>
+                        <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID1" StoredValue="Browse">
+                          <usau:BackupSlot.BackupValues>
+                            <scg:Dictionary x:TypeArguments="ugade:EDriveItemMode, scg:List(x:Object)" />
+                          </usau:BackupSlot.BackupValues>
+                        </usau:BackupSlot>
+                      </uga:WriteCellConnections.FileIdBackup>
+                      <uga:WriteCellConnections.Item>
+                        <ugam:DriveItemArgument Backup="{x:Reference __ReferenceID1}" ConnectionDescriptor="{x:Null}" Existing="{x:Null}" FullPath="{x:Null}" IdOrUrl="{x:Null}" ParentId="{x:Null}" ParentIdFriendlyName="{x:Null}" RelativePath="{x:Null}" BrowserId="https://docs.google.com/spreadsheets/d/1JZ-76gnTXibG3UcT9FC5Y4pW0D5Fye9lrOnjM-illNY/edit?usp=drivesdk" ConnectionKey="7dfba646-e2fb-4181-bcb1-1c091adbe3d2" FriendlyName="Unicorn_Name_Iterations" FullPathHint="My Drive/Unicorn_Name_Iterations" InputMode="Browse">
+                          <ugam:DriveItemArgument.DriveId>
+                            <InArgument x:TypeArguments="x:String" />
+                          </ugam:DriveItemArgument.DriveId>
+                          <ugam:DriveItemArgument.ParentIdFullPathHint>
+                            <InArgument x:TypeArguments="x:String">
+                              <Literal x:TypeArguments="x:String" Value="" />
+                            </InArgument>
+                          </ugam:DriveItemArgument.ParentIdFullPathHint>
+                        </ugam:DriveItemArgument>
+                      </uga:WriteCellConnections.Item>
+                    </uga:WriteCellConnections>
+                  </Sequence>
+                </ActivityAction>
+              </uga:ForEachRowConnections.Body>
+              <uga:ForEachRowConnections.ColumnNames>
+                <x:Array Type="x:String">
+                  <x:String>Name</x:String>
+                  <x:String>Birthday Month</x:String>
+                  <x:String>Unicorn Name</x:String>
+                </x:Array>
+              </uga:ForEachRowConnections.ColumnNames>
+              <uga:ForEachRowConnections.FileIdBackup>
+                <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID0" StoredValue="Browse">
+                  <usau:BackupSlot.BackupValues>
+                    <scg:Dictionary x:TypeArguments="ugade:EDriveItemMode, scg:List(x:Object)" />
+                  </usau:BackupSlot.BackupValues>
+                </usau:BackupSlot>
+              </uga:ForEachRowConnections.FileIdBackup>
+              <uga:ForEachRowConnections.Item>
+                <ugam:DriveItemArgument Backup="{x:Reference __ReferenceID0}" ConnectionDescriptor="{x:Null}" Existing="{x:Null}" FullPath="{x:Null}" IdOrUrl="{x:Null}" ParentId="{x:Null}" ParentIdFriendlyName="{x:Null}" RelativePath="{x:Null}" BrowserId="https://docs.google.com/spreadsheets/d/1JZ-76gnTXibG3UcT9FC5Y4pW0D5Fye9lrOnjM-illNY/edit?usp=drivesdk" ConnectionKey="7dfba646-e2fb-4181-bcb1-1c091adbe3d2" FriendlyName="Unicorn_Name_Iterations" FullPathHint="My Drive/Unicorn_Name_Iterations" InputMode="Browse">
+                  <ugam:DriveItemArgument.DriveId>
+                    <InArgument x:TypeArguments="x:String" />
+                  </ugam:DriveItemArgument.DriveId>
+                  <ugam:DriveItemArgument.ParentIdFullPathHint>
+                    <InArgument x:TypeArguments="x:String">
+                      <Literal x:TypeArguments="x:String" Value="" />
+                    </InArgument>
+                  </ugam:DriveItemArgument.ParentIdFullPathHint>
+                </ugam:DriveItemArgument>
+              </uga:ForEachRowConnections.Item>
+              <uga:ForEachRowConnections.RangeMetadata>
+                <ugsm:RangeMetadataSlim ColumnStart="1" RangeType="Range" />
+              </uga:ForEachRowConnections.RangeMetadata>
+            </uga:ForEachRowConnections>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1382, 744" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="ce53ae2a4a67097edc0f4e5a7221b93e.jpg" Selector="&lt;html app='chrome.exe' title='Find Unicorn Name' /&gt;" Url="https://www.rpasamples.com/unicornname" Version="V3">
+          <uix:TargetApp.SapInfo>
+            <uix:SAPElementInfo IsSapSubsystem="False" WebAutomationFramework="Default" />
+          </uix:TargetApp.SapInfo>
+        </uix:TargetApp>
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <uga:DownloadFileConnections ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" DestinationPath="{x:Null}" File="{x:Null}" ManualEntryFileId="{x:Null}" ManualFileId="{x:Null}" Result="{x:Null}" AuthScopesInvalid="False" BrowserFileId="https://docs.google.com/spreadsheets/d/1JZ-76gnTXibG3UcT9FC5Y4pW0D5Fye9lrOnjM-illNY/edit?usp=drivesdk" ConflictResolution="Fail" ConnectionId="f1313105-8fa4-41a0-ab69-6aba75ee561f" DisplayName="Download File" DownloadDocumentAs="Word" DownloadDrawingAs="Jpeg" DownloadPresentationAs="Ppt" DownloadSpreadsheetAs="Xlsx" FileFriendlyName="Unicorn_Name_Iterations" FileInputMode="Browse" sap2010:WorkflowViewState.IdRef="DownloadFileConnections_2" NewResult="[file]" UseConnectionService="True">
+      <uga:DownloadFileConnections.FileIdBackup>
+        <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID2" StoredValue="Browse">
+          <usau:BackupSlot.BackupValues>
+            <scg:Dictionary x:TypeArguments="ugade:EDriveItemMode, scg:List(x:Object)" />
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </uga:DownloadFileConnections.FileIdBackup>
+      <uga:DownloadFileConnections.Item>
+        <ugam:DriveItemArgument Backup="{x:Reference __ReferenceID2}" ConnectionDescriptor="{x:Null}" Existing="{x:Null}" FullPath="{x:Null}" IdOrUrl="{x:Null}" ParentId="{x:Null}" ParentIdFriendlyName="{x:Null}" RelativePath="{x:Null}" BrowserId="https://docs.google.com/spreadsheets/d/1JZ-76gnTXibG3UcT9FC5Y4pW0D5Fye9lrOnjM-illNY/edit?usp=drivesdk" ConnectionKey="f1313105-8fa4-41a0-ab69-6aba75ee561f" FriendlyName="Unicorn_Name_Iterations" FullPathHint="My Drive/Unicorn_Name_Iterations" InputMode="Browse">
+          <ugam:DriveItemArgument.DriveId>
+            <InArgument x:TypeArguments="x:String" />
+          </ugam:DriveItemArgument.DriveId>
+          <ugam:DriveItemArgument.ParentIdFullPathHint>
+            <InArgument x:TypeArguments="x:String">
+              <Literal x:TypeArguments="x:String" Value="" />
+            </InArgument>
+          </ugam:DriveItemArgument.ParentIdFullPathHint>
+        </ugam:DriveItemArgument>
+      </uga:DownloadFileConnections.Item>
+    </uga:DownloadFileConnections>
+    <uga:SendEmailConnections ArgumentAttachmentPaths="{x:Null}" ArgumentAttachments="{x:Null}" AttachmentPaths="{x:Null}" Bcc="{x:Null}" Cc="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" ReplyTo="{x:Null}" SingleAttachment="{x:Null}" TextBody="{x:Null}" AttachmentInputMode="UseExisting" Attachments="[Enumerable.Repeat(file, 1).ToList()]" AuthScopesInvalid="False" Body="&lt;p&gt;&lt;em&gt;If you’re getting this email, then my first automation in Studio Web was successful! Here’s the Unicorn Name workbook you requested.&lt;/em&gt;&lt;/p&gt;" ConnectionId="8522613c-4e75-4995-b392-349448b00b24" DisplayName="Send Email" sap2010:WorkflowViewState.IdRef="SendEmailConnections_1" Importance="Normal" InputType="HTML" SaveAsDraft="True" Subject="Unicorn Name Exercise " To="[New String(){&quot;automation-first@uipath.com&quot;}]" UseConnectionService="True">
+      <uga:SendEmailConnections.AttachmentsBackup>
+        <usau:BackupSlot x:TypeArguments="ugage:AttachmentInputMode" StoredValue="UseExisting">
+          <usau:BackupSlot.BackupValues>
+            <scg:List x:TypeArguments="x:Object" x:Key="UseExisting" Capacity="1">
+              <InArgument x:TypeArguments="scg:IEnumerable(upr:IResource)" />
+            </scg:List>
+            <scg:List x:TypeArguments="x:Object" x:Key="Builder" Capacity="1">
+              <x:Null />
+            </scg:List>
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </uga:SendEmailConnections.AttachmentsBackup>
+      <uga:SendEmailConnections.InputTypeBackup>
+        <usau:BackupSlot x:TypeArguments="ugage:BodyInputType" StoredValue="HTML">
+          <usau:BackupSlot.BackupValues>
+            <scg:Dictionary x:TypeArguments="ugage:BodyInputType, scg:List(x:Object)" />
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </uga:SendEmailConnections.InputTypeBackup>
+    </uga:SendEmailConnections>
+  </Sequence>
+</Activity>

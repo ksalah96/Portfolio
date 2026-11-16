@@ -1,0 +1,20 @@
+{
+  "version": "3.0.0.0",
+  "bundleHash": "35JMkqL53hUQxQ35g7jYT4UAJlxC6nhGJIvANtQ",
+  "addedAssemblyNames": [],
+  "discardedAssemblyNames": [],
+  "discardedAssemblyReplacements": {},
+  "assembliesJitInfo": {
+    "Studio.Generated.TypedDataRow1": {
+      "createdAt": "2026-11-15T13:12:09.8416945+02:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable1",
+        "DataColumnCollection1",
+        "DataRow1",
+        "DataRowCollection1"
+      ]
+    }
+  }
+}

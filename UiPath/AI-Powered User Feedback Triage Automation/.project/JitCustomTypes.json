@@ -1,0 +1,239 @@
+{
+  "version": "3.0.0.0",
+  "bundleHash": "eMY1avjLzHuCw8XPXMUbQSmGxVjxiSWKmU7lL8xlmw",
+  "addedAssemblyNames": [],
+  "discardedAssemblyNames": [],
+  "discardedAssemblyReplacements": {},
+  "assembliesJitInfo": {
+    "C8CE277CC61_v2_sub_g.YWCwG2LFGcH1jMTPe1HiuYP2": {
+      "createdAt": "2025-06-25T08:25:59.1140127+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_v2_sub_generateChatCompletion_Create.Bundle",
+      "typeNames": [
+        "message",
+        "choices",
+        "usage",
+        "detectedEntities",
+        "contextGroundingCitations",
+        "v2_sub_generateChatCompletion_Create"
+      ]
+    },
+    "C8CE277CC61_categori.3bE2giQZDE1XfNv32F7YLI": {
+      "createdAt": "2025-06-25T08:38:05.5038598+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_categorize_Create.Bundle",
+      "typeNames": [
+        "categorize_Create"
+      ]
+    },
+    "C8CE277CC61_summaris.5gkwrl64BD1pYz791hkynA": {
+      "createdAt": "2025-06-25T08:47:55.6675974+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_summarise_Create.Bundle",
+      "typeNames": [
+        "summarise_Create"
+      ]
+    },
+    "C8CE277CC61_semantic.uyQzM4ZJvrA1ke2SZ4Bdgjx2": {
+      "createdAt": "2025-07-01T15:11:25.422714+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_semanticminus_signsimilarity_Create.Bundle",
+      "typeNames": [
+        "semanticSimilarity",
+        "semanticminus_signsimilarity_Create"
+      ]
+    },
+    "Studio.Generated.TypedDataRow1": {
+      "createdAt": "2025-07-02T12:39:27.3933747+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable1",
+        "DataColumnCollection1",
+        "DataRow1",
+        "DataRowCollection1"
+      ]
+    },
+    "Studio.Generated.TypedDataTable2": {
+      "createdAt": "2025-07-02T13:12:43.5568123+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable2",
+        "DataColumnCollection2",
+        "DataRow2",
+        "DataRowCollection2"
+      ]
+    },
+    "Studio.Generated.TypedDataRow3": {
+      "createdAt": "2025-07-12T14:11:19.8292575+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable3",
+        "DataColumnCollection3",
+        "DataRow3",
+        "DataRowCollection3"
+      ]
+    },
+    "Studio.Generated.TypedDataRow4": {
+      "createdAt": "2025-07-15T12:31:30.8363341+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable4",
+        "DataColumnCollection4",
+        "DataRow4",
+        "DataRowCollection4"
+      ]
+    },
+    "Studio.Generated.TypedDataRow5": {
+      "createdAt": "2025-07-15T12:37:14.9131023+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable5",
+        "DataColumnCollection5",
+        "DataRow5",
+        "DataRowCollection5"
+      ]
+    },
+    "Studio.Generated.TypedDataRow6": {
+      "createdAt": "2025-07-15T12:37:37.581425+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable6",
+        "DataColumnCollection6",
+        "DataRow6",
+        "DataRowCollection6"
+      ]
+    },
+    "Studio.Generated.TypedDataRow7": {
+      "createdAt": "2025-07-15T14:13:17.9483365+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable7",
+        "DataColumnCollection7",
+        "DataRow7",
+        "DataRowCollection7"
+      ]
+    },
+    "Studio.Generated.TypedDataRow8": {
+      "createdAt": "2025-07-15T14:21:45.0885952+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable8",
+        "DataColumnCollection8",
+        "DataRow8",
+        "DataRowCollection8"
+      ]
+    },
+    "Studio.Generated.TypedDataRow9": {
+      "createdAt": "2025-07-15T16:22:45.8133901+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable9",
+        "DataColumnCollection9",
+        "DataRow9",
+        "DataRowCollection9"
+      ]
+    },
+    "Studio.Generated.TypedDataRow10": {
+      "createdAt": "2025-07-15T16:23:46.0795896+00:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable10",
+        "DataColumnCollection10",
+        "DataRow10",
+        "DataRowCollection10"
+      ]
+    },
+    "CBF6FF85907_v2_sub_g.OjOmX4ea9WF1KfGO52HkZNT4": {
+      "createdAt": "2025-09-29T16:10:51.6260322+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.CBF6FF85907_v2_sub_generateChatCompletion_Create.Bundle",
+      "typeNames": [
+        "message",
+        "choices",
+        "usage",
+        "detectedEntities",
+        "contextGroundingCitations",
+        "v2_sub_generateChatCompletion_Create"
+      ]
+    },
+    "CBF6FF85907_categori.WccTH2TKdBB1sjM9l3LOlkn": {
+      "createdAt": "2025-09-29T16:10:54.3626006+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.CBF6FF85907_categorize_Create.Bundle",
+      "typeNames": [
+        "categorize_Create"
+      ]
+    },
+    "CBF6FF85907_semantic.FYimW44UTKK1PUD9P1RWRbk1": {
+      "createdAt": "2025-09-29T16:11:07.7411618+00:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.CBF6FF85907_semanticminus_signsimilarity_Create.Bundle",
+      "typeNames": [
+        "semanticSimilarity",
+        "semanticminus_signsimilarity_Create"
+      ]
+    },
+    "CA12167504E_v2_sub_g.EuzLY4FUbUL1PXga31VUOch2": {
+      "createdAt": "2026-11-16T12:30:09.6127128+02:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.CA12167504E_v2_sub_generateChatCompletion_Create.Bundle",
+      "typeNames": [
+        "message",
+        "choices",
+        "usage",
+        "detectedEntities",
+        "contextGroundingCitations",
+        "v2_sub_generateChatCompletion_Create"
+      ]
+    },
+    "CA12167504E_categori.ABaUo3CqCOG1P0thN4fCq8U2": {
+      "createdAt": "2026-11-16T12:30:14.8289326+02:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.CA12167504E_categorize_Create.Bundle",
+      "typeNames": [
+        "categorize_Create"
+      ]
+    },
+    "CA12167504E_semantic.83Yks2iCNhS13yZ2ALbSIZ3": {
+      "createdAt": "2026-11-16T12:30:17.9964208+02:00",
+      "providerName": "CustomEntities",
+      "rootNamespace": "UiPath.IntegrationService.Activities.SWEntities.CA12167504E_semanticminus_signsimilarity_Create.Bundle",
+      "typeNames": [
+        "semanticSimilarity",
+        "semanticminus_signsimilarity_Create"
+      ]
+    },
+    "Studio.Generated.TypedDataRow11": {
+      "createdAt": "2026-11-16T13:02:52.4957717+02:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable11",
+        "DataColumnCollection11",
+        "DataRow11",
+        "DataRowCollection11"
+      ]
+    },
+    "Studio.Generated.TypedDataRow12": {
+      "createdAt": "2026-11-16T13:16:26.8868564+02:00",
+      "providerName": "TypedDataTable",
+      "rootNamespace": "System.Data",
+      "typeNames": [
+        "DataTable12",
+        "DataColumnCollection12",
+        "DataRow12",
+        "DataRowCollection12"
+      ]
+    }
+  }
+}

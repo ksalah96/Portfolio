@@ -1,0 +1,1101 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:sd="clr-namespace:System.Data;assembly=Studio.Generated.TypedDataRow11"
+ xmlns:sd1="clr-namespace:System.Data;assembly=Studio.Generated.TypedDataRow12"
+ xmlns:uast="clr-namespace:UiPath.Activities.System.Text;assembly=UiPath.System.Activities"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:uiascb="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.CA12167504E_v2_sub_generateChatCompletion_Create.Bundle;assembly=CA12167504E_v2_sub_g.EuzLY4FUbUL1PXga31VUOch2"
+ xmlns:uiascb1="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.CA12167504E_categorize_Create.Bundle;assembly=CA12167504E_categori.ABaUo3CqCOG1P0thN4fCq8U2"
+ xmlns:uiascb2="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.CA12167504E_semanticminus_signsimilarity_Create.Bundle;assembly=CA12167504E_semantic.83Yks2iCNhS13yZ2ALbSIZ3"
+ xmlns:uiascb3="clr-namespace:UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_v2_sub_generateChatCompletion_Create.Bundle;assembly=C8CE277CC61_v2_sub_g.YWCwG2LFGcH1jMTPe1HiuYP2"
+ xmlns:umae="clr-namespace:UiPath.MicrosoftOffice365.Activities.Excel;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umaee="clr-namespace:UiPath.MicrosoftOffice365.Activities.Excel.Enums;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umaf="clr-namespace:UiPath.MicrosoftOffice365.Activities.Files;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umafe="clr-namespace:UiPath.MicrosoftOffice365.Activities.Files.Enums;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umafm="clr-namespace:UiPath.MicrosoftOffice365.Activities.Files.Models;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umam="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umamf="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Filters;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umamm="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Models;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umas="clr-namespace:UiPath.MicrosoftOffice365.Activities.Sharepoint;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umec="clr-namespace:UiPath.MicrosoftOffice365.Excel.Contracts;assembly=UiPath.MicrosoftOffice365"
+ xmlns:umem="clr-namespace:UiPath.MicrosoftOffice365.Excel.Models;assembly=UiPath.MicrosoftOffice365"
+ xmlns:umfm="clr-namespace:UiPath.MicrosoftOffice365.Files.Models;assembly=UiPath.MicrosoftOffice365"
+ xmlns:umm="clr-namespace:UiPath.MicrosoftOffice365.Models;assembly=UiPath.MicrosoftOffice365"
+ xmlns:upr="clr-namespace:UiPath.Platform.ResourceHandling;assembly=UiPath.Platform"
+ xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="67">
+      <x:String>System.Collections</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Excel.Enums</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Excel.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Sharepoint</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Models</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Files.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Enums</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Excel</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.Activities.System.Text</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Excel.Models</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Enums</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.ConnectionClient.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail.Models</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Models</x:String>
+      <x:String>UiPath.Shared.Services.Graph.Mail.Models</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail.Enums</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail.Filters</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Mail.Enums</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Filters</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_v2_sub_generateChatCompletion_Create.Bundle</x:String>
+      <x:String>UiPath.Shared.Services.Graph.Mail.Contracts</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_categorize_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_summarise_Create.Bundle</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_semanticminus_signsimilarity_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CBF6FF85907_v2_sub_generateChatCompletion_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CBF6FF85907_categorize_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CBF6FF85907_semanticminus_signsimilarity_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CA12167504E_v2_sub_generateChatCompletion_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CA12167504E_categorize_Create.Bundle</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CA12167504E_semanticminus_signsimilarity_Create.Bundle</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="53">
+      <AssemblyReference>Studio.Generated.TypedDataRow12</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow11</AssemblyReference>
+      <AssemblyReference>CA12167504E_semantic.83Yks2iCNhS13yZ2ALbSIZ3</AssemblyReference>
+      <AssemblyReference>CA12167504E_categori.ABaUo3CqCOG1P0thN4fCq8U2</AssemblyReference>
+      <AssemblyReference>CA12167504E_v2_sub_g.EuzLY4FUbUL1PXga31VUOch2</AssemblyReference>
+      <AssemblyReference>CBF6FF85907_semantic.FYimW44UTKK1PUD9P1RWRbk1</AssemblyReference>
+      <AssemblyReference>CBF6FF85907_categori.WccTH2TKdBB1sjM9l3LOlkn</AssemblyReference>
+      <AssemblyReference>CBF6FF85907_v2_sub_g.OjOmX4ea9WF1KfGO52HkZNT4</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow10</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow9</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow8</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow7</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow6</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow5</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow4</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow3</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable2</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataRow1</AssemblyReference>
+      <AssemblyReference>C8CE277CC61_semantic.uyQzM4ZJvrA1ke2SZ4Bdgjx2</AssemblyReference>
+      <AssemblyReference>C8CE277CC61_summaris.5gkwrl64BD1pYz791hkynA</AssemblyReference>
+      <AssemblyReference>C8CE277CC61_categori.3bE2giQZDE1XfNv32F7YLI</AssemblyReference>
+      <AssemblyReference>C8CE277CC61_v2_sub_g.YWCwG2LFGcH1jMTPe1HiuYP2</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Graph</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>ConnectionClient</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Xml.ReaderWriter</AssemblyReference>
+      <AssemblyReference>System.Xml.XmlSerializer</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="356,732" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="contentCategory" />
+      <Variable x:TypeArguments="s:String[]" Default="[new System.String() {  }]" Name="existingBugList" />
+      <Variable x:TypeArguments="s:Nullable(x:Double)" Name="similarityScore" />
+      <Variable x:TypeArguments="umfm:O365DriveRemoteItem" Name="fileOrFolder">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">GetFileFolderConnections_1</x:String>
+            <x:String x:Key="SourcePropertyName">Result</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+      <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="allEmailAddresses">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">ExtractText_1</x:String>
+            <x:String x:Key="SourcePropertyName">Results</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+      <Variable x:TypeArguments="uiascb3:v2_sub_generateChatCompletion_Create" Default="[new UiPath.IntegrationService.Activities.SWEntities.C8CE277CC61_v2_sub_generateChatCompletion_Create.Bundle.v2_sub_generateChatCompletion_Create]" Name="contentGeneration_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">ConnectorActivity_6</x:String>
+            <x:String x:Key="SourcePropertyName">Jit_v2_sub_generateChatCompletion</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+      <Variable x:TypeArguments="uiascb:v2_sub_generateChatCompletion_Create" Default="[new UiPath.IntegrationService.Activities.SWEntities.CA12167504E_v2_sub_generateChatCompletion_Create.Bundle.v2_sub_generateChatCompletion_Create]" Name="contentGeneration" />
+      <Variable x:TypeArguments="uiascb1:categorize_Create" Default="[new UiPath.IntegrationService.Activities.SWEntities.CA12167504E_categorize_Create.Bundle.categorize_Create]" Name="categorize" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
+    <umam:ForEachEmailConnections ConnectionAccountName="{x:Null}" FolderIdBackup="{x:Reference __ReferenceID7}" FreeTextFilter="{x:Null}" Length="{x:Null}" Mailbox="{x:Null}" ManualEntryFolder="{x:Null}" QueryFilter="{x:Null}" AuthScopesInvalid="False" BodyAsHtml="False" BrowserFolder="Inbox" BrowserFolderId="AQMkADAwATM0MDAAMi1hY2FlLTQ4Y2ItMDACLTAwCgAuAAADBpQSlEXdNEerySBHnN27UwEAlXI054oUG0ChWBNvvNbU9QAAAgEMAAAA" ConnectionId="bb9ae343-e8ee-4481-8acc-6d1ad970a035" CurrentItemVariableName="CurrentEmail" DisplayName="For Each Email" FilterSelectionMode="ConditionBuilder" sap2010:WorkflowViewState.IdRef="ForEachEmailConnections_1" Importance="Any" IncludeAttachments="None" IncludeSubfolders="False" MarkAsRead="False" MaxResults="100" OrderByDate="NewestFirst" SelectionMode="Browse" UnreadOnly="False" UseConnectionService="True" UseSharedMailbox="False" WithAttachmentsOnly="False">
+      <umam:ForEachEmailConnections.Body>
+        <ActivityAction x:TypeArguments="umm:Office365Message, x:Int32">
+          <ActivityAction.Argument1>
+            <DelegateInArgument x:TypeArguments="umm:Office365Message" Name="CurrentEmail" />
+          </ActivityAction.Argument1>
+          <ActivityAction.Argument2>
+            <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentEmailIndex" />
+          </ActivityAction.Argument2>
+          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <umaf:GetFileFolderConnections BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID0}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="Examples.docx" BrowserItemId="4497CCD2D9B8788B!s9bf110bae80541058e4b64f84e57faa4" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=9bf110ba-e805-4105-8e4b-64f84e57faa4&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" DisplayName="Get File or Folder" sap2010:WorkflowViewState.IdRef="GetFileFolderConnections_1" ItemSelectionMode="Browse" Result="[fileOrFolder]" UseConnectionService="True">
+              <umaf:GetFileFolderConnections.DriveItemArgument>
+                <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="Examples.docx" BrowserItemId="4497CCD2D9B8788B!s9bf110bae80541058e4b64f84e57faa4" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=9bf110ba-e805-4105-8e4b-64f84e57faa4&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=9bf110ba-e805-4105-8e4b-64f84e57faa4&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/Examples.docx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                  <umafm:DriveItemArgument.ItemIdBackup>
+                    <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID0" StoredValue="Browse">
+                      <usau:BackupSlot.BackupValues>
+                        <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                      </usau:BackupSlot.BackupValues>
+                    </usau:BackupSlot>
+                  </umafm:DriveItemArgument.ItemIdBackup>
+                </umafm:DriveItemArgument>
+              </umaf:GetFileFolderConnections.DriveItemArgument>
+            </umaf:GetFileFolderConnections>
+            <isactr:ConnectorActivity Configuration="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" ConnectionId="f7411ce2-cd97-404c-b9b7-6da12167504e" DisplayName="Content Generation - Summarize user feedback" sap2010:WorkflowViewState.IdRef="ConnectorActivity_1" UiPathActivityTypeId="aba52a00-4c05-318d-8f99-5ad924b2f277">
+              <isactr:ConnectorActivity.FieldObjects>
+                <isactr:FieldObject Name="prompt" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">[string.Format("Summarize this email {0} into a single short sentence.  {1}- If it matches an existing known issue or feature request, return exactly that phrase. {2}- If it does not match any, create a new short phrase that describes the core issue or request. {3}- Do NOT include names, dates, timestamps, or any extra explanation. {4}- ONLY return the short summary. ", CurrentEmail.Body, Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine)]</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="isPIIEnabled" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="isFilterPIIEnabled" Type="FieldArgument" />
+                <isactr:FieldObject Name="languageCode" Type="FieldArgument" />
+                <isactr:FieldObject Name="piiEntityCategories_array" Type="FieldArgument" />
+                <isactr:FieldObject Name="confidenceThreshold" Type="FieldArgument" />
+                <isactr:FieldObject Name="topK" Type="FieldArgument" />
+                <isactr:FieldObject Name="contextGrounding" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">File resource</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="_file" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="upr:IResource">[fileOrFolder]</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="folderKey" Type="FieldArgument" />
+                <isactr:FieldObject Name="topP" Type="FieldArgument" />
+                <isactr:FieldObject Name="indexID" Type="FieldArgument" />
+                <isactr:FieldObject Name="max_tokens" Type="FieldArgument" />
+                <isactr:FieldObject Name="temperature" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Double">0</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="frequency_penalty" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Int64">0</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="numberOfResults" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Int64">3</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="presence_penalty" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Int64">0</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="n" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Int64">1</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="top_p" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:Int64">1</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="_stop" Type="FieldArgument" />
+                <isactr:FieldObject Name="modelName" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">gemini-3.7-flash</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="instruction" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">You are a helpful assistant</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="Xminus_signElementsminus_signServiceminus_signProfile" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">high-capacity</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="out_text" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <OutArgument x:TypeArguments="x:String" />
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="out_maskedText" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <OutArgument x:TypeArguments="x:String" />
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="Jit_v2_sub_generateChatCompletion" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <OutArgument x:TypeArguments="uiascb:v2_sub_generateChatCompletion_Create">[contentGeneration]</OutArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="out_contextGroundingCitationsString" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <OutArgument x:TypeArguments="x:String" />
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+              </isactr:ConnectorActivity.FieldObjects>
+            </isactr:ConnectorActivity>
+            <ui:CommentOut DisplayName="Disabled Activities" sap2010:WorkflowViewState.IdRef="CommentOut_11">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored activities" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                  <ui:LogMessage DisplayName="Log Message 1" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[string.Format(&quot;Email summary: {0}&quot;, contentGeneration.text)]" />
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+            <isactr:ConnectorActivity Configuration="H4sIAAAAAAAACpVXbW/bNhD+K4Q+bYCs2VmbbsY6IHazxltTe7XTDhiKgpbOFmeJVEgqqRv4v+8hJduS7SQb8iEm73i8e557oR6C3wRliRkqabmQpIP+QzAlruOUzzOqhEH/789hMJJFaXcbD8F7nlPQD3KVUOZ/h8EbYYqMr2vJtZMwWYvIxFoUVigJ0SwltiRcx624I3YxYt4MU5qN3jCrWGkoYrNUGMZjqAi7ZgkteJlZ48QW56sT98KmfpmKZUrGstuSZ05dzQ3pO0qYKi0cD1mq7umOdMg4S8RiQZqkrY3EXLI5MUMZxRZH5ty4gxJ3GqF3NuCMTJjFLUIuIzbF3XGKn5UV482kHPGIvIDbxllwrlWnI6AwWxcOGWM1jmE9VdqOdeJg7/S6YfBOqVVZOA7G83/gSxNjE2zlH3lW7raxO+E2xfKHJdnrtqY779gKkgYznzeeDrEEEw9Q5Mlg/aYCN+hbXVIYXErH/g0QHAMyLRLaSibKiJrEiRY51+sA5nxaXIApJets8TvvVMxr5T9LgmoYjOWQyztutvZG5ppsqpIJ1/DNOiScYBPuEixGaoKqo/Qa7vePcqs+41IFHtBSafFtm1B5iSwB24VWdwgsYRy8soqSZzh62QTuNBIfyBQAYYfXB7otXQpt14e4DFTizu2jrd0FbUcBt0StmFuiOgDlM6gdwDkcUDrnIBop4fmC379UsYbVv1+9dZ8OdaI9bJ6JOwQZOcJ2dPTh9dawD2G7+CQSJKiz8EnIRN3PhM2OwqpE7eAmFVE7Jr3iUGVlLv+g9YGZdVPWtuNgZGrhSzI+oX0lvPtPqnlEtlc2zbcU2vc2Vk/brR14Sn+z+f8plbTcbOfUwV2NWmuFME2RQ64bHjlWF9qcXB/c11oSMYZMY/SV50VGoau2pIwtM2VROFtWxCuyJmQxylHlpJmmO0H32CEbP1OHr56vw5OgHLafBkh/dS4zyhGK6UwxN0RMHeTdQoDoQ8xquQtpK2+BNQIkWvKMaTR+BwtmhD0RULvIAjfAOjHH5MD4CpoRjsyVSBKS/6EHNyK+Iu7AerzFokuP/WQ6Huq/C/tlT+ajnejbcfD7OG+Em0uRQ2Pp5rySNXDRRTXSUcjR9NOltNXP4UXvrHf+6mX3xWXj7i9DTVhEg1ImGUVHgpCdOhddDPiN+nF4Oxy/7U26Nn3/YjG8/enmLGQfSRv48roXdd0fzoODUtNrSaXVPAvZpJxnInatRa1IvpZl5oasqzpM/qC/4Jmh40Z/CH8F7cmJB3S99vGo27eFk7Ou2TeOh56QeNS418pW66BIT6ZgnWOb5wPcrocl2Hy8+zwS98a9OkbSWC5j2mUihA9BzQjOek58T5QSs0tpkIDtUhTIpE79jwudrKBUZ9G6jmnrVth+OrWy+MraoqoFVzoKwcIp53vmWtbW4KkkH/I4paTx/PKe79++rnZGzuqSciFF58foVWeRcZPuqawavX+NHSqx7976ne8D1OTUk1ON6cOjwVFmPG7KI175PdDqHm+5kaXc+Y39um8A3/q9NuHxii+pyUXvPOp25mR5dNY9e9k9P3sR9Zrk1B5Udc7eksQzfl/aTc2m1Z9heEfSE23lcRbHhf9uqB4+vgkcUTuezhrv4tbpd1wuS0QKATpqGFzzrxMsp07aP+viEX7FzQBmV2BhmELbcV3XxMhUL10zBSPOBRSFKnVM1YN5VxQz+moHmYpXra7KBeKNMy4w7lwxQgm7QM19OOR8hW8agQJZoRmySUb4CGGJQjNCBacUrzAhqwp02DZmwEwVjux/ARv+i/XLDQAA" ConnectionId="f7411ce2-cd97-404c-b9b7-6da12167504e" DisplayName="Categorize 1" sap2010:WorkflowViewState.IdRef="ConnectorActivity_7" UiPathActivityTypeId="f6c9a20f-7e4c-3114-977f-69cc35299639">
+              <isactr:ConnectorActivity.FieldObjects>
+                <isactr:FieldObject Name="content" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">[string.Format("{0}", contentGeneration.text)]</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="categories" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[New Dictionary(Of System.String, System.String) From { {"Bug report", "A technical issue or malfunction where the product doesn't work as expected (e.g., crashes, errors, missing functionality)"},{"Feature request", "A suggestion to add or improve a capability that doesn't currently exist in the product (e.g., new filters, dark mode)"},{"Complaint", "Negative feedback about the user experience, product limitations, or service quality that doesn't involve a technical bug"},{"Praise", "Positive feedback or appreciation for the product, team, or specific feature (e.g., compliments, thank-yous)"},{"Other", "Messages that don't clearly fall into the categories above, including general inquiries, unrelated content, or unclear feedback."} }]</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="modelName" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">gemini-3.7-flash</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="description" Type="FieldArgument" />
+                <isactr:FieldObject Name="Xminus_signElementsminus_signServiceminus_signProfile" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <InArgument x:TypeArguments="x:String">high-capacity</InArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="Jit_categorize" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <OutArgument x:TypeArguments="uiascb1:categorize_Create">[categorize]</OutArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+                <isactr:FieldObject Name="out_category" Type="FieldArgument">
+                  <isactr:FieldObject.Value>
+                    <OutArgument x:TypeArguments="x:String">[contentCategory]</OutArgument>
+                  </isactr:FieldObject.Value>
+                </isactr:FieldObject>
+              </isactr:ConnectorActivity.FieldObjects>
+            </isactr:ConnectorActivity>
+            <ui:CommentOut DisplayName="Disabled Activities 1" sap2010:WorkflowViewState.IdRef="CommentOut_12">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored activities" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                  <ui:LogMessage DisplayName="Log Message 4" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[string.Format(&quot;Initial Message: {0}{1}Email Summry: {2}{3}Email category: {4}&quot;, CurrentEmail.Body, Environment.NewLine, contentGeneration.text, Environment.NewLine, categorize.category)]" />
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+            <ui:IfElseIfV2 Condition="[categorize.category = &quot;Bug report&quot;]" DisplayName="Else If" sap2010:WorkflowViewState.IdRef="IfElseIfV2_1">
+              <ui:IfElseIfV2.Else>
+                <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <Sequence DisplayName="Sequence - complaints and praises" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                    <uast:ExtractText EndingText="{x:Null}" FirstMatch="{x:Null}" StartingText="{x:Null}" DisplayName="Extract Text" ExtractBaseURLOnly="False" ExtractOptions="Email" sap2010:WorkflowViewState.IdRef="ExtractText_1" IgnoreDuplicates="False" MatchCase="False" Results="[allEmailAddresses]" Source="[string.Format(&quot;{0}&quot;, CurrentEmail.Body)]" />
+                    <isactr:ConnectorActivity Configuration="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" ConnectionId="f7411ce2-cd97-404c-b9b7-6da12167504e" DisplayName="Content Generation  - Extract user feedback" sap2010:WorkflowViewState.IdRef="ConnectorActivity_6" UiPathActivityTypeId="aba52a00-4c05-318d-8f99-5ad924b2f277">
+                      <isactr:ConnectorActivity.FieldObjects>
+                        <isactr:FieldObject Name="prompt" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <InArgument x:TypeArguments="x:String">[string.Format("Extract the message body from {0}{1}Ignore any polite words and the automated message at the end.", CurrentEmail.Body, Environment.NewLine)]</InArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="isPIIEnabled" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="isFilterPIIEnabled" Type="FieldArgument" />
+                        <isactr:FieldObject Name="languageCode" Type="FieldArgument" />
+                        <isactr:FieldObject Name="piiEntityCategories_array" Type="FieldArgument" />
+                        <isactr:FieldObject Name="confidenceThreshold" Type="FieldArgument" />
+                        <isactr:FieldObject Name="topK" Type="FieldArgument" />
+                        <isactr:FieldObject Name="contextGrounding" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <InArgument x:TypeArguments="x:String">None</InArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="_file" Type="FieldArgument" />
+                        <isactr:FieldObject Name="folderKey" Type="FieldArgument" />
+                        <isactr:FieldObject Name="topP" Type="FieldArgument" />
+                        <isactr:FieldObject Name="indexID" Type="FieldArgument" />
+                        <isactr:FieldObject Name="max_tokens" Type="FieldArgument" />
+                        <isactr:FieldObject Name="temperature" Type="FieldArgument" />
+                        <isactr:FieldObject Name="frequency_penalty" Type="FieldArgument" />
+                        <isactr:FieldObject Name="numberOfResults" Type="FieldArgument" />
+                        <isactr:FieldObject Name="presence_penalty" Type="FieldArgument" />
+                        <isactr:FieldObject Name="n" Type="FieldArgument" />
+                        <isactr:FieldObject Name="top_p" Type="FieldArgument" />
+                        <isactr:FieldObject Name="_stop" Type="FieldArgument" />
+                        <isactr:FieldObject Name="modelName" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <InArgument x:TypeArguments="x:String">gemini-3.7-flash</InArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="instruction" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <InArgument x:TypeArguments="x:String">You are a helpful assistant</InArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="Xminus_signElementsminus_signServiceminus_signProfile" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <InArgument x:TypeArguments="x:String">high-capacity</InArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="out_text" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <OutArgument x:TypeArguments="x:String" />
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="out_maskedText" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <OutArgument x:TypeArguments="x:String" />
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="Jit_v2_sub_generateChatCompletion" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <OutArgument x:TypeArguments="uiascb:v2_sub_generateChatCompletion_Create">[contentGeneration]</OutArgument>
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                        <isactr:FieldObject Name="out_contextGroundingCitationsString" Type="FieldArgument">
+                          <isactr:FieldObject.Value>
+                            <OutArgument x:TypeArguments="x:String" />
+                          </isactr:FieldObject.Value>
+                        </isactr:FieldObject>
+                      </isactr:ConnectorActivity.FieldObjects>
+                    </isactr:ConnectorActivity>
+                    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap:WorkflowViewStateService.ViewState="{x:Null}" DisplayName="For Each currentText" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[allEmailAddresses]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="x:String">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                            <umae:WriteRowConnections ArrayRow="{x:Null}" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" DataRow="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID5}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" DataType="IndividualFields" DisplayName="Write Row 5" HasHeaders="False" sap2010:WorkflowViewState.IdRef="WriteRowConnections_7" ItemSelectionMode="Browse" Range="[categorize.category]" RangeMode="Default" RowPosition="0" UseConnectionService="True" WorkingWithTemplateWorkbook="False" WriteMode="Append">
+                              <umae:WriteRowConnections.AllFields>
+                                <x:Array Type="umec:IRangeField">
+                                  <umem:RangeColumn DisplayName="Column 1" Guid="b4b8b44e-af56-4851-a379-875493509e4d" Index="0" Name="Column 1">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 2" Guid="4c15ed03-35a3-40e5-82ce-c6285a5bed9e" Index="1" Name="Column 2">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 3" Guid="483986ec-c057-4b52-acad-99257341233b" Index="2" Name="Column 3">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 4" Guid="4486c3cc-42ff-4f95-a991-d0639b061543" Index="3" Name="Column 4">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 5" Guid="716bc521-5bfb-49fb-9bcd-241aa41dba22" Index="4" Name="Column 5">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 6" Guid="4afaef4e-56cc-4294-8fea-ddf1553dc093" Index="5" Name="Column 6">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 7" Guid="65291659-1db2-4c18-98ae-e04d7ebbefde" Index="6" Name="Column 7">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 8" Guid="4393805c-56a3-453e-b954-7d34b0770c02" Index="7" Name="Column 8">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 9" Guid="0d3450d0-e29e-4aa2-bb8c-ada898f64637" Index="8" Name="Column 9">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 10" Guid="1c2c439b-f0b6-42e3-9057-4699bd1408cd" Index="9" Name="Column 10">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 11" Guid="597012fe-b618-4aed-aa6f-31e4abcc2455" Index="10" Name="Column 11">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 12" Guid="b4753368-944d-4f1c-ad3f-83bc895d639f" Index="11" Name="Column 12">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 13" Guid="eb8e0694-b42b-4fd2-a6b6-8c015b635fbb" Index="12" Name="Column 13">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 14" Guid="e46d4f8e-f251-40b9-a445-3a1b9f30c4ae" Index="13" Name="Column 14">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 15" Guid="c2cbffac-eda0-42b2-ba23-245eeb820427" Index="14" Name="Column 15">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 16" Guid="6b92d0c5-0793-4002-8670-b97a106b4147" Index="15" Name="Column 16">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 17" Guid="801e8af4-7a55-4ccb-97dc-151807b4d457" Index="16" Name="Column 17">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 18" Guid="fe79e7f2-b039-4bd3-ac45-c1a5b5d5c42a" Index="17" Name="Column 18">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 19" Guid="b8940966-dbfc-474a-a6b9-b6dff23e552e" Index="18" Name="Column 19">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 20" Guid="3bd11446-c6ac-4cad-8509-05fcfe693a43" Index="19" Name="Column 20">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 21" Guid="7a31ae69-faa0-40b9-a87a-33f87f28cdd3" Index="20" Name="Column 21">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 22" Guid="fc0848ea-145b-4f8f-b937-ef4911b9b1cc" Index="21" Name="Column 22">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 23" Guid="028d112b-649e-4a3e-ac88-9c004955ce0b" Index="22" Name="Column 23">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 24" Guid="09e6e7fd-d7af-4c0f-b654-24beadf118ff" Index="23" Name="Column 24">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 25" Guid="2a3af1a6-e3ba-4aee-bbff-51f1b466c4b7" Index="24" Name="Column 25">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                  <umem:RangeColumn DisplayName="Column 26" Guid="bb9926ed-0d96-4cda-88a1-1fedf59891ec" Index="25" Name="Column 26">
+                                    <umem:RangeColumn.Sample>
+                                      <umem:CellDetail Type="Object" TypeFormat="General" Value="Sample" />
+                                    </umem:RangeColumn.Sample>
+                                  </umem:RangeColumn>
+                                </x:Array>
+                              </umae:WriteRowConnections.AllFields>
+                              <umae:WriteRowConnections.DriveItemArgument>
+                                <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/User feedback.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                  <umafm:DriveItemArgument.ItemIdBackup>
+                                    <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID5" StoredValue="Browse">
+                                      <usau:BackupSlot.BackupValues>
+                                        <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                      </usau:BackupSlot.BackupValues>
+                                    </usau:BackupSlot>
+                                  </umafm:DriveItemArgument.ItemIdBackup>
+                                </umafm:DriveItemArgument>
+                              </umae:WriteRowConnections.DriveItemArgument>
+                              <umae:WriteRowConnections.InputDataTypeBackup>
+                                <usau:BackupSlot x:TypeArguments="umaee:InputDataType" StoredValue="IndividualFields">
+                                  <usau:BackupSlot.BackupValues>
+                                    <scg:List x:TypeArguments="x:Object" x:Key="DataRow" Capacity="1">
+                                      <x:Null />
+                                    </scg:List>
+                                    <scg:List x:TypeArguments="x:Object" x:Key="IndividualFields" Capacity="2">
+                                      <x:Array Type="umec:IRangeField" />
+                                      <umas:ActivityState />
+                                    </scg:List>
+                                  </usau:BackupSlot.BackupValues>
+                                </usau:BackupSlot>
+                              </umae:WriteRowConnections.InputDataTypeBackup>
+                              <umae:WriteRowConnections.RangeWriteModeBackup>
+                                <usau:BackupSlot x:TypeArguments="umaee:RangeWriteMode" StoredValue="Append">
+                                  <usau:BackupSlot.BackupValues>
+                                    <scg:Dictionary x:TypeArguments="umaee:RangeWriteMode, scg:List(x:Object)" />
+                                  </usau:BackupSlot.BackupValues>
+                                </usau:BackupSlot>
+                              </umae:WriteRowConnections.RangeWriteModeBackup>
+                              <umae:WriteRowConnections.State>
+                                <umas:ActivityState>
+                                  <umas:ActivityState.SelectedFields>
+                                    <scg:List x:TypeArguments="umas:DynamicField" Capacity="2">
+                                      <umas:DynamicField Id="b4b8b44e-af56-4851-a379-875493509e4d" Name="dynamicField_AddRangeProperty_35">
+                                        <umas:DynamicField.ArgumentValue>
+                                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", currentText)]</InArgument>
+                                        </umas:DynamicField.ArgumentValue>
+                                      </umas:DynamicField>
+                                      <umas:DynamicField Id="4c15ed03-35a3-40e5-82ce-c6285a5bed9e" Name="dynamicField_AddRangeProperty_36">
+                                        <umas:DynamicField.ArgumentValue>
+                                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", contentGeneration.text)]</InArgument>
+                                        </umas:DynamicField.ArgumentValue>
+                                      </umas:DynamicField>
+                                    </scg:List>
+                                  </umas:ActivityState.SelectedFields>
+                                </umas:ActivityState>
+                              </umae:WriteRowConnections.State>
+                              <umae:WriteRowConnections.TemplateArgument>
+                                <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                  <umafm:DriveItemArgument.ItemIdBackup>
+                                    <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+                                      <usau:BackupSlot.BackupValues>
+                                        <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                      </usau:BackupSlot.BackupValues>
+                                    </usau:BackupSlot>
+                                  </umafm:DriveItemArgument.ItemIdBackup>
+                                </umafm:DriveItemArgument>
+                              </umae:WriteRowConnections.TemplateArgument>
+                            </umae:WriteRowConnections>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
+                  </Sequence>
+                </Sequence>
+              </ui:IfElseIfV2.Else>
+              <ui:IfElseIfV2.ElseIfs>
+                <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                  <ui:IfElseIfBlock BlockType="If" Condition="[categorize.category = &quot;Feature request&quot;]" DisplayName=" 1" sap2010:WorkflowViewState.IdRef="IfElseIfBlock_1">
+                    <ui:IfElseIfBlock.Then>
+                      <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                        <Sequence DisplayName="Sequence - feature requests" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                          <umae:ForEachRowConnections x:TypeArguments="sd1:DataRow12" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID4}" Length="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" sap:WorkflowViewStateService.ViewState="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" CurrentItemVariableName="CurrentRow" DisplayName="For Each Row in Workbook 1 1" EmptyRowAction="Skip" sap2010:WorkflowViewState.IdRef="ForEachRowConnections`1_3" IncludeHeaders="True" ItemSelectionMode="Browse" Range="'Feature request'" UseConnectionService="True">
+                            <umae:ForEachRowConnections.Body>
+                              <ActivityAction x:TypeArguments="sd1:DataRow12, x:Int32">
+                                <ActivityAction.Argument1>
+                                  <DelegateInArgument x:TypeArguments="sd1:DataRow12" Name="CurrentRow" />
+                                </ActivityAction.Argument1>
+                                <ActivityAction.Argument2>
+                                  <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentRowIndex" />
+                                </ActivityAction.Argument2>
+                                <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                  <isactr:ConnectorActivity Configuration="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" ConnectionId="f7411ce2-cd97-404c-b9b7-6da12167504e" DisplayName="Semantic Similarity" sap2010:WorkflowViewState.IdRef="ConnectorActivity_5" UiPathActivityTypeId="89a94adc-0ec1-36b0-9862-97db1723dcce">
+                                    <isactr:ConnectorActivity.FieldObjects>
+                                      <isactr:FieldObject Name="similarityType" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <InArgument x:TypeArguments="x:String">String to string</InArgument>
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="outputFormat" Type="FieldArgument" />
+                                      <isactr:FieldObject Name="firstComparisonInput" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <InArgument x:TypeArguments="x:String">[string.Format("{0}", contentGeneration.text)]</InArgument>
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="secondComparisonInput" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <InArgument x:TypeArguments="x:String">[string.Format("{0}", CurrentRow.Feature_Request_Description)]</InArgument>
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="comparisonArray" Type="FieldArgument" />
+                                      <isactr:FieldObject Name="modelName" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <InArgument x:TypeArguments="x:String">gemini-3.7-flash</InArgument>
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="Xminus_signElementsminus_signServiceminus_signProfile" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <InArgument x:TypeArguments="x:String">high-capacity</InArgument>
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="out_semanticSimilarity_sub_similarityScore" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <OutArgument x:TypeArguments="s:Nullable(x:Double)">[similarityScore]</OutArgument>
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="out_semanticSimilarity_sub_similarityExplanation" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <OutArgument x:TypeArguments="x:String" />
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="out_semanticSimilarity_sub_string" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <OutArgument x:TypeArguments="x:String" />
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="out_semanticSimilarity_sub_listOfScores" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <OutArgument x:TypeArguments="x:String" />
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                      <isactr:FieldObject Name="Jit_semanticminus_signsimilarity" Type="FieldArgument">
+                                        <isactr:FieldObject.Value>
+                                          <OutArgument x:TypeArguments="uiascb2:semanticminus_signsimilarity_Create" />
+                                        </isactr:FieldObject.Value>
+                                      </isactr:FieldObject>
+                                    </isactr:ConnectorActivity.FieldObjects>
+                                  </isactr:ConnectorActivity>
+                                  <ui:LogMessage DisplayName="Log Message 2 1" sap2010:WorkflowViewState.IdRef="LogMessage_8" Message="[string.Format(&quot;Initial message: {0}{1}Summarized message: {2}{3}Category: {4}{5}Similarity score: {6}&quot;, CurrentEmail.Body, Environment.NewLine, contentGeneration.text, Environment.NewLine, categorize.category, Environment.NewLine, similarityScore.Value)]" />
+                                  <If Condition="[similarityScore.Value &gt;= 0.2]" DisplayName="If 3" sap2010:WorkflowViewState.IdRef="If_5">
+                                    <If.Then>
+                                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                        <umae:WriteRowConnections ArrayRow="{x:Null}" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" DataRow="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID3}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" DataType="IndividualFields" DisplayName="Write Row 3" HasHeaders="True" sap2010:WorkflowViewState.IdRef="WriteRowConnections_5" ItemSelectionMode="Browse" Range="'Feature request'" RangeMode="Sheet" RowPosition="0" UseConnectionService="True" WorkingWithTemplateWorkbook="False" WriteMode="Append">
+                                          <umae:WriteRowConnections.AllFields>
+                                            <x:Array Type="umem:RangeColumn">
+                                              <umem:RangeColumn DisplayName="Request ID" Guid="e0b06bf5-3321-4c8f-9d1e-8a6e2278239c" Index="0" Name="Request ID">
+                                                <umem:RangeColumn.Sample>
+                                                  <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="FR-202" />
+                                                </umem:RangeColumn.Sample>
+                                              </umem:RangeColumn>
+                                              <umem:RangeColumn DisplayName="Feature Request Description" Guid="f91304bc-099f-464b-94e3-9bf7f6d37156" Index="1" Name="Feature Request Description">
+                                                <umem:RangeColumn.Sample>
+                                                  <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="Option to export reports directly to Google Drive" />
+                                                </umem:RangeColumn.Sample>
+                                              </umem:RangeColumn>
+                                            </x:Array>
+                                          </umae:WriteRowConnections.AllFields>
+                                          <umae:WriteRowConnections.DriveItemArgument>
+                                            <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/User feedback.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                              <umafm:DriveItemArgument.ItemIdBackup>
+                                                <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID3" StoredValue="Browse">
+                                                  <usau:BackupSlot.BackupValues>
+                                                    <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                                  </usau:BackupSlot.BackupValues>
+                                                </usau:BackupSlot>
+                                              </umafm:DriveItemArgument.ItemIdBackup>
+                                            </umafm:DriveItemArgument>
+                                          </umae:WriteRowConnections.DriveItemArgument>
+                                          <umae:WriteRowConnections.InputDataTypeBackup>
+                                            <usau:BackupSlot x:TypeArguments="umaee:InputDataType" StoredValue="IndividualFields">
+                                              <usau:BackupSlot.BackupValues>
+                                                <scg:List x:TypeArguments="x:Object" x:Key="DataRow" Capacity="1">
+                                                  <x:Null />
+                                                </scg:List>
+                                                <scg:List x:TypeArguments="x:Object" x:Key="IndividualFields" Capacity="2">
+                                                  <x:Array Type="umec:IRangeField" />
+                                                  <umas:ActivityState />
+                                                </scg:List>
+                                              </usau:BackupSlot.BackupValues>
+                                            </usau:BackupSlot>
+                                          </umae:WriteRowConnections.InputDataTypeBackup>
+                                          <umae:WriteRowConnections.RangeWriteModeBackup>
+                                            <usau:BackupSlot x:TypeArguments="umaee:RangeWriteMode" StoredValue="Append">
+                                              <usau:BackupSlot.BackupValues>
+                                                <scg:Dictionary x:TypeArguments="umaee:RangeWriteMode, scg:List(x:Object)" />
+                                              </usau:BackupSlot.BackupValues>
+                                            </usau:BackupSlot>
+                                          </umae:WriteRowConnections.RangeWriteModeBackup>
+                                          <umae:WriteRowConnections.State>
+                                            <umas:ActivityState>
+                                              <umas:ActivityState.SelectedFields>
+                                                <scg:List x:TypeArguments="umas:DynamicField" Capacity="1">
+                                                  <umas:DynamicField Id="f91304bc-099f-464b-94e3-9bf7f6d37156" Name="dynamicField_AddRangeProperty_36">
+                                                    <umas:DynamicField.ArgumentValue>
+                                                      <InArgument x:TypeArguments="x:Object">[contentGeneration.text]</InArgument>
+                                                    </umas:DynamicField.ArgumentValue>
+                                                  </umas:DynamicField>
+                                                </scg:List>
+                                              </umas:ActivityState.SelectedFields>
+                                            </umas:ActivityState>
+                                          </umae:WriteRowConnections.State>
+                                          <umae:WriteRowConnections.TemplateArgument>
+                                            <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                              <umafm:DriveItemArgument.ItemIdBackup>
+                                                <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+                                                  <usau:BackupSlot.BackupValues>
+                                                    <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                                  </usau:BackupSlot.BackupValues>
+                                                </usau:BackupSlot>
+                                              </umafm:DriveItemArgument.ItemIdBackup>
+                                            </umafm:DriveItemArgument>
+                                          </umae:WriteRowConnections.TemplateArgument>
+                                        </umae:WriteRowConnections>
+                                        <ui:LogMessage DisplayName="Log Message 5" sap2010:WorkflowViewState.IdRef="LogMessage_12" Message="[&quot;New feature request identified&quot;]" />
+                                      </Sequence>
+                                    </If.Then>
+                                    <If.Else>
+                                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_27" />
+                                    </If.Else>
+                                  </If>
+                                </Sequence>
+                              </ActivityAction>
+                            </umae:ForEachRowConnections.Body>
+                            <umae:ForEachRowConnections.ColumnNames>
+                              <x:Array Type="x:String">
+                                <x:String>Request ID</x:String>
+                                <x:String>Feature Request Description</x:String>
+                              </x:Array>
+                            </umae:ForEachRowConnections.ColumnNames>
+                            <umae:ForEachRowConnections.DriveItemArgument>
+                              <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/User feedback.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                <umafm:DriveItemArgument.ItemIdBackup>
+                                  <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID4" StoredValue="Browse">
+                                    <usau:BackupSlot.BackupValues>
+                                      <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                    </usau:BackupSlot.BackupValues>
+                                  </usau:BackupSlot>
+                                </umafm:DriveItemArgument.ItemIdBackup>
+                              </umafm:DriveItemArgument>
+                            </umae:ForEachRowConnections.DriveItemArgument>
+                            <umae:ForEachRowConnections.RangeMetadata>
+                              <umem:RangeMetadataSlim ColumnStart="1" RangeType="Sheet" />
+                            </umae:ForEachRowConnections.RangeMetadata>
+                            <umae:ForEachRowConnections.TemplateArgument>
+                              <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                <umafm:DriveItemArgument.ItemIdBackup>
+                                  <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+                                    <usau:BackupSlot.BackupValues>
+                                      <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                    </usau:BackupSlot.BackupValues>
+                                  </usau:BackupSlot>
+                                </umafm:DriveItemArgument.ItemIdBackup>
+                              </umafm:DriveItemArgument>
+                            </umae:ForEachRowConnections.TemplateArgument>
+                          </umae:ForEachRowConnections>
+                        </Sequence>
+                      </Sequence>
+                    </ui:IfElseIfBlock.Then>
+                  </ui:IfElseIfBlock>
+                </sc:BindingList>
+              </ui:IfElseIfV2.ElseIfs>
+              <ui:IfElseIfV2.Then>
+                <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                  <umae:ForEachRowConnections x:TypeArguments="sd:DataRow11" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID2}" Length="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" CurrentItemVariableName="CurrentRow" DisplayName="For Each Row in Workbook 1" EmptyRowAction="Skip" sap2010:WorkflowViewState.IdRef="ForEachRowConnections`1_2" IncludeHeaders="True" ItemSelectionMode="Browse" Range="'Bug report'" UseConnectionService="True">
+                    <umae:ForEachRowConnections.Body>
+                      <ActivityAction x:TypeArguments="sd:DataRow11, x:Int32">
+                        <ActivityAction.Argument1>
+                          <DelegateInArgument x:TypeArguments="sd:DataRow11" Name="CurrentRow" />
+                        </ActivityAction.Argument1>
+                        <ActivityAction.Argument2>
+                          <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentRowIndex" />
+                        </ActivityAction.Argument2>
+                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                          <isactr:ConnectorActivity Configuration="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" ConnectionId="f7411ce2-cd97-404c-b9b7-6da12167504e" DisplayName="Semantic Similarity" sap2010:WorkflowViewState.IdRef="ConnectorActivity_4" UiPathActivityTypeId="89a94adc-0ec1-36b0-9862-97db1723dcce">
+                            <isactr:ConnectorActivity.FieldObjects>
+                              <isactr:FieldObject Name="similarityType" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <InArgument x:TypeArguments="x:String">String to string</InArgument>
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="outputFormat" Type="FieldArgument" />
+                              <isactr:FieldObject Name="firstComparisonInput" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <InArgument x:TypeArguments="x:String">[string.Format("{0}", contentGeneration.text)]</InArgument>
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="secondComparisonInput" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <InArgument x:TypeArguments="x:String">[string.Format("{0}", CurrentRow.Known_Issue_Description)]</InArgument>
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="comparisonArray" Type="FieldArgument" />
+                              <isactr:FieldObject Name="modelName" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <InArgument x:TypeArguments="x:String">gemini-3.7-flash</InArgument>
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="Xminus_signElementsminus_signServiceminus_signProfile" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <InArgument x:TypeArguments="x:String">high-capacity</InArgument>
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="out_semanticSimilarity_sub_similarityScore" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <OutArgument x:TypeArguments="s:Nullable(x:Double)">[similarityScore]</OutArgument>
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="out_semanticSimilarity_sub_similarityExplanation" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <OutArgument x:TypeArguments="x:String" />
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="out_semanticSimilarity_sub_string" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <OutArgument x:TypeArguments="x:String" />
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="out_semanticSimilarity_sub_listOfScores" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <OutArgument x:TypeArguments="x:String" />
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                              <isactr:FieldObject Name="Jit_semanticminus_signsimilarity" Type="FieldArgument">
+                                <isactr:FieldObject.Value>
+                                  <OutArgument x:TypeArguments="uiascb2:semanticminus_signsimilarity_Create" />
+                                </isactr:FieldObject.Value>
+                              </isactr:FieldObject>
+                            </isactr:ConnectorActivity.FieldObjects>
+                          </isactr:ConnectorActivity>
+                          <ui:LogMessage DisplayName="Log Message 2" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[string.Format(&quot;Initial message: {0}{1}Summarized message: {2}{3}Category: {4}{5}Similarity score: {6}&quot;, CurrentEmail.Body, Environment.NewLine, contentGeneration.text, Environment.NewLine, categorize.category, Environment.NewLine, similarityScore.Value)]" />
+                          <If Condition="[similarityScore.Value &gt;= 0.2]" DisplayName="If" sap2010:WorkflowViewState.IdRef="If_4">
+                            <If.Then>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                <umae:WriteRowConnections ArrayRow="{x:Null}" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" DataRow="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID1}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" DataType="IndividualFields" DisplayName="Write Row 2" HasHeaders="True" sap2010:WorkflowViewState.IdRef="WriteRowConnections_4" ItemSelectionMode="Browse" Range="'Bug report'" RangeMode="Sheet" RowPosition="0" UseConnectionService="True" WorkingWithTemplateWorkbook="False" WriteMode="Append">
+                                  <umae:WriteRowConnections.AllFields>
+                                    <x:Array Type="umem:RangeColumn">
+                                      <umem:RangeColumn DisplayName="Issue ID" Guid="6becc712-f6e1-419f-a1f2-c917fecf9f54" Index="0" Name="Issue ID">
+                                        <umem:RangeColumn.Sample>
+                                          <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="ISS-102" />
+                                        </umem:RangeColumn.Sample>
+                                      </umem:RangeColumn>
+                                      <umem:RangeColumn DisplayName="Known Issue Description" Guid="cfd74c5f-0e8a-418a-b73e-a03a13899287" Index="1" Name="Known Issue Description">
+                                        <umem:RangeColumn.Sample>
+                                          <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="Dashboard takes too long to load after login" />
+                                        </umem:RangeColumn.Sample>
+                                      </umem:RangeColumn>
+                                    </x:Array>
+                                  </umae:WriteRowConnections.AllFields>
+                                  <umae:WriteRowConnections.DriveItemArgument>
+                                    <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/User feedback.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                      <umafm:DriveItemArgument.ItemIdBackup>
+                                        <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID1" StoredValue="Browse">
+                                          <usau:BackupSlot.BackupValues>
+                                            <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                          </usau:BackupSlot.BackupValues>
+                                        </usau:BackupSlot>
+                                      </umafm:DriveItemArgument.ItemIdBackup>
+                                    </umafm:DriveItemArgument>
+                                  </umae:WriteRowConnections.DriveItemArgument>
+                                  <umae:WriteRowConnections.InputDataTypeBackup>
+                                    <usau:BackupSlot x:TypeArguments="umaee:InputDataType" StoredValue="IndividualFields">
+                                      <usau:BackupSlot.BackupValues>
+                                        <scg:List x:TypeArguments="x:Object" x:Key="DataRow" Capacity="1">
+                                          <x:Null />
+                                        </scg:List>
+                                        <scg:List x:TypeArguments="x:Object" x:Key="IndividualFields" Capacity="2">
+                                          <x:Array Type="umec:IRangeField" />
+                                          <umas:ActivityState />
+                                        </scg:List>
+                                      </usau:BackupSlot.BackupValues>
+                                    </usau:BackupSlot>
+                                  </umae:WriteRowConnections.InputDataTypeBackup>
+                                  <umae:WriteRowConnections.RangeWriteModeBackup>
+                                    <usau:BackupSlot x:TypeArguments="umaee:RangeWriteMode" StoredValue="Append">
+                                      <usau:BackupSlot.BackupValues>
+                                        <scg:Dictionary x:TypeArguments="umaee:RangeWriteMode, scg:List(x:Object)" />
+                                      </usau:BackupSlot.BackupValues>
+                                    </usau:BackupSlot>
+                                  </umae:WriteRowConnections.RangeWriteModeBackup>
+                                  <umae:WriteRowConnections.State>
+                                    <umas:ActivityState>
+                                      <umas:ActivityState.SelectedFields>
+                                        <scg:List x:TypeArguments="umas:DynamicField" Capacity="1">
+                                          <umas:DynamicField Id="cfd74c5f-0e8a-418a-b73e-a03a13899287" Name="dynamicField_AddRangeProperty_36">
+                                            <umas:DynamicField.ArgumentValue>
+                                              <InArgument x:TypeArguments="x:Object">[string.Format("{0}", contentGeneration.text)]</InArgument>
+                                            </umas:DynamicField.ArgumentValue>
+                                          </umas:DynamicField>
+                                        </scg:List>
+                                      </umas:ActivityState.SelectedFields>
+                                    </umas:ActivityState>
+                                  </umae:WriteRowConnections.State>
+                                  <umae:WriteRowConnections.TemplateArgument>
+                                    <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+                                      <umafm:DriveItemArgument.ItemIdBackup>
+                                        <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+                                          <usau:BackupSlot.BackupValues>
+                                            <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                                          </usau:BackupSlot.BackupValues>
+                                        </usau:BackupSlot>
+                                      </umafm:DriveItemArgument.ItemIdBackup>
+                                    </umafm:DriveItemArgument>
+                                  </umae:WriteRowConnections.TemplateArgument>
+                                </umae:WriteRowConnections>
+                                <ui:LogMessage DisplayName="Log Message 3" sap2010:WorkflowViewState.IdRef="LogMessage_9" Message="[&quot;New bug identified&quot;]" />
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_25" />
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </umae:ForEachRowConnections.Body>
+                    <umae:ForEachRowConnections.ColumnNames>
+                      <x:Array Type="x:String">
+                        <x:String>Issue ID</x:String>
+                        <x:String>Known Issue Description</x:String>
+                      </x:Array>
+                    </umae:ForEachRowConnections.ColumnNames>
+                    <umae:ForEachRowConnections.DriveItemArgument>
+                      <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="User feedback.xlsx" BrowserItemId="4497CCD2D9B8788B!s925550788a484bfba016039243bb222c" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=92555078-8a48-4bfb-a016-039243bb222c&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/User feedback.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                        <umafm:DriveItemArgument.ItemIdBackup>
+                          <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID2" StoredValue="Browse">
+                            <usau:BackupSlot.BackupValues>
+                              <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                            </usau:BackupSlot.BackupValues>
+                          </usau:BackupSlot>
+                        </umafm:DriveItemArgument.ItemIdBackup>
+                      </umafm:DriveItemArgument>
+                    </umae:ForEachRowConnections.DriveItemArgument>
+                    <umae:ForEachRowConnections.RangeMetadata>
+                      <umem:RangeMetadataSlim ColumnStart="1" RangeType="Sheet" />
+                    </umae:ForEachRowConnections.RangeMetadata>
+                    <umae:ForEachRowConnections.TemplateArgument>
+                      <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+                        <umafm:DriveItemArgument.ItemIdBackup>
+                          <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+                            <usau:BackupSlot.BackupValues>
+                              <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                            </usau:BackupSlot.BackupValues>
+                          </usau:BackupSlot>
+                        </umafm:DriveItemArgument.ItemIdBackup>
+                      </umafm:DriveItemArgument>
+                    </umae:ForEachRowConnections.TemplateArgument>
+                  </umae:ForEachRowConnections>
+                </Sequence>
+              </ui:IfElseIfV2.Then>
+            </ui:IfElseIfV2>
+          </Sequence>
+        </ActivityAction>
+      </umam:ForEachEmailConnections.Body>
+      <umam:ForEachEmailConnections.Filter>
+        <umamf:MailFilterCollection LogicalOperator="And">
+          <umamf:MailFilterCollection.Filters>
+            <umamf:MailFilterElement DateValue="{x:Null}" Criteria="From" DateOperator="NewerThan" InStringValue="k.salah0610@gmail.com" StringOperator="Contains" TypeOperator="Equals" TypeValue="Email" />
+            <umamf:MailFilterElement InStringValue="{x:Null}" Criteria="Date" DateOperator="NewerThan" DateValue="[DateTime.Today]" StringOperator="Contains" TypeOperator="Equals" TypeValue="Email" />
+            <umamf:MailFilterElement DateValue="{x:Null}" Criteria="Subject" DateOperator="NewerThan" InStringValue="You’ve received new feedback" StringOperator="Contains" TypeOperator="Equals" TypeValue="Email" />
+          </umamf:MailFilterCollection.Filters>
+        </umamf:MailFilterCollection>
+      </umam:ForEachEmailConnections.Filter>
+      <umam:ForEachEmailConnections.FilterSelectionBackup>
+        <usau:BackupSlot x:TypeArguments="umame:FilterMode" StoredValue="ConditionBuilder">
+          <usau:BackupSlot.BackupValues>
+            <scg:List x:TypeArguments="x:Object" x:Key="ConditionBuilder" Capacity="1">
+              <umamf:MailFilterCollection LogicalOperator="And">
+                <umamf:MailFilterCollection.Filters>
+                  <umamf:MailFilterElement DateValue="{x:Null}" Criteria="From" DateOperator="NewerThan" InStringValue="automation-first@uipath.com" StringOperator="Contains" TypeOperator="Equals" TypeValue="Email" />
+                  <umamf:MailFilterElement InStringValue="{x:Null}" Criteria="Date" DateOperator="NewerThan" DateValue="[DateTime.Today]" StringOperator="Contains" TypeOperator="Equals" TypeValue="Email" />
+                  <umamf:MailFilterElement DateValue="{x:Null}" Criteria="Subject" DateOperator="NewerThan" InStringValue="You’ve received new feedback" StringOperator="Contains" TypeOperator="Equals" TypeValue="Email" />
+                </umamf:MailFilterCollection.Filters>
+              </umamf:MailFilterCollection>
+            </scg:List>
+            <scg:List x:TypeArguments="x:Object" x:Key="FreeTextFilter" Capacity="1">
+              <x:Null />
+            </scg:List>
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </umam:ForEachEmailConnections.FilterSelectionBackup>
+      <umam:ForEachEmailConnections.MailFolderArgument>
+        <umamm:MailFolderArgument ConnectionDescriptor="{x:Null}" ManualEntryFolder="{x:Null}" BrowserFolder="Inbox" BrowserFolderId="AQMkADAwATM0MDAAMi1hY2FlLTQ4Y2ItMDACLTAwCgAuAAADBpQSlEXdNEerySBHnN27UwEAlXI054oUG0ChWBNvvNbU9QAAAgEMAAAA" ConnectionKey="bb9ae343-e8ee-4481-8acc-6d1ad970a035" SelectionMode="Browse">
+          <umamm:MailFolderArgument.Backup>
+            <usau:BackupSlot x:TypeArguments="umame:ItemSelectionMode" x:Name="__ReferenceID7" StoredValue="Browse">
+              <usau:BackupSlot.BackupValues>
+                <scg:Dictionary x:TypeArguments="umame:ItemSelectionMode, scg:List(x:Object)" />
+              </usau:BackupSlot.BackupValues>
+            </usau:BackupSlot>
+          </umamm:MailFolderArgument.Backup>
+        </umamm:MailFolderArgument>
+      </umam:ForEachEmailConnections.MailFolderArgument>
+      <umam:ForEachEmailConnections.MailboxArg>
+        <umamm:MailboxArgument Backup="{x:Reference __ReferenceID6}" SharedMailbox="{x:Null}" UseSharedMailbox="False" />
+      </umam:ForEachEmailConnections.MailboxArg>
+      <umam:ForEachEmailConnections.MailboxBackup>
+        <usau:BackupSlot x:TypeArguments="umame:MailboxSelectionMode" x:Name="__ReferenceID6" StoredValue="NoMailbox">
+          <usau:BackupSlot.BackupValues>
+            <scg:List x:TypeArguments="x:Object" x:Key="NoMailbox" Capacity="1">
+              <x:Null />
+            </scg:List>
+            <scg:List x:TypeArguments="x:Object" x:Key="UseMailbox" Capacity="2">
+              <x:Null />
+              <x:Null />
+            </scg:List>
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </umam:ForEachEmailConnections.MailboxBackup>
+    </umam:ForEachEmailConnections>
+    <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_10" Message="[&quot;Automation ended&quot;]" />
+  </Sequence>
+</Activity>

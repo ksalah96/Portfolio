@@ -1,0 +1,113 @@
+{
+  "ExportedBy": "StudioWeb",
+  "BundleHash": "35JMkqL53hUQxQ35g7jYT4UAJlxC6nhGJIvANtQ",
+  "Version": "1.0.0.0",
+  "JitAssemblyCompilerCommands": [
+    {
+      "ProviderName": "TypedDataTable",
+      "TypedDataTableDto": {
+        "Id": 1,
+        "IdRef": "ForEachRowConnections`1_1",
+        "Hash": "ForEachRowConnections`1_1|DataRow|U7SMy7UjsZTu8NahweDpywmb8Gq3vCbLKRrwIR0RxDY|M8QgJnMcDYq2DQeuuBU0Jk546eYbnq2FCcwUoYRi4Ss|HT8aFX0uTakdBZzx1gQ7QazRUYM25L1273kAdp3Xng|f21e854c-8e7c-416f-a68a-5511be71238f",
+        "DataType": "System.Data.DataTable, System.Data.Common",
+        "Columns": [
+          {
+            "ColumnName": "Name",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Name",
+            "Description": "Column 1",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Birthday Month",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Birthday Month",
+            "Description": "Column 2",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Unicorn Name",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Unicorn Name",
+            "Description": "Column 3",
+            "Category": "Simplified"
+          }
+        ],
+        "RowExtensionProperties": [
+          {
+            "ColumnName": "SheetsRowIndex",
+            "DataType": "System.Int32, System.Private.CoreLib",
+            "DescriptionKey": "General_RowExtensions_Property_SheetsRowIndex_Description",
+            "Category": "Simplified"
+          }
+        ],
+        "NestedRowExtensionProperties": [
+          {
+            "ParentColumnName": "Name",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Name Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Name",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Name ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Birthday Month",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Birthday Month Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Birthday Month",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Birthday Month ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Unicorn Name",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Unicorn Name Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Unicorn Name",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Unicorn Name ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          }
+        ],
+        "ResourceManager": {
+          "ResourceManagerName": "UiPath.GSuite.Properties.UiPath.GSuite",
+          "ResourceManagerAssemblyName": "UiPath.GSuite"
+        },
+        "Namespace": "System.Data"
+      },
+      "EntityAssemblyKey": {
+        "Name": "Studio.Generated.TypedDataRow1",
+        "Hash": "ForEachRowConnections`1_1|DataRow|U7SMy7UjsZTu8NahweDpywmb8Gq3vCbLKRrwIR0RxDY|M8QgJnMcDYq2DQeuuBU0Jk546eYbnq2FCcwUoYRi4Ss|HT8aFX0uTakdBZzx1gQ7QazRUYM25L1273kAdp3Xng|f21e854c-8e7c-416f-a68a-5511be71238f",
+        "AssemblyName": "Studio.Generated.TypedDataRow1"
+      }
+    }
+  ]
+}
