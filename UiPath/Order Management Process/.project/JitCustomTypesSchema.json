@@ -1,0 +1,313 @@
+{
+  "ExportedBy": "StudioWeb",
+  "BundleHash": "GCHbUr0XnWSZ6z1NmFORlCiRW8lAWeUpgfk7vng7I",
+  "Version": "1.0.0.0",
+  "JitAssemblyCompilerCommands": [
+    {
+      "ProviderName": "TypedDataTable",
+      "TypedDataTableDto": {
+        "Id": 1,
+        "IdRef": "ForEachRowConnections`1_1",
+        "Hash": "ForEachRowConnections`1_1|DataRow|drKbbHXduO4KFEopct2yLyMC4pv4auPAaBWO2zV0IaE|kTpLYz4sNoey8Tk2EUQH8fS98LWuj9UMSbl2aNSKE4|dpA8m66ruZrdVrm6TDByraKP8l0W6FcqcvXEux5QU|b46c0518-151b-42bd-afff-565451422371",
+        "DataType": "System.Data.DataTable, System.Data.Common",
+        "Columns": [
+          {
+            "ColumnName": "Order ID",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Order ID",
+            "Description": "Column 1",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Customer Name",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Customer Name",
+            "Description": "Column 2",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Customer Tier",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Customer Tier",
+            "Description": "Column 3",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Item Category",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Item Category",
+            "Description": "Column 4",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Order Amount",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Order Amount",
+            "Description": "Column 5",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Current Inventory Status",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Current Inventory Status",
+            "Description": "Column 6",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Discount",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Discount",
+            "Description": "Column 7",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Total",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Total",
+            "Description": "Column 8",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Department",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Department",
+            "Description": "Column 9",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Payment Status",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Payment Status",
+            "Description": "Column 10",
+            "Category": "Simplified"
+          },
+          {
+            "ColumnName": "Updated Inventory Status",
+            "DataType": "System.String, System.Private.CoreLib",
+            "Name": "Updated Inventory Status",
+            "Description": "Column 11",
+            "Category": "Simplified"
+          }
+        ],
+        "RowExtensionProperties": [
+          {
+            "ColumnName": "WorksheetsRowIndex",
+            "DataType": "System.Int32, System.Private.CoreLib",
+            "DescriptionKey": "General_RowExtensions_Property_WorksheetsRowIndex_Description",
+            "Category": "Simplified"
+          }
+        ],
+        "NestedRowExtensionProperties": [
+          {
+            "ParentColumnName": "Order ID",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Order ID Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Order ID",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Order ID ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Customer Name",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Customer Name Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Customer Name",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Customer Name ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Customer Tier",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Customer Tier Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Customer Tier",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Customer Tier ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Item Category",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Item Category Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Item Category",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Item Category ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Order Amount",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Order Amount Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Order Amount",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Order Amount ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Current Inventory Status",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Current Inventory Status Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Current Inventory Status",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Current Inventory Status ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Discount",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Discount Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Discount",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Discount ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Total",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Total Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Total",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Total ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Department",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Department Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Department",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Department ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Payment Status",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Payment Status Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Payment Status",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Payment Status ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Updated Inventory Status",
+            "Extension": {
+              "ColumnName": "_Address",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Updated Inventory Status Address",
+              "DescriptionKey": "General_RowExtensions_Property_Column_Address_Description"
+            }
+          },
+          {
+            "ParentColumnName": "Updated Inventory Status",
+            "Extension": {
+              "ColumnName": "_ColumnAddress",
+              "DataType": "System.String, System.Private.CoreLib",
+              "Name": "Updated Inventory Status ColumnAddress",
+              "DescriptionKey": "General_RowExtensions_Property_Column_ColumnAddress_Description"
+            }
+          }
+        ],
+        "ResourceManager": {
+          "ResourceManagerName": "UiPath.MicrosoftOffice365.Properties.Resources",
+          "ResourceManagerAssemblyName": "UiPath.MicrosoftOffice365"
+        },
+        "Namespace": "System.Data"
+      },
+      "EntityAssemblyKey": {
+        "Name": "Studio.Generated.TypedDataRow1",
+        "Hash": "ForEachRowConnections`1_1|DataRow|drKbbHXduO4KFEopct2yLyMC4pv4auPAaBWO2zV0IaE|kTpLYz4sNoey8Tk2EUQH8fS98LWuj9UMSbl2aNSKE4|dpA8m66ruZrdVrm6TDByraKP8l0W6FcqcvXEux5QU|b46c0518-151b-42bd-afff-565451422371",
+        "AssemblyName": "Studio.Generated.TypedDataRow1"
+      }
+    }
+  ]
+}

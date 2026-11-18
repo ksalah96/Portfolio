@@ -1,0 +1,333 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib"
+ xmlns:sd="clr-namespace:System.Data;assembly=Studio.Generated.TypedDataRow1"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:umae="clr-namespace:UiPath.MicrosoftOffice365.Activities.Excel;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umaee="clr-namespace:UiPath.MicrosoftOffice365.Activities.Excel.Enums;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umafe="clr-namespace:UiPath.MicrosoftOffice365.Activities.Files.Enums;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umafm="clr-namespace:UiPath.MicrosoftOffice365.Activities.Files.Models;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umas="clr-namespace:UiPath.MicrosoftOffice365.Activities.Sharepoint;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:umem="clr-namespace:UiPath.MicrosoftOffice365.Excel.Models;assembly=UiPath.MicrosoftOffice365"
+ xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.MicrosoftOffice365.Activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="36">
+      <x:String>UiPath.ConnectionClient.Contracts</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Excel.Enums</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Excel.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Sharepoint</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Models</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Files.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Enums</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Excel</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Excel.Models</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="27">
+      <AssemblyReference>Studio.Generated.TypedDataRow1</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.ReaderWriter</AssemblyReference>
+      <AssemblyReference>System.Xml.XmlSerializer</AssemblyReference>
+      <AssemblyReference>ConnectionClient</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="356,732" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="Discount" />
+      <Variable x:TypeArguments="x:Double" Name="Total" />
+      <Variable x:TypeArguments="x:String" Name="Depatment" />
+      <Variable x:TypeArguments="x:String" Name="PaymentStatus" />
+      <Variable x:TypeArguments="x:String" Name="UpdatedInventoryStatus" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
+    <umae:ForEachRowConnections x:TypeArguments="sd:DataRow1" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID1}" Length="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="Orders.xlsx" BrowserItemId="4497CCD2D9B8788B!s7cfbddb8c8cd495eb8a6ba0812e25988" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=7cfbddb8-c8cd-495e-b8a6-ba0812e25988&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" CurrentItemVariableName="CurrentOrder" DisplayName="For Each Row in Workbook" EmptyRowAction="Skip" sap2010:WorkflowViewState.IdRef="ForEachRowConnections`1_1" IncludeHeaders="True" ItemSelectionMode="Browse" Range="Sheet1" UseConnectionService="True">
+      <umae:ForEachRowConnections.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow1, x:Int32">
+          <ActivityAction.Argument1>
+            <DelegateInArgument x:TypeArguments="sd:DataRow1" Name="CurrentRow" />
+          </ActivityAction.Argument1>
+          <ActivityAction.Argument2>
+            <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentRowIndex" />
+          </ActivityAction.Argument2>
+          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Calculate Discount - Invoke Workflow File (Calculate Discount.xaml)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Calculate Discount.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_CustomerTier">[string.Format("{0}", CurrentRow.Customer_Tier)]</InArgument>
+                <OutArgument x:TypeArguments="x:Int32" x:Key="out_Discount">[Discount]</OutArgument>
+                <InArgument x:TypeArguments="x:Double" x:Key="in_orderAmount">[CDbl(CurrentRow.Order_Amount)]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <Assign DisplayName="Calculate Total" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Double">[Total]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Double">[CDbl(CurrentRow.Order_Amount) * (1 - (Discount/100))]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Assign Department - Invoke Workflow File (Assign Department.xaml)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Assign Department.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ItemCategory">[string.Format("{0}", CurrentRow.Item_Category)]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="out_Department">[Depatment]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Payment Processing - Invoke Workflow File (Payment Processing.xaml)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="Payment Processing.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_OrderID">[string.Format("{0}", CurrentRow.Order_ID)]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Total">[string.Format("{0}", Total)]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="out_PaymentStatus">[PaymentStatus]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Check inventory - Invoke Workflow File (Check inventory.xaml)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Check inventory.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="in_initialStatus">[string.Format("{0}", CurrentRow.Current_Inventory_Status)]</InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="out_UpdatedStatus">[UpdatedInventoryStatus]</OutArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <umae:WriteRowConnections ArrayRow="{x:Null}" BrowserParentItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" DataRow="{x:Null}" ItemIdBackup="{x:Reference __ReferenceID0}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" TemplateBrowserDriveName="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" TemplateBrowserSiteUrl="{x:Null}" WorkbookSample="{x:Null}" AuthScopesInvalid="False" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="Orders.xlsx" BrowserItemId="4497CCD2D9B8788B!s7cfbddb8c8cd495eb8a6ba0812e25988" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=7cfbddb8-c8cd-495e-b8a6-ba0812e25988&amp;cid=4497ccd2d9b8788b" ConnectionId="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" DataType="IndividualFields" DisplayName="Write Row" HasHeaders="True" sap2010:WorkflowViewState.IdRef="WriteRowConnections_1" ItemSelectionMode="Browse" Range="Sheet1" RangeMode="Sheet" RowPosition="0" UseConnectionService="True" WorkingWithTemplateWorkbook="False" WriteMode="Overwrite">
+              <umae:WriteRowConnections.AllFields>
+                <x:Array Type="umem:RangeColumn">
+                  <umem:RangeColumn DisplayName="Order ID" Guid="89a80700-b58f-49bd-bac5-f52965882777" Index="0" Name="Order ID">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object">
+                        <umem:CellDetail.Value>
+                          <x:Int64>101</x:Int64>
+                        </umem:CellDetail.Value>
+                      </umem:CellDetail>
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Customer Name" Guid="857ae5e6-740e-452e-8547-4eba802d5eb3" Index="1" Name="Customer Name">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="Roxanne Braun" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Customer Tier" Guid="142ff2d9-6729-4788-b59d-e984365dc1a3" Index="2" Name="Customer Tier">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="Gold" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Item Category" Guid="1c544397-5305-4eba-9e1c-9c35fb9ad252" Index="3" Name="Item Category">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="Electronics" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Order Amount" Guid="3b59ef4e-bd76-44f4-9a40-45c5efc3d1e6" Index="4" Name="Order Amount">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object">
+                        <umem:CellDetail.Value>
+                          <x:Int64>1500</x:Int64>
+                        </umem:CellDetail.Value>
+                      </umem:CellDetail>
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Current Inventory Status" Guid="e6c23591-816d-4228-8480-af7d03d5a7e8" Index="5" Name="Current Inventory Status">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="Available" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Discount" Guid="a2a9894b-c761-4fe0-95a3-616f0f2b4737" Index="6" Name="Discount">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Total" Guid="56c0ba5b-219f-438e-8ba0-2a00b17c1b5e" Index="7" Name="Total">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Department" Guid="04000c28-0bd8-46c9-a215-105950f1b887" Index="8" Name="Department">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Payment Status" Guid="dae81a24-e1ad-401c-90c0-09c5e8f21586" Index="9" Name="Payment Status">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                  <umem:RangeColumn DisplayName="Updated Inventory Status" Guid="39292531-81ea-4c6b-ae4c-76f86869b795" Index="10" Name="Updated Inventory Status">
+                    <umem:RangeColumn.Sample>
+                      <umem:CellDetail TypeFormat="{x:Null}" Type="Object" Value="" />
+                    </umem:RangeColumn.Sample>
+                  </umem:RangeColumn>
+                </x:Array>
+              </umae:WriteRowConnections.AllFields>
+              <umae:WriteRowConnections.DriveItemArgument>
+                <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="Orders.xlsx" BrowserItemId="4497CCD2D9B8788B!s7cfbddb8c8cd495eb8a6ba0812e25988" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=7cfbddb8-c8cd-495e-b8a6-ba0812e25988&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=7cfbddb8-c8cd-495e-b8a6-ba0812e25988&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/Orders.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+                  <umafm:DriveItemArgument.ItemIdBackup>
+                    <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID0" StoredValue="Browse">
+                      <usau:BackupSlot.BackupValues>
+                        <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                      </usau:BackupSlot.BackupValues>
+                    </usau:BackupSlot>
+                  </umafm:DriveItemArgument.ItemIdBackup>
+                </umafm:DriveItemArgument>
+              </umae:WriteRowConnections.DriveItemArgument>
+              <umae:WriteRowConnections.InputDataTypeBackup>
+                <usau:BackupSlot x:TypeArguments="umaee:InputDataType" StoredValue="IndividualFields">
+                  <usau:BackupSlot.BackupValues>
+                    <scg:List x:TypeArguments="x:Object" x:Key="DataRow" Capacity="1">
+                      <x:Null />
+                    </scg:List>
+                  </usau:BackupSlot.BackupValues>
+                </usau:BackupSlot>
+              </umae:WriteRowConnections.InputDataTypeBackup>
+              <umae:WriteRowConnections.RangeWriteModeBackup>
+                <usau:BackupSlot x:TypeArguments="umaee:RangeWriteMode" StoredValue="Overwrite">
+                  <usau:BackupSlot.BackupValues>
+                    <scg:List x:TypeArguments="x:Object" x:Key="Append" Capacity="1">
+                      <x:String></x:String>
+                    </scg:List>
+                  </usau:BackupSlot.BackupValues>
+                </usau:BackupSlot>
+              </umae:WriteRowConnections.RangeWriteModeBackup>
+              <umae:WriteRowConnections.State>
+                <umas:ActivityState>
+                  <umas:ActivityState.SelectedFields>
+                    <scg:List x:TypeArguments="umas:DynamicField" Capacity="5">
+                      <umas:DynamicField Id="a2a9894b-c761-4fe0-95a3-616f0f2b4737" Name="dynamicField_AddRangeProperty_41">
+                        <umas:DynamicField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", Discount)]</InArgument>
+                        </umas:DynamicField.ArgumentValue>
+                      </umas:DynamicField>
+                      <umas:DynamicField Id="56c0ba5b-219f-438e-8ba0-2a00b17c1b5e" Name="dynamicField_AddRangeProperty_42">
+                        <umas:DynamicField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", Total)]</InArgument>
+                        </umas:DynamicField.ArgumentValue>
+                      </umas:DynamicField>
+                      <umas:DynamicField Id="04000c28-0bd8-46c9-a215-105950f1b887" Name="dynamicField_AddRangeProperty_43">
+                        <umas:DynamicField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", Depatment)]</InArgument>
+                        </umas:DynamicField.ArgumentValue>
+                      </umas:DynamicField>
+                      <umas:DynamicField Id="dae81a24-e1ad-401c-90c0-09c5e8f21586" Name="dynamicField_AddRangeProperty_44">
+                        <umas:DynamicField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", PaymentStatus)]</InArgument>
+                        </umas:DynamicField.ArgumentValue>
+                      </umas:DynamicField>
+                      <umas:DynamicField Id="39292531-81ea-4c6b-ae4c-76f86869b795" Name="dynamicField_AddRangeProperty_45">
+                        <umas:DynamicField.ArgumentValue>
+                          <InArgument x:TypeArguments="x:Object">[string.Format("{0}", UpdatedInventoryStatus)]</InArgument>
+                        </umas:DynamicField.ArgumentValue>
+                      </umas:DynamicField>
+                    </scg:List>
+                  </umas:ActivityState.SelectedFields>
+                </umas:ActivityState>
+              </umae:WriteRowConnections.State>
+              <umae:WriteRowConnections.TemplateArgument>
+                <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+                  <umafm:DriveItemArgument.ItemIdBackup>
+                    <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+                      <usau:BackupSlot.BackupValues>
+                        <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+                      </usau:BackupSlot.BackupValues>
+                    </usau:BackupSlot>
+                  </umafm:DriveItemArgument.ItemIdBackup>
+                </umafm:DriveItemArgument>
+              </umae:WriteRowConnections.TemplateArgument>
+            </umae:WriteRowConnections>
+          </Sequence>
+        </ActivityAction>
+      </umae:ForEachRowConnections.Body>
+      <umae:ForEachRowConnections.ColumnNames>
+        <x:Array Type="x:String">
+          <x:String>Order ID</x:String>
+          <x:String>Customer Name</x:String>
+          <x:String>Customer Tier</x:String>
+          <x:String>Item Category</x:String>
+          <x:String>Order Amount</x:String>
+          <x:String>Current Inventory Status</x:String>
+          <x:String>Discount</x:String>
+          <x:String>Total</x:String>
+          <x:String>Department</x:String>
+          <x:String>Payment Status</x:String>
+          <x:String>Updated Inventory Status</x:String>
+        </x:Array>
+      </umae:ForEachRowConnections.ColumnNames>
+      <umae:ForEachRowConnections.DriveItemArgument>
+        <umafm:DriveItemArgument BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" ConnectionDescriptor="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" BrowserDriveId="4497ccd2d9b8788b" BrowserDriveName="OneDrive" BrowserItemFriendlyName="Orders.xlsx" BrowserItemId="4497CCD2D9B8788B!s7cfbddb8c8cd495eb8a6ba0812e25988" BrowserSiteUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=7cfbddb8-c8cd-495e-b8a6-ba0812e25988&amp;cid=4497ccd2d9b8788b" BrowserSpecificUrl="https://onedrive.live.com/personal/4497ccd2d9b8788b/_layouts/15/doc.aspx?resid=7cfbddb8-c8cd-495e-b8a6-ba0812e25988&amp;cid=4497ccd2d9b8788b" ConnectionKey="59d4531c-1bcc-4d8b-af0e-f344ac53be2a" FullPathHint="One Drive/Orders.xlsx" ItemSelectionMode="Browse" ParentFullPathHint="">
+          <umafm:DriveItemArgument.ItemIdBackup>
+            <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" x:Name="__ReferenceID1" StoredValue="Browse">
+              <usau:BackupSlot.BackupValues>
+                <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+              </usau:BackupSlot.BackupValues>
+            </usau:BackupSlot>
+          </umafm:DriveItemArgument.ItemIdBackup>
+        </umafm:DriveItemArgument>
+      </umae:ForEachRowConnections.DriveItemArgument>
+      <umae:ForEachRowConnections.RangeMetadata>
+        <umem:RangeMetadataSlim ColumnStart="1" RangeType="Sheet" />
+      </umae:ForEachRowConnections.RangeMetadata>
+      <umae:ForEachRowConnections.TemplateArgument>
+        <umafm:DriveItemArgument BrowserDriveId="{x:Null}" BrowserDriveName="{x:Null}" BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" BrowserParentDriveId="{x:Null}" BrowserParentDriveName="{x:Null}" BrowserParentItemFriendlyName="{x:Null}" BrowserParentItemId="{x:Null}" BrowserParentPath="{x:Null}" BrowserSiteUrl="{x:Null}" BrowserSpecificUrl="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Item="{x:Null}" ManualEntryDriveName="{x:Null}" ManualEntryItemFullPath="{x:Null}" ManualEntryItemId="{x:Null}" ManualEntryItemRelativePath="{x:Null}" ManualEntryItemUrl="{x:Null}" ManualEntrySiteUrl="{x:Null}" ReferenceId="{x:Null}" FullPathHint="" ItemSelectionMode="Browse" ParentFullPathHint="">
+          <umafm:DriveItemArgument.ItemIdBackup>
+            <usau:BackupSlot x:TypeArguments="umafe:EDriveItemMode" StoredValue="Browse">
+              <usau:BackupSlot.BackupValues>
+                <scg:Dictionary x:TypeArguments="umafe:EDriveItemMode, scg:List(x:Object)" />
+              </usau:BackupSlot.BackupValues>
+            </usau:BackupSlot>
+          </umafm:DriveItemArgument.ItemIdBackup>
+        </umafm:DriveItemArgument>
+      </umae:ForEachRowConnections.TemplateArgument>
+    </umae:ForEachRowConnections>
+  </Sequence>
+</Activity>
